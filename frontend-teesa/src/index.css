@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* COLORS
+#03D368: Verde
+#224957: Verde Oscuro
+#FBFEFA: Blanco
+#E5E5E5: Gris
+#192C8C: Azul Claro
+#00082D: Azul Oscuro
+*/
+html,
+body,
+#root,
+.App {
+  width: 100% !important;
+  height: 100% !important;
+  background-color: #fbfefa;
+  font-family: 'Roboto', sans-serif;
+}
