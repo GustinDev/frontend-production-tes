@@ -29,9 +29,6 @@ export default function NavBar(props) {
 
   const [cartId, setCartId] = useState('');
 
-  const [cart, setCart] = useState({
-    CartId: cartId,
-  });
   const [info, setInfo] = useState({
     items: '',
   });
@@ -118,18 +115,18 @@ export default function NavBar(props) {
   //carrito
   // const cartt = useSelector((state) => state.app.cart);
 
-  const cartItems = useSelector((state) => state.app.items);
-
   // console.log("Cart Length:", cartt.length);
 
   return (
     <div className='flex flex-row justify-between items-center w-full h-[4em] border-b-2 border-gray-300 bg-teesaBlueDark text-white text-xl sm:text-lg relative'>
       <div className='flex items-center'>
-        <img
-          className='w-[10%] my-0'
-          src={title}
-          alt='Icono Teesa'
-        />
+        <NavLink to='/home'>
+          <img
+            className='w-12 my-0'
+            src={title}
+            alt='Icono Teesa'
+          />
+        </NavLink>
         <div className='hidden sm:flex gap-[4%]'>
           <NavLink
             to='/home'

@@ -4,7 +4,7 @@ import tech2 from '../../../assets/about/kittwo.jpg';
 
 const AboutUs = () => {
   return (
-    <div className='flex flex-col justify-center aling-center w-full h-full mt-0'>
+    <div className='flex flex-col justify-center aling-center w-full h-full mt-0 bg-stone-100'>
       {/* First Part */}
       <section className='py-10 lg:py-20 bg-stone-100 font-poppins '>
         <div className='max-w-6xl py-4 mx-auto lg:py-6 md:px-6'>
@@ -48,64 +48,52 @@ const AboutUs = () => {
           </div>
         </div>
       </section>
-
-      <section className='flex items-start py-20 bg-gray-100 xl:h-screen font-poppins -mt-56 lg:-mt-20 '>
-        <div className='justify-center flex-1 max-w-6xl px-4 py-4 mx-auto lg:py-6 md:px-6'>
-          <div className='relative max-w-xl mx-auto'>
-            <img
-              className='hidden lg:flex relative z-20 object-cover w-full rounded-2xl h-96'
-              src={tech1}
-              alt='photo'
-              loading='lazy'
-            />
-            <div className='bottom-0 z-40 mt-10 -mb-20 lg:absolute lg:right-0 lg:-mr-44 lg:mt-0 '>
-              <div className='w-full p-8 border shadow-sm  bg-gray-50 lg:w-96 rounded-2xl'>
-                <h2 className='mb-4 text-4xl font-bold text-gray-600 '>
-                  Misión
-                </h2>
-                <p className='pb-4 mb-4 text-gray-600  '>
-                  Somos un aliado estratégico innovador brindando soluciones
-                  integrales profesionales en mantenimientos, equipos y dotación
-                  de cocinas industriales, de proveedores reconocidos por su
-                  excelente calidad enfocados a la EFICIENCIA, para fortalecer
-                  sus sistemas productivos con mano de obra calificada y
-                  certificada, con equipos confiables, tecnología de punta,
-                  diseñados con altos estándares de calidad a su necesidad.
-                </p>
-              </div>
-            </div>
+      {/* MISION Y VISION */}
+      <div className='containerboth flex flex-col max-w-7xl xl:mx-auto gap-20 bg-stone-100 mx-10'>
+        <section className='flex'>
+          <img
+            src={tech1}
+            alt='photo'
+            className='hidden md:flex rounded-l-3xl w-1/2 object-cover'
+          />
+          <div className='bg-stone-200 md:w-1/2 rounded-lg md:rounded-r-3xl p-5 xl:p-10'>
+            <h2 className='mt-2 text-3xl font-black text-gray-700 md:text-5xl'>
+              Misión
+            </h2>
+            <p className='py-4 mb-10 text-lg leading-7 text-gray-500 '>
+              Somos un aliado estratégico innovador brindando soluciones
+              integrales profesionales en mantenimientos, equipos y dotación de
+              cocinas industriales, de proveedores reconocidos por su excelente
+              calidad enfocados a la EFICIENCIA, para fortalecer sus sistemas
+              productivos con mano de obra calificada y certificada, con equipos
+              confiables, tecnología de punta, diseñados con altos estándares de
+              calidad a su necesidad.
+            </p>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section className='flex flex-col-reverse md:flex-row items-center md:items-start py-20 bg-gray-100 xl:h-screen font-poppins -mt-40 md:-mt-60 lg:-mt-[250px] 2xl:-mt-[600px]'>
-        <div className='justify-center flex-1 max-w-6xl px-4 py-4 mx-auto lg:py-6 md:px-6'>
-          <div className='relative max-w-xl mx-auto'>
-            <div className=' lg:bottom-0 z-40 md:mt-10 md:-mb-20 lg:absolute lg:left-0 lg:-ml-44 lg:mt-0'>
-              <div className='w-full p-8 border shadow-sm bg-gray-50 lg:w-96 rounded-2xl'>
-                <h2 className='mb-4 text-4xl font-bold text-gray-600'>
-                  Visión
-                </h2>
-                <p className='pb-4 mb-4 text-gray-600'>
-                  En el 2030 TEESA aumentará la participación en nuestro negocio
-                  fundamental, soluciones integrales profesionales en
-                  mantenimientos, equipos y dotación de cocinas industriales con
-                  tecnológica eficaces apropiadas e innovadoras, apuntando a la
-                  consolidación como uno de los principales proveedores en el
-                  gremio gastronómico que permitan el crecimiento,
-                  sostenibilidad, rentabilidad económica y social.
-                </p>
-              </div>
-            </div>
-            <img
-              className='md:mt-40 lg:mt-0 relative z-20 object-cover w-full rounded-2xl h-96 md'
-              src={tech2}
-              loading='lazy'
-              alt='photo'
-            />
+        <section className='flex  mb-40'>
+          <div className='bg-stone-200 md:w-1/2 rounded-lg md:rounded-l-3xl p-5 xl:p-10'>
+            <h2 className='mt-2 text-3xl font-black text-gray-700 md:text-5xl'>
+              Visión
+            </h2>
+            <p className='py-4 mb-10  leading-7 text-gray-500 text-lg'>
+              En el 2030 TEESA aumentará la participación en nuestro negocio
+              fundamental, soluciones integrales profesionales en
+              mantenimientos, equipos y dotación de cocinas industriales con
+              tecnología eficaz, apropiada e innovadora, apuntando a la
+              consolidación como uno de los principales proveedores en el gremio
+              gastronómico que permitan el crecimiento, sostenibilidad,
+              rentabilidad económica y social.
+            </p>
           </div>
-        </div>
-      </section>
+          <img
+            className='hidden md:flex rounded-r-3xl w-1/2 object-cover'
+            src={tech2}
+            alt='photo'
+          />
+        </section>
+      </div>
     </div>
   );
 };
