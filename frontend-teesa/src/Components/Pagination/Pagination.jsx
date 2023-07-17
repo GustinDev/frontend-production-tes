@@ -37,14 +37,14 @@ const Pagination = () => {
   };
 
   return (
-    <div className='pagination-container'>
+    <div className='pagination-container flex justify-center items-center'>
       {/* Renderizar los productos aquí */}
-      <div className='products-container' style={{ marginTop: '50px' }}>
-        {/* ... */}
-      </div>
 
       {/* Paginación */}
-      <div className='pagination-wrapper fixed bottom-0 left-0 right-0 bg-white py-4' style={{ marginTop: '20px' }}>
+      <div
+        className='flex justify-center items-center pagination-wrapper w-[40px] bg-white py-4'
+        style={{ marginTop: '20px' }}
+      >
         <div className='pagination-inner flex justify-center'>
           <button
             className={`px-4 py-2 mx-1 rounded-lg ${

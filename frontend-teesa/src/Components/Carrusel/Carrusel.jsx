@@ -1,6 +1,7 @@
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { useSelector } from 'react-redux';
+import './slide.css';
 
 const ImageCarousel = () => {
   const imagenes = useSelector(
@@ -8,12 +9,17 @@ const ImageCarousel = () => {
   );
 
   return (
-    <div className="w-1/2 mx-auto"> {/* Ajusta el tamaño deseado para el contenedor */}
-      <Carousel>
+    <div className='w-2/3 h-full mx-auto'>
+      {' '}
+      {/* Ajusta el tamaño deseado para el contenedor */}
+      <Carousel className='main-slide'>
         {imagenes?.map((image, index) => (
-          <div key={index}>
+          <div
+            key={index}
+            className='h-[300px] w-[300px]'
+          >
             <img
-              className='w-full h-auto object-cover rounded-lg'
+              className='h-full object-contain'
               src={image}
               alt={`Imagen ${index}`}
             />

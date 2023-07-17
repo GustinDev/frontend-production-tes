@@ -108,7 +108,7 @@ function Home() {
   return (
     <div className='flex flex-col'>
       {/* Second Navbar */}
-      <div className='flex flex-col bg-teesaBlueDark w-full h-[3em] items-center justify-center mt-[-1px] border-t-4 border-teesaGreen text-teesaWhite text-[16px]'>
+      <div className='flex flex-col bg-teesaBlueDark w-full h-[3em] items-center justify-center mt-[-3px] border-t-[6px] border-teesaGreen text-teesaWhite text-[16px]'>
         <SearchBar />
       </div>
       {/* Hero */}
@@ -127,7 +127,7 @@ function Home() {
         {/* Termina parte de Sol. */}
         {/* Inicia parte de Juan. */}
         {/* Cards */}
-        <div className='cardsContainer w-full md:w-2/3 m-5 bg-teesaWhite flex flex-wrap justify-center'>
+        <div className='cardsContainer w-full md:w-2/3 m-5 bg-teesaWhite flex flex-wrap justify-center flex-col'>
           {status === 'loading' && (
             <div className='flex justify-center items-center w-full h-[800px]'>
               <img

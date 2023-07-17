@@ -25,6 +25,7 @@ import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import Cart from './Components/Carrito/Cart';
 import EditProducts from './Components/Dashboard/EditProducts';
+import Footer from './views/Footer/Footer';
 
 function App() {
   const location = useLocation();
@@ -127,6 +128,7 @@ function App() {
           element={<CreateProducts />}
         />
       </Routes>
+      {!hideNavbar && <Footer />}
     </div>
   );
 }

@@ -73,8 +73,6 @@ const CardDetail = ({
     });
   }, [dispatch, userData]);
 
-  const [cantidad, setCantidad] = useState(0);
-
   const handleIncrement = () => {
     if (cart.CartId) {
       setCart((prevCart) => ({
@@ -127,15 +125,6 @@ const CardDetail = ({
         },
       });
     } else if (cartGuest.cantidad > 0) {
-      // const updatedCartGuest = {
-      //   ...cartGuest,
-      // };
-      // dispatch(postCartGuestProducts(updatedCartGuest)); // Enviar el carrito actualizado del usuario no registrado
-      // setCartGuest((prevCartGuest) => ({
-      //   ...prevCartGuest,
-      //   ProductId: id,
-      //   cantidad: 0,// Asignar el userId al estado cartGuest
-      // }));
       Swal.fire({
         icon: 'warning',
         title: '¡Error!',
@@ -151,65 +140,9 @@ const CardDetail = ({
           toast.style.marginTop = '80px';
         },
       });
-    } //navigate('/carrito');
-    // <Cart userId={cartGuest.userId} />
-
-    // navigate('/carrito');
+    }
   };
   console.log(cartGuest);
-
-  // useEffect(() => {
-  //   dispatch(getUser()).then((action) => {
-  //     const response = action.payload;
-  //     // console.log(response);
-  //     const cartId = response.find((user) => user.id === userData.userId)?.Cart
-  //       .id;
-  //     // console.log(cartId);
-  //     setCartId(cartId);
-  //     setCart((prevCart) => ({
-  //       ...prevCart,
-  //       CartId: cartId,
-  //     }));
-  //   });
-  // }, [dispatch, userData]);
-
-  // // const [cantidad, setCantidad] = useState(0);
-
-  // // const handleChange = (e) => {
-  // //   const value = e.target.value;
-  // //   setCart((prevCart) => ({
-  // //     ...prevCart,
-  // //     cantidad: value,
-  // //   }));
-  // // };
-
-  // const handleIncrement = () => {
-  //   setCart((prevCart) => ({
-  //     ...prevCart,
-  //     cantidad: Number(prevCart.cantidad) + 1,
-  //   }));
-  // };
-
-  // const handleDecrement = () => {
-  //   if (cart.cantidad > 0) {
-  //     setCart((prevCart) => ({
-  //       ...prevCart,
-  //       cantidad: Number(prevCart.cantidad) - 1,
-  //     }));
-  //   }
-  // };
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   // console.log(cart);
-  //   dispatch(postCart(cart));
-  //   setCart({
-  //     ProductId: id,
-  //     CartId: cartId,
-  //     cantidad: 0,
-  //   });
-  //   // navigate('/carrito');
-  // };
 
   //* Datos Descripción:
 

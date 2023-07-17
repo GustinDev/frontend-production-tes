@@ -27,8 +27,6 @@ export default function NavBar(props) {
 
   const userAdmin = useSelector((state) => state.userState.userData.userType);
 
-  const [cartId, setCartId] = useState('');
-
   const [info, setInfo] = useState({
     items: '',
   });
@@ -118,8 +116,8 @@ export default function NavBar(props) {
   // console.log("Cart Length:", cartt.length);
 
   return (
-    <div className='flex flex-row justify-between items-center w-full h-[4em] border-b-2 border-gray-300 bg-teesaBlueDark text-white text-xl sm:text-lg relative'>
-      <div className='flex items-center'>
+    <div className='pr-5 flex flex-row justify-between items-center w-full h-[4em] border-b-2 border-gray-300 bg-teesaBlueDark text-white text-xl sm:text-lg relative '>
+      <div className='flex items-center py-5'>
         <NavLink to='/home'>
           <img
             className='w-12 my-0'
@@ -151,12 +149,6 @@ export default function NavBar(props) {
             className='transition duration-300 ease-in-out transform hover:text-teesaGreen focus:text-teesaGreen'
           >
             Nosotros
-          </NavLink>
-          <NavLink
-            to='/aboutdevs'
-            className='transition duration-300 ease-in-out transform hover:text-teesaGreen focus:text-teesaGreen'
-          >
-            Devs
           </NavLink>
           {userAdmin == true ? (
             <NavLink
@@ -236,12 +228,6 @@ export default function NavBar(props) {
             ></i>
           </NavLink>
         )}
-        {/* <i
-          className={`bx bx-cart mr-6 ${
-            isMobileMenuOpen ? 'hidden sm:flex' : 'flex'
-          }`}
-          style={{ fontSize: '1.5rem' }}
-        ></i> */}
 
         {userAdmin == true ? (
           <div></div>
@@ -277,7 +263,7 @@ export default function NavBar(props) {
       </div>
 
       {isMobileMenuOpen && (
-        <div className='sm:hidden w-full absolute top-full left-0 bg-teesaBlueDark text-white py-2 z-10'>
+        <div className='sm:hidden w-full absolute top-full left-0 bg-teesaBlueDark text-white p-2 z-10'>
           <NavLink
             to='/home'
             className='w-full px-4 py-2 hover:bg-teesaGreen hover:text-teesaBlueDark text-base block'
@@ -301,12 +287,6 @@ export default function NavBar(props) {
             className='w-full px-4 py-2 hover:bg-teesaGreen hover:text-teesaBlueDark text-base block'
           >
             Nosotros
-          </NavLink>
-          <NavLink
-            to='/aboutdevs'
-            className='w-full px-4 py-2 hover:bg-teesaGreen hover:text-teesaBlueDark text-base block'
-          >
-            Devs
           </NavLink>
           {userAdmin == true ? (
             <NavLink
