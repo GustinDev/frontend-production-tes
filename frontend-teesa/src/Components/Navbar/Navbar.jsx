@@ -209,8 +209,8 @@ export default function NavBar(props) {
         ) : (
           <NavLink
             to='/login'
-            className={`mr-5 transition duration-300 ease-in-out transform hover:text-teesaGreen focus:text-teesaGreen ${
-              isMobileMenuOpen ? 'hidden sm:flex' : 'flex'
+            className={`hidden sm:flex mr-5 transition duration-300 ease-in-out transform hover:text-teesaGreen focus:text-teesaGreen ${
+              isMobileMenuOpen ? 'hidden  sm:flex md:flex' : 'flex'
             }`}
           >
             Ingresar
@@ -220,7 +220,7 @@ export default function NavBar(props) {
           <NavLink
             to='/login'
             className={`flex transition duration-300 ease-in-out transform hover:text-teesaGreen ${
-              isMobileMenuOpen ? 'hidden sm:flex' : 'flex'
+              isMobileMenuOpen ? 'flex  sm:flex' : 'flex'
             }`}
           >
             <i
@@ -260,7 +260,7 @@ export default function NavBar(props) {
           </div>
         )}
 
-        {/* Boton carrito Navv*/}
+        {/* Boton carrito Nav*/}
       </div>
 
       {isMobileMenuOpen && (
