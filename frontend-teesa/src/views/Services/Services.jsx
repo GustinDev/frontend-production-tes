@@ -12,7 +12,7 @@ function Services() {
         Nuestros Servicios
       </h1>
       <div className='flex flex-col  md:flex-row justify-center items-center md:gap-[10%] gap-4 mb-[3%] text-center'>
-        <div className='w-2/3 md:w-[30%] h-[40%] bg-teesaBlueDark flex flex-col justify-center items-center rounded-lg'>
+        <div className='w-2/3 md:w-[25%] h-[40%] bg-teesaBlueDark flex flex-col justify-center items-center rounded-lg'>
           <img
             src={preventivo}
             alt='prev'
@@ -23,7 +23,7 @@ function Services() {
             durante la producción.
           </p>
         </div>
-        <div className='w-2/3 md:w-[30%] h-[40%] bg-teesaBlueDark flex flex-col justify-center items-center rounded-lg '>
+        <div className='w-2/3 md:w-[25%] h-[40%] bg-teesaBlueDark flex flex-col justify-center items-center rounded-lg '>
           <img
             src={correctivo}
             alt='corr'
