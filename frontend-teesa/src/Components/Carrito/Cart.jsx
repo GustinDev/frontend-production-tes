@@ -123,7 +123,7 @@ export const Cart = () => {
   }, [dispatch, userId]);
 
   return (
-    <div className='flex flex-col items-center justify-center mt-8'>
+    <div className='flex flex-col items-center justify-start mt-10 h-screen'>
       <h2 className='text-4xl font-medium text-gray-800 mb-4'>
         Carrito de Productos
       </h2>

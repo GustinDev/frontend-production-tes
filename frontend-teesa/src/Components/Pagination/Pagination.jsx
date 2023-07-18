@@ -37,7 +37,7 @@ const Pagination = () => {
   };
 
   return (
-    <div className='pagination-container flex justify-center items-center'>
+    <div className='pagination-container flex justify-center items-center mb-20'>
       {/* Renderizar los productos aquí */}
 
       {/* Paginación */}

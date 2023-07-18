@@ -77,7 +77,7 @@ const Contact = () => {
           </h1>
         </div>
         {/* Si le ponemos m-auto se centra el form */}
-        <div className='m-auto flex flex-col lg:flex-row w-11/12 px-6 justify-center '>
+        <div className='m-auto flex flex-col lg:flex-row w-11/12 px-6 justify-center  gap-8'>
           <div className='flex rounded-lg bg-teesaWhite px-6 py-12  border-[3px] border-teesaBlueLight md:py-16 md:px-4 -mt-[100px] backdrop-blur-[30px] shadow-lg h-fit justify-center'>
             <div className='flex flex-wrap  flex-row justify-center'>
               <div className='mb-12  shrink-0 grow-0 basis-auto md:px-3 lg:mb-0 lg:w-5/12 lg:px-0'>
@@ -165,7 +165,10 @@ const Contact = () => {
                     )}
                     {!errors.user_email && <div className='h-[24px]'></div>}
                   </div>
-                  <div className='relative mb-1' data-te-input-wrapper-init>
+                  <div
+                    className='relative mb-1'
+                    data-te-input-wrapper-init
+                  >
                     <textarea
                       name='message'
                       className={`min-h-[auto] w-full rounded bg-transparent py-[0.32rem] px-3 leading-[1.6] outline-none border-2 border-teesaBlueLight shadow-lg ${
@@ -293,7 +296,7 @@ const Contact = () => {
               </div>
             </div>
           </div>
-          <div className='-ml-10 mt-5 md:mx-auto lg:-mt-[100px]'>
+          <div className='-ml-10 mt-5  lg:-mt-[100px]'>
             <Map />
           </div>
         </div>

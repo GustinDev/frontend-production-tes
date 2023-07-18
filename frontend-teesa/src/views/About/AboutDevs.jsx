@@ -1,6 +1,4 @@
 import AboutDevCard from './AboutDevCard/AboutDevCard';
-import { Link } from 'react-router-dom';
-import Logo from '../../assets/Logo - Screenshot.jpg';
 import developers from '../../developersData';
 
 const AboutDevs = () => {
@@ -57,21 +55,6 @@ const AboutDevs = () => {
           ))}
         </div>
       </div>
-
-      <footer className='w-full flex items-center justify-between bg-teesaBlueDark py-4 px-4'>
-        <p className='text-center mt-4 text-teesaWhite flex-grow'>
-          Si deseas obtener más información sobre nuestro personal y su
-          formación profesional, ¡háznoslo saber!
-        </p>
-        <div className='flex items-center'>
-          <img src={Logo} alt='' className='w-6 h-6 mx-2' />
-          <Link to='/contact'>
-            <button className='text-white text-sm rounded-md px-4 py-2 ml-2 font-semibold bg-teesaGreen hover:bg-gradient-to-r from-teesaGreen to-teesaGreenDark transition-colors duration-300 shadow-md'>
-              Contacto
-            </button>
-          </Link>
-        </div>
-      </footer>
     </div>
   );
 };

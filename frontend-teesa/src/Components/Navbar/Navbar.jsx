@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
@@ -116,7 +117,7 @@ export default function NavBar(props) {
   // console.log("Cart Length:", cartt.length);
 
   return (
-    <div className='pr-5 flex flex-row justify-between items-center w-full h-[4em] border-b-2 border-gray-300 bg-teesaBlueDark text-white text-xl sm:text-lg relative '>
+    <div className='pr-5 flex flex-row justify-between items-center w-full h-[4em] border-b-2 border-teesaGreen bg-teesaBlueDark text-white text-xl sm:text-lg relative '>
       <div className='flex items-center py-5'>
         <NavLink to='/home'>
           <img
@@ -125,7 +126,7 @@ export default function NavBar(props) {
             alt='Icono Teesa'
           />
         </NavLink>
-        <div className='hidden sm:flex gap-[4%]'>
+        <div className='hidden sm:flex gap-[6%]'>
           <NavLink
             to='/home'
             className='transition duration-300 ease-in-out transform hover:text-teesaGreen focus:text-teesaGreen'
@@ -171,7 +172,7 @@ export default function NavBar(props) {
         </div>
       </div>
 
-      <div className='flex items-end justify-end xl:mr-[4%] lg:mr-[4%] md:mr-[3%] sm:mr-[3%]'>
+      <div className='flex items-end justify-end xl:mr-5 lg:mr-5 md:mr-5 sm:mr-5'>
         {user || nombreGoogle ? (
           <div
             className={`mr-5 cursor-pointer relative flex items-center ${

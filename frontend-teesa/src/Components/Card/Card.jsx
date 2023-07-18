@@ -130,7 +130,6 @@ export const Card = ({ nombre, categoria, imagenes, precio, marca, id }) => {
 
     // navigate('/carrito');
   };
-  console.log(cartGuest);
 
   // carro
 

@@ -11,7 +11,6 @@ const ImageCarousel = () => {
   return (
     <div className='w-2/3 h-full mx-auto'>
       {' '}
-      {/* Ajusta el tamaño deseado para el contenedor */}
       <Carousel className='main-slide'>
         {imagenes?.map((image, index) => (
           <div

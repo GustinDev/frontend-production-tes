@@ -38,10 +38,13 @@ function App() {
 
   const hideNavbar =
     pathname === '/' || pathname === '/signup' || pathname === '/error404';
-
+  const hideFooter =
+    pathname === '/' ||
+    pathname === '/signup' ||
+    pathname === '/error404' ||
+    pathname === '/contact';
   return (
     <div>
-      {/* Solucionar doble navbar */}
       {!hideNavbar && <Navbar />}
       <Routes>
         <Route
@@ -128,7 +131,7 @@ function App() {
           element={<CreateProducts />}
         />
       </Routes>
-      {!hideNavbar && <Footer />}
+      {!hideFooter && <Footer />}
     </div>
   );
 }

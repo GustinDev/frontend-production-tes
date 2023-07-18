@@ -140,7 +140,7 @@ function Home() {
             <div>Error al cargar los productos: {error}</div>
           )}
           {status === 'succeeded' && (
-            <div className='flex flex-wrap m-auto justify-center'>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 sm:grid-cols-1 gap-4 mx-auto'>
               {products.products?.map((product) => (
                 <Card
                   id={product?.id}
