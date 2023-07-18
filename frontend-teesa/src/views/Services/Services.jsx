@@ -11,8 +11,8 @@ function Services() {
       <h1 className='text-white font-bold   xl:text-5xl lg:text-5xl md:text-4xl sm:text-4xl my-10 bg-teesaBlueDark py-5 px-10 rounded-xl'>
         Nuestros Servicios
       </h1>
-      <div className='flex flex-grow flex-row justify-center items-center gap-[10%] mb-[3%] text-center'>
-        <div className='w-[25%] h-[40%] bg-teesaBlueDark flex flex-col justify-center items-center rounded-lg'>
+      <div className='flex flex-col  md:flex-row justify-center items-center md:gap-[10%] gap-4 mb-[3%] text-center'>
+        <div className='w-2/3 md:w-[25%] h-[40%] bg-teesaBlueDark flex flex-col justify-center items-center rounded-lg'>
           <img
             src={preventivo}
             alt='prev'
@@ -23,7 +23,7 @@ function Services() {
             durante la producción.
           </p>
         </div>
-        <div className='w-[25%] h-[40%] bg-teesaBlueDark flex flex-col justify-center items-center rounded-lg '>
+        <div className='w-2/3 md:w-[25%] h-[40%] bg-teesaBlueDark flex flex-col justify-center items-center rounded-lg '>
           <img
             src={correctivo}
             alt='corr'
@@ -36,9 +36,9 @@ function Services() {
         </div>
       </div>
       {/* AGENDAR */}
-      <div className='bg-teesaBlueDark w-2/3 h-full text-teesaWhite flex flex-row justify-between items-center text-center   rounded-lg mb-20 '>
-        <div className='flex flex-col justify-center items-center text-center w-1/2  p-5'>
-          <h1 className='xl:text-3xl  font-bold lg:text-3xl md:text-xl sm:text-lg pb-5'>
+      <div className='bg-teesaBlueDark w-2/3 h-full text-teesaWhite flex flex-row justify-between items-center text-center   rounded-lg mb-40 '>
+        <div className='flex flex-col justify-center items-center text-center w-full lg:w-1/2  p-4'>
+          <h1 className='xl:text-3xl  font-bold lg:text-3xl md:text-xl sm:text-lg pb-3'>
             ¿Quieres agendar una visita técnica?
           </h1>
           <Link to='/contact'>
@@ -47,39 +47,39 @@ function Services() {
             </button>
           </Link>
           {/* MITAD */}
-          <hr className='border-2 w-full border-white cursor-pointer  my-4 2xl:my-8' />
+          <hr className='border-2 w-full border-white cursor-pointer my-2  xl:my-4 2xl:my-8' />
           <h2 className='mb-2 text-xl font-bold  xl:text-3xl'>
             Escríbenos por:
           </h2>
-          <div className='flex flex-row justify-center items-center xl:gap-6 lg:gap-6 md:gap-4 sm:gap-2'>
+          <div className='flex flex-row justify-center items-center xl:gap-6 lg:gap-6 md:gap-4 gap-2'>
             <a
               target='_blank'
               rel='noreferrer'
               href='https://api.whatsapp.com/send?phone=%2B57+316+2432974&text=Hola%2C+vi+tu+pagina+web+y+deseo+mas+informaci%C3%B3n'
             >
-              <i className='fa-brands fa-square-whatsapp xl:text-7xl lg:text-7xl md:text-7xl sm:text-4xl hover:scale-125 duration-75'></i>
+              <i className='fa-brands fa-square-whatsapp text-4xl xl:text-7xl lg:text-7xl md:text-7xl hover:scale-125 duration-75'></i>
             </a>
             <a
               target='_blank'
               rel='noreferrer'
               href='https://www.facebook.com/profile.php?id=100068661421832&mibextid=ZbWKwL'
             >
-              <i className='fa-brands fa-square-facebook xl:text-7xl lg:text-7xl md:text-7xl sm:text-4xl hover:scale-125 duration-75'></i>
+              <i className='fa-brands fa-square-facebook xl:text-7xl lg:text-7xl md:text-7xl text-4xl hover:scale-125 duration-75'></i>
             </a>
             <a
               target='_blank'
               rel='noreferrer'
               href='https://www.instagram.com/teesa.tec/'
             >
-              <i className='fa-brands fa-square-instagram xl:text-7xl lg:text-7xl md:text-7xl sm:text-4xl hover:scale-125 duration-75'></i>
+              <i className='fa-brands fa-square-instagram xl:text-7xl lg:text-7xl md:text-7xl text-4xl hover:scale-125 duration-75'></i>
             </a>
           </div>
         </div>
-        <div className='w-1/2 h-full'>
+        <div className='hidden lg:flex w-1/2 h-full'>
           <img
             src={tech}
             alt='tech'
-            className='rounded-r-lg object-contain h-full'
+            className=' rounded-r-lg object-contain h-full'
           />
         </div>
       </div>

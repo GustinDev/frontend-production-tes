@@ -137,7 +137,9 @@ function Home() {
             </div>
           )}
           {status === 'failed' && (
-            <div>Error al cargar los productos: {error}</div>
+            <div className='text-2xl w-1/2 h-1/2 font-bold text-center'>
+              Error al cargar los productos. {error}
+            </div>
           )}
           {status === 'succeeded' && (
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 sm:grid-cols-1 gap-4 mx-auto'>
