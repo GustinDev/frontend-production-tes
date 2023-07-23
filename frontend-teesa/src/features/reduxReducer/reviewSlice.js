@@ -22,7 +22,7 @@ export const fetchReviews = createAsyncThunk(
   async (productId) => {
     try {
       const response = await axios.get(
-        `https://servidor-teesa.onrender.com/reviews/${productId}`
+        `https://teesa-backend.onrender.com/reviews/${productId}`
       );
       return response.data;
     } catch (error) {
@@ -38,7 +38,7 @@ export const postReview = createAsyncThunk(
   async ({ userId, ProductId, comentario, estrellas }) => {
     try {
       const response = await axios.post(
-        `https://servidor-teesa.onrender.com/reviews/${userId}`,
+        `https://teesa-backend.onrender.com/reviews/${userId}`,
         { ProductId, comentario, estrellas }
       );
       console.log(response.data);
@@ -54,7 +54,7 @@ export const postReview = createAsyncThunk(
 export const verifyUserReview = createAsyncThunk(
   'reviews/verifyUserReview',
   async ({ userID, productID }) => {
-    const url = `https://servidor-teesa.onrender.com/reviews/validate/${userID}?ProductId=${productID}`;
+    const url = `https://teesa-backend.onrender.com/reviews/validate/${userID}?ProductId=${productID}`;
     const response = await axios.get(url);
     console.log(response.data);
     return response.data;

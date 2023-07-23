@@ -7,24 +7,27 @@ const initialState = {
   error: null,
   errorMessage: '',
   success: false,
-  token:'',
-  googleAuthLink: 'https://servidor-teesa.onrender.com/google/signup'
+  token: '',
+  googleAuthLink: 'https://teesa-backend.onrender.com/google/signup',
 };
 
 // Comunicación con BACK.
 export const registerUser = createAsyncThunk(
   'product/registerUser',
-  async ({ nombre, correo,  contrasena, confirmarContrasena }, { rejectWithValue }) => {
+  async (
+    { nombre, correo, contrasena, confirmarContrasena },
+    { rejectWithValue }
+  ) => {
     try {
       const response = await axios.post(
-        'https://servidor-teesa.onrender.com/signup',
-        { nombre, correo, contrasena, confirmarContrasena}
+        'https://teesa-backend.onrender.com/signup',
+        { nombre, correo, contrasena, confirmarContrasena }
       );
       console.log(response.data.token);
       return response.data.token;
     } catch (error) {
       // Manejar cualquier error aquí
-      console.log(error.response.data.message)
+      console.log(error.response.data.message);
       return rejectWithValue(error.response.data.message);
     }
   }
@@ -41,7 +44,7 @@ const registerSlice = createSlice({
     builder.addCase(registerUser.pending, (state) => {
       state.loading = true;
       state.error = null;
-      state.errorMessage = null; 
+      state.errorMessage = null;
     });
     builder.addCase(registerUser.fulfilled, (state, action) => {
       state.loading = false;

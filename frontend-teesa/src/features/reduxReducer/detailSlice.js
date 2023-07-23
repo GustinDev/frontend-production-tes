@@ -12,7 +12,7 @@ export const getProductById = createAsyncThunk(
   async (id) => {
     try {
       const response = await axios.get(
-        `https://servidor-teesa.onrender.com/detail/${id}`
+        `https://teesa-backend.onrender.com/detail/${id}`
       );
       return response.data;
     } catch (error) {

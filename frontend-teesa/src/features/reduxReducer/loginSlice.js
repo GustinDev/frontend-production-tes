@@ -9,7 +9,7 @@ const initialState = {
   errorMessage: '',
   success: false,
   token: '',
-  googleAuthLink: 'https://servidor-teesa.onrender.com/auth/google/login',
+  googleAuthLink: 'https://teesa-backend.onrender.com/auth/google/login',
   googleUser: null,
 };
 
@@ -19,7 +19,7 @@ export const loginUser = createAsyncThunk(
   async ({ correo, contrasena }, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        'https://servidor-teesa.onrender.com/login',
+        'https://teesa-backend.onrender.com/login',
         { correo, contrasena }
       );
       const cookies = new Cookies();
@@ -31,7 +31,7 @@ export const loginUser = createAsyncThunk(
     }
   }
 );
- 
+
 //Login Google:
 
 export const fetchGoogleProfile = createAsyncThunk(
@@ -39,7 +39,7 @@ export const fetchGoogleProfile = createAsyncThunk(
   async () => {
     try {
       const response = await axios.get(
-        'https://servidor-teesa.onrender.com/auth/google/perfil'
+        'https://teesa-backend.onrender.com/auth/google/perfil'
       );
       return response;
     } catch (error) {

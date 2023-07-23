@@ -19,7 +19,7 @@ const initialState = {
 export const getApiData = createAsyncThunk('products/getApiData', async () => {
   try {
     const response = await axios.get(
-      'https://servidor-teesa.onrender.com/products'
+      'https://teesa-backend.onrender.com/products'
     );
     return response.data.products;
   } catch (error) {
@@ -34,7 +34,7 @@ export const getPaginationData = createAsyncThunk(
   async (number) => {
     try {
       const response = await axios.get(
-        `https://servidor-teesa.onrender.com/products?page=${number}`
+        `https://teesa-backend.onrender.com/products?page=${number}`
       );
 
       return response.data;
@@ -50,7 +50,7 @@ export const getPaginationData = createAsyncThunk(
 export const getBrands = createAsyncThunk('products/getBrands', async () => {
   try {
     const response = await axios.get(
-      'https://servidor-teesa.onrender.com/brands'
+      'https://teesa-backend.onrender.com/brands'
     );
     return response.data; // Actualiza aquí para acceder a response.data
   } catch (error) {

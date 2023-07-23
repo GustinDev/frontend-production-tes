@@ -13,7 +13,7 @@ const initialState = {
 export const getUser = createAsyncThunk('users/getUsers', async () => {
   try {
     const response = await axios.get(
-      `https://servidor-teesa.onrender.com/users`
+      `https://teesa-backend.onrender.com/users`
     );
     // console.log(response.data);
     return response.data;
@@ -28,7 +28,7 @@ export const postCart = createAsyncThunk(
   async ({ ProductId, CartId, cantidad }, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        'https://servidor-teesa.onrender.com/cart',
+        'https://teesa-backend.onrender.com/cart',
         {
           ProductId,
           cantidad,
@@ -49,7 +49,7 @@ export const postCart = createAsyncThunk(
 export const getCart = createAsyncThunk('cart/getCart', async (CartId) => {
   try {
     const response = await axios.get(
-      `https://servidor-teesa.onrender.com/cart?CartId=${CartId}`
+      `https://teesa-backend.onrender.com/cart?CartId=${CartId}`
     );
     // console.log(response.data);
     return response.data;
@@ -64,7 +64,7 @@ export const updateCart = createAsyncThunk(
   async ({ CartProductId, cantidad }) => {
     try {
       const response = await axios.put(
-        `https://servidor-teesa.onrender.com/cart/${CartProductId}`,
+        `https://teesa-backend.onrender.com/cart/${CartProductId}`,
         { cantidad }
       );
       // console.log(response.data);
@@ -81,7 +81,7 @@ export const deleteCart = createAsyncThunk(
   async (CartProductId) => {
     try {
       const response = await axios.delete(
-        `https://servidor-teesa.onrender.com/cart/${CartProductId}`
+        `https://teesa-backend.onrender.com/cart/${CartProductId}`
       );
       // console.log(response.data);
       return response.data;
@@ -182,7 +182,7 @@ export default cartSlice.reducer;
 //   'cart/postCart',
 //   async ({ ProductId, CartId, cantidad }, { rejectWithValue, getState }) => {
 //     try {
-//       const response = await axios.post('https://servidor-teesa.onrender.com/cart', {
+//       const response = await axios.post('https://teesa-backend.onrender.com/cart', {
 //         ProductId,
 //         cantidad,
 //         CartId,

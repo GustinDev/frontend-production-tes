@@ -67,57 +67,54 @@ function Register() {
       confirmButtonColor: '#192C8C',
     });
   };
-  
-      //Ejecutar el Reducer Post.
-      const onSubmit = async (data) => {
-        const resultAction = await dispatch(registerUser(data));
-        console.log(data)
-        if (resultAction.error) {
-          const errorMessage = resultAction.error.response.data.message;
-          alertErrorMessage(errorMessage);
-        } else {
-          const { correo, contrasena } = data; // Obtener correo y contraseña del formulario de registro
-          const loginData = { correo, contrasena };
-          console.log(loginData)
-          const loginAction = await dispatch(loginUser(loginData)); // Hacer el inicio de sesión automático
-      
-          if (loginAction.error) {
-            const errorMessage = loginAction.error.response.data.message;
-            alertErrorMessage(errorMessage);
-          } else {
-            const ntoken = loginAction.payload;
-            setTokenValue(ntoken);
-            await setUserWithTokenData();
-            setIsUserLoaded(true);
-            alertSucess();
-            const cookies= new Cookies()
-            const tokenExists = cookies.get('token'); 
-      if (tokenExists) {
-        nav('/home');
-      }
-          }
 
+  //Ejecutar el Reducer Post.
+  const onSubmit = async (data) => {
+    const resultAction = await dispatch(registerUser(data));
+    console.log(data);
+    if (resultAction.error) {
+      const errorMessage = resultAction.error.response.data.message;
+      alertErrorMessage(errorMessage);
+    } else {
+      const { correo, contrasena } = data; // Obtener correo y contraseña del formulario de registro
+      const loginData = { correo, contrasena };
+      console.log(loginData);
+      const loginAction = await dispatch(loginUser(loginData)); // Hacer el inicio de sesión automático
+
+      if (loginAction.error) {
+        const errorMessage = loginAction.error.response.data.message;
+        alertErrorMessage(errorMessage);
+      } else {
+        const ntoken = loginAction.payload;
+        setTokenValue(ntoken);
+        await setUserWithTokenData();
+        setIsUserLoaded(true);
+        alertSucess();
+        const cookies = new Cookies();
+        const tokenExists = cookies.get('token');
+        if (tokenExists) {
+          nav('/home');
         }
-        //EmailJS - Mailer
-        const user_email = data.correo;
-        const user_name = data.nombre;
-        emailjs
-          .send(
-            'service_2rp9duo',
-            'template_ogrchsj',
-            { user_email, user_name },
-            'W5KJUGxF4wBdmUA3v'
-          )
-          .then((result) => {
-            console.log(result.text);
-          })
-          .catch((error) => {
-            console.log(error.text);
-          });
-          reset();
       }
- 
-
+    }
+    //EmailJS - Mailer
+    const user_email = data.correo;
+    const user_name = data.nombre;
+    emailjs
+      .send(
+        'service_2rp9duo',
+        'template_ogrchsj',
+        { user_email, user_name },
+        'W5KJUGxF4wBdmUA3v'
+      )
+      .then((result) => {
+        console.log(result.text);
+      })
+      .catch((error) => {
+        console.log(error.text);
+      });
+    reset();
+  };
 
   //Llamar a la  función Token Data.
 
@@ -149,18 +146,34 @@ function Register() {
   const contrasena = watch('contrasena');
   const confirmarContrasena = watch('confirmarContrasena');
 
-
-    return (
-      <div className="relative bg-cover w-screen h-screen flex flex-row justify-center align-center items-center overflow-hidden m-auto" style={{backgroundImage: `url(${waves})`}}>
-        <div className='flex-col xl:mb-[] lg:mb-[]'>
-          <img src={logo} alt="logo" className='mt-[15%] xl:h-[800px] lg:h-[700px] md:h-[400px] xs:hidden'/>
-        </div>
-        <div className='bg-gradient-to-r from-teesaGreenDark to-teesaGreen rounded-lg flex flex-col justify-center align-center items-center h-auto mb-[12%] lg:mt-[12%]'>
-          <h1 className='font-bold  xl:text-4xl lg:text-3xl text-teesaGrey  mt-[5%] '>Registrate</h1>
-            <div className='flex flex-col justify-center align-center items-center p-8'>
-              <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col justify-center align-center items-center gap-[0.5em]'>
-                <label className="flex flex-col justify-center align-center items-center ">
-                <input type="text" name="nombre" placeholder=' Nombre' className="bg-teesaBlueDark text-teesaGrey rounded-md h-[2em] w-[15em]" {...register('nombre', { 
+  return (
+    <div
+      className='relative bg-cover w-screen h-screen flex flex-row justify-center align-center items-center overflow-hidden m-auto'
+      style={{ backgroundImage: `url(${waves})` }}
+    >
+      <div className='flex-col xl:mb-[] lg:mb-[]'>
+        <img
+          src={logo}
+          alt='logo'
+          className='mt-[15%] xl:h-[800px] lg:h-[700px] md:h-[400px] xs:hidden'
+        />
+      </div>
+      <div className='bg-gradient-to-r from-teesaGreenDark to-teesaGreen rounded-lg flex flex-col justify-center align-center items-center h-auto mb-[12%] lg:mt-[12%]'>
+        <h1 className='font-bold  xl:text-4xl lg:text-3xl text-teesaGrey  mt-[5%] '>
+          Registrate
+        </h1>
+        <div className='flex flex-col justify-center align-center items-center p-8'>
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className='flex flex-col justify-center align-center items-center gap-[0.5em]'
+          >
+            <label className='flex flex-col justify-center align-center items-center '>
+              <input
+                type='text'
+                name='nombre'
+                placeholder=' Nombre'
+                className='bg-teesaBlueDark text-teesaGrey rounded-md h-[2em] w-[15em]'
+                {...register('nombre', {
                   required: 'Este campo es obligatorio',
                   pattern: {
                     value: /^[a-zA-Z\s]+$/,
@@ -195,19 +208,22 @@ function Register() {
               ) : (
                 <div className='h-[5px]'></div>
               )}
+            </label>
 
-                </label>
-              
-                <label className="flex flex-col justify-center align-center items-center gap-[3%]">
-                <input type="password" name="contrasena" placeholder=' Contraseña' className="bg-teesaBlueDark text-teesaGrey rounded-md h-[2em] w-[15em]"
-                {...register('contrasena', { 
-
+            <label className='flex flex-col justify-center align-center items-center gap-[3%]'>
+              <input
+                type='password'
+                name='contrasena'
+                placeholder=' Contraseña'
+                className='bg-teesaBlueDark text-teesaGrey rounded-md h-[2em] w-[15em]'
+                {...register('contrasena', {
                   required: 'Este campo es obligatorio',
                   pattern: {
-                    value: /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&()_+\-=[\]{};':"\\|,.<>/?]).{6,20}$/,
-                    message: 'La contraseña debe contener al menos una mayúscula, un número y un caracter especial',
+                    value:
+                      /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&()_+\-=[\]{};':"\\|,.<>/?]).{6,20}$/,
+                    message:
+                      'La contraseña debe contener al menos una mayúscula, un número y un caracter especial',
                   },
-                  
                 })}
                 onBlur={() => handleBlur('contrasena')}
               />
@@ -218,48 +234,56 @@ function Register() {
               ) : (
                 <div className='h-[5px]'></div>
               )}
-                </label>
-                <label className="flex flex-col justify-center align-center items-center gap-[3%]">
-          <input
-            type="password"
-            name="confirmarContrasena"
-            placeholder=" Confirmar contraseña"
-            className="bg-teesaBlueDark text-teesaGrey rounded-md h-[2em] w-[15em]"
-            {...register('confirmarContrasena', { 
-              required: 'Este campo es obligatorio',
-              validate: value => value === contrasena || 'Las contraseñas no coinciden',
-            })}
-            onBlur={() => handleBlur('confirmarContrasena')}
-          />
-          {errors.confirmarContrasena && (
-            <span className="text-red-500">{errors.confirmarContrasena.message}</span>
-          )}
-        </label>
-                <button className='bg-teesaGreen font-bold h-[2em] w-[12em] hover:bg-green-600 hover:transform hover:scale-105 rounded-md'>INGRESAR</button>
-                <p className='text-end'>
-          ¿Ya tienes cuenta?{' '}
-          <Link to='/login'>
-            <span className='text-teesaBlueDark hover:cursor-pointer hover:text-teesaBlueLight font-bold'>
-              Log In
-            </span>
-          </Link>
-        </p>
-      <div className='w-[75%] border-t-2 border-black '></div>
-      
-              </form>
-              <div className='flex justify-center items-center align-center text-center mt-2 w-[70%]'>
-            <a href="https://servidor-teesa.onrender.com/google/signup">
-            <button
-              className='flex justify-cetner items-center mb-[5px] w-[16em] h-[2.5em] justify-center rounded  bg-teesaWhite text-md font-medium uppercase leading-normal text-black shadow-lg border-2 border-black hover:bg-gray-300 hover:transform hover:scale-105'
-              type='submit'>
-              <img src={googleIcon} className=' w-22  h-5 mx-3 my-auto' /> Ingresar con Google</button>
-              </a>
-          </div> 
-            </div>
-            
-          
+            </label>
+            <label className='flex flex-col justify-center align-center items-center gap-[3%]'>
+              <input
+                type='password'
+                name='confirmarContrasena'
+                placeholder=' Confirmar contraseña'
+                className='bg-teesaBlueDark text-teesaGrey rounded-md h-[2em] w-[15em]'
+                {...register('confirmarContrasena', {
+                  required: 'Este campo es obligatorio',
+                  validate: (value) =>
+                    value === contrasena || 'Las contraseñas no coinciden',
+                })}
+                onBlur={() => handleBlur('confirmarContrasena')}
+              />
+              {errors.confirmarContrasena && (
+                <span className='text-red-500'>
+                  {errors.confirmarContrasena.message}
+                </span>
+              )}
+            </label>
+            <button className='bg-teesaGreen font-bold h-[2em] w-[12em] hover:bg-green-600 hover:transform hover:scale-105 rounded-md'>
+              INGRESAR
+            </button>
+            <p className='text-end'>
+              ¿Ya tienes cuenta?{' '}
+              <Link to='/login'>
+                <span className='text-teesaBlueDark hover:cursor-pointer hover:text-teesaBlueLight font-bold'>
+                  Log In
+                </span>
+              </Link>
+            </p>
+            <div className='w-[75%] border-t-2 border-black '></div>
+          </form>
+          <div className='flex justify-center items-center align-center text-center mt-2 w-[70%]'>
+            <a href='https://teesa-backend.onrender.com/google/signup'>
+              <button
+                className='flex justify-cetner items-center mb-[5px] w-[16em] h-[2.5em] justify-center rounded  bg-teesaWhite text-md font-medium uppercase leading-normal text-black shadow-lg border-2 border-black hover:bg-gray-300 hover:transform hover:scale-105'
+                type='submit'
+              >
+                <img
+                  src={googleIcon}
+                  className=' w-22  h-5 mx-3 my-auto'
+                />{' '}
+                Ingresar con Google
+              </button>
+            </a>
+          </div>
         </div>
       </div>
+    </div>
   );
 }
 

@@ -8,7 +8,7 @@ const initialState = {
   error: null,
   errorMessage: '',
   success: false,
-  ProductChart: null
+  ProductChart: null,
 };
 
 export const createProduct = createAsyncThunk(
@@ -31,7 +31,7 @@ export const createProduct = createAsyncThunk(
     console.log(payload);
     try {
       const response = await axios.post(
-        'https://servidor-teesa.onrender.com/products',
+        'https://teesa-backend.onrender.com/products',
         payload
       );
       console.log(response);
@@ -51,7 +51,7 @@ export const editProduct = createAsyncThunk(
       const { imagenes, precio, stock } = payload.data;
       const { ProductID } = payload;
       const response = await axios.put(
-        `https://servidor-teesa.onrender.com/detail/${ProductID}`,
+        `https://teesa-backend.onrender.com/detail/${ProductID}`,
         { imagenes, precio, stock }
       );
 
@@ -75,7 +75,7 @@ export const deleteProduct = createAsyncThunk(
   async (ProductID) => {
     try {
       const response = await axios.delete(
-        `https://servidor-teesa.onrender.com/products/${ProductID}`
+        `https://teesa-backend.onrender.com/products/${ProductID}`
       );
       console.log('Respuesta de la solicitud DELETE:', response.data);
       return response.data;
@@ -96,7 +96,7 @@ export const getProductsChart = createAsyncThunk(
   async () => {
     try {
       const response = await axios.get(
-        `https://servidor-teesa.onrender.com/purchase`
+        `https://teesa-backend.onrender.com/purchase`
       );
       return response;
     } catch (error) {
@@ -105,7 +105,6 @@ export const getProductsChart = createAsyncThunk(
     }
   }
 );
-
 
 const adminProductSlice = createSlice({
   name: 'adminProductState',

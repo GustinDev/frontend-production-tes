@@ -9,7 +9,7 @@ export const fetchProducts = createAsyncThunk(
       // const { precioQuery } = filters;
       const queryParams = new URLSearchParams(filters).toString();
       const response = await axios.get(
-        `https://servidor-teesa.onrender.com/products?${queryParams}`
+        `https://teesa-backend.onrender.com/products?${queryParams}`
       );
       return response.data;
     } catch (error) {
@@ -22,7 +22,7 @@ export const fetchProducts = createAsyncThunk(
 //   async (number) => {
 //     try {
 //       const response = await axios.get(
-//         `https://servidor-teesa.onrender.com/products?page=${number}`
+//         `https://teesa-backend.onrender.com/products?page=${number}`
 //       );
 //       return response.data;
 //     } catch (error) {
@@ -45,7 +45,7 @@ const filtersSlice = createSlice({
     addFilter: (state, action) => {
       state.filters = action.payload;
     },
-    
+
     changePage: (state, action) => {
       state.page = action.payload;
       console.log(state.page);
@@ -74,7 +74,7 @@ const filtersSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-    .addCase(fetchProducts.pending, (state) => {
+      .addCase(fetchProducts.pending, (state) => {
         state.status = 'loading';
         state.error = null;
       })
@@ -86,15 +86,16 @@ const filtersSlice = createSlice({
         state.status = 'failed';
         state.error = action.payload;
       });
-      // builder.addCase(getPaginationData.fulfilled, (state, action) => {
-      //   state.status = 'succeeded';
-      //   state.products = action.payload;
-      //   state.filters = { ...state.filters };
-      
-      // });
-    },
+    // builder.addCase(getPaginationData.fulfilled, (state, action) => {
+    //   state.status = 'succeeded';
+    //   state.products = action.payload;
+    //   state.filters = { ...state.filters };
+
+    // });
+  },
 });
 
-export const { addFilter, sortByName, sortByPrice,changePage } = filtersSlice.actions;
+export const { addFilter, sortByName, sortByPrice, changePage } =
+  filtersSlice.actions;
 
 export default filtersSlice.reducer;

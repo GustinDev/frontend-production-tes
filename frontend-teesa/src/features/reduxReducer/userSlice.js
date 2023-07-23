@@ -10,22 +10,14 @@ const cookies = new Cookies();
 
 export const putUser = createAsyncThunk('user/putUser', async (payload) => {
   try {
-    const {
-      userName,
-      userNit,
-      userAddress,
-      userPhone,
-      userId,
-      // userType,
-      userEmail,
-    } = payload;
+    const { userName, userNit, userAddress, userPhone, userId } = payload;
     const nombre = userName;
     const nit = userNit;
     const direccion = userAddress;
     const telefono = userPhone;
 
     const response = await axios.put(
-      `https://servidor-teesa.onrender.com/user/${userId}`,
+      `https://teesa-backend.onrender.com/user/${userId}`,
       {
         nombre,
         nit,
@@ -63,7 +55,7 @@ export const getProducts = createAsyncThunk(
   async (userId) => {
     try {
       const response = await axios.get(
-        `https://servidor-teesa.onrender.com/purchase/${userId}`
+        `https://teesa-backend.onrender.com/purchase/${userId}`
       );
       return response;
     } catch (error) {
@@ -79,7 +71,7 @@ export const fetchUserById = createAsyncThunk(
   'user/fetchUserById',
   async (id) => {
     const response = await axios.get(
-      `https://servidor-teesa.onrender.com/users/${id}`
+      `https://teesa-backend.onrender.com/users/${id}`
     );
     // console.log(response.data);
     return response.data;
