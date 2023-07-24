@@ -155,13 +155,13 @@ function Home() {
                 />
               ))}
             </div>
-          ) : (
+          ) : status === 'succeeded' ? (
             <div className='h-full font-bold text-3xl flex justify-center items center my-40 flex-col mx-auto'>
               <div className='bg-teesaBlueDark p-5 rounded-lg text-white'>
                 <h1>No se encontraron productos.</h1>
               </div>
             </div>
-          )}
+          ) : null}
           {status === 'succeeded' &&
             products.products.length >
             (

@@ -1,6 +1,7 @@
-//React Router Dom:
+import React, { useEffect } from 'react';
 import { Route, Routes, useLocation, Navigate } from 'react-router-dom';
-//Components
+import { useDispatch } from 'react-redux';
+import { getUserDataFromCookie } from './features/reduxReducer/userSlice';
 import Home from './Components/Home/Home';
 import Navbar from './Components/Navbar/Navbar';
 import Landing from './views/Landing/Landing';
@@ -19,10 +20,6 @@ import CheckoutFailed from './views/Checkout/CheckoutFailed';
 import UserProfile from './views/UserProfile/UserProfile';
 import CreateProducts from './Components/Dashboard/CreateProducts';
 import Dashboard from './Components/Dashboard/Dashboard';
-//Redux
-import { getUserDataFromCookie } from './features/reduxReducer/userSlice';
-import { useDispatch } from 'react-redux';
-import { useEffect } from 'react';
 import Cart from './Components/Carrito/Cart';
 import EditProducts from './Components/Dashboard/EditProducts';
 import Footer from './views/Footer/Footer';
@@ -36,13 +33,13 @@ function App() {
     dispatch(getUserDataFromCookie());
   }, [dispatch]);
 
+  // Lista de rutas donde se mostrará el Footer
+  const visibleFooterRoutes = ['/', '/home', '/about', '/services'];
+
   const hideNavbar =
     pathname === '/' || pathname === '/signup' || pathname === '/error404';
-  const hideFooter =
-    pathname === '/' ||
-    pathname === '/signup' ||
-    pathname === '/error404' ||
-    pathname === '/contact';
+  const hideFooter = !visibleFooterRoutes.includes(pathname); // Verificar si la ruta actual no está en la lista de rutas visibles para el Footer
+
   return (
     <div>
       {!hideNavbar && <Navbar />}
@@ -52,31 +49,31 @@ function App() {
           element={<Landing />}
         />
         <Route
-          path='home'
+          path='/home'
           element={<Home />}
         />
         <Route
-          path='home/:id'
+          path='/home/:id'
           element={<Detail />}
         />
         <Route
-          path='login'
+          path='/login'
           element={<Login />}
         />
         <Route
-          path='services'
+          path='/services'
           element={<Services />}
         />
         <Route
-          path='aboutdevs'
+          path='/aboutdevs'
           element={<AboutDevs />}
         />
         <Route
-          path='about'
+          path='/about'
           element={<About />}
         />
         <Route
-          path='contact'
+          path='/contact'
           element={<Contact />}
         />
         <Route
@@ -84,11 +81,11 @@ function App() {
           element={<Register />}
         />
         <Route
-          path='error404'
+          path='/error404'
           element={<Error404 />}
         />
         <Route
-          path='mercado'
+          path='/mercado'
           element={<Mercado />}
         />
         <Route
@@ -97,33 +94,30 @@ function App() {
         />
         <Route
           path='*'
-          element={<Navigate to='error404' />}
+          element={<Navigate to='/error404' />}
         />
         <Route
-          path='carrito'
+          path='/carrito'
           element={<Cart />}
         />
         <Route
           path='/admin'
           element={<Dashboard />}
         />
-
         <Route
           path='/dashboard/editproduct/:id'
           element={<EditProducts />}
         />
-
-        {/* Checkout */}
         <Route
-          path='checkoutsuccess'
+          path='/checkoutsuccess'
           element={<CheckoutSucess />}
         />
         <Route
-          path='checkoutpending'
+          path='/checkoutpending'
           element={<CheckoutPending />}
         />
         <Route
-          path='checkoutfailed'
+          path='/checkoutfailed'
           element={<CheckoutFailed />}
         />
         <Route
