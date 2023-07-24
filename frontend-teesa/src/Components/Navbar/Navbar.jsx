@@ -78,7 +78,7 @@ export default function NavBar(props) {
     //   dispatch(saveUserDataToCookie({ nombre: nombreGoogleCookie }));
     //   setNombreGoogle(nombreGoogleCookie);
     // }
-  }, []);
+  }, [cookies, dispatch]);
 
   //Log Out Button
 
@@ -113,6 +113,7 @@ export default function NavBar(props) {
   const firstName = nombreGoogle
     ? nombreGoogle.split(' ')[0]
     : userName.split(' ')[0];
+  console.log(nombreGoogle);
   console.log('Primer nombre:', firstName);
 
   return (
