@@ -29,7 +29,10 @@ function Detail() {
     <div>
       {loading && (
         <div className='flex justify-center items-center w-full h-[800px]'>
-          <img src={loadingGif} alt='gif' />
+          <img
+            src={loadingGif}
+            alt='gif'
+          />
         </div>
       )}
       {!loading && (

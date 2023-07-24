@@ -205,7 +205,7 @@ const CardDetail = ({
   };
 
   return (
-    <div className='w-full h-screen mt-12 flex flex-col justify-center items-center '>
+    <div className='w-full h-full mt-12 flex flex-col justify-center items-center '>
       <div className='detailContainer flex flex-col lg:flex-row w-full lg:w-3/4 rounded   '>
         <div className='flex justify-start items-start w-5 -mt-10'>
           <NavLink className=' justify-self-start mb-1  transition duration-300 ease-in-out transform m-2'>
