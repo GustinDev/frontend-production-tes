@@ -112,8 +112,9 @@ export default function NavBar(props) {
 
   const firstName = nombreGoogle
     ? nombreGoogle.split(' ')[0]
-    : userName.split(' ')[0];
-  console.log(nombreGoogle);
+    : userName
+    ? userName.split(' ')[0]
+    : null;
   console.log('Primer nombre:', firstName);
 
   return (
@@ -182,7 +183,7 @@ export default function NavBar(props) {
             onMouseLeave={handleTooltipToggle}
           >
             <span className='hover:text-teesaGreen transition duration-300 ease-in-out'>
-              {nombreGoogle ? firstName : firstName}
+              {nombreGoogle || user ? firstName : firstName}
             </span>
             <i
               className='fa-solid fa-user ml-5 flex transition duration-300 ease-in-out transform hover:text-teesaGreen'
