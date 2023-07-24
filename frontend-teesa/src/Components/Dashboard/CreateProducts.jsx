@@ -109,7 +109,7 @@ const CreateProducts = () => {
   };
 
   return (
-    <div className='flex flex-col justify-start items-center w-full h-screen'>
+    <div className='flex flex-col justify-start items-center w-full h-full'>
       <div className='w-full flex '>
         <NavLink to='/admin'>
           <button className='bg-teesaBlueLight  text-white flex flex-row hover:bg-teesaBlueDark p-2 m-5 rounded-xl'>
@@ -120,7 +120,7 @@ const CreateProducts = () => {
       <h1 className='text-black text-4xl font-bold my-5'>Crear Producto</h1>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className='w-full md:w-2/5 lg:w-2/5 xl:w-2/5 sm:w-4/5 xs:w-4/5   bg-grey-100 rounded-lg border-teesaBlueDark border-2 flex flex-col p-10 h-auto'
+        className='w-full md:w-2/5 lg:w-2/5 xl:w-2/5 sm:w-4/5 xs:w-4/5   bg-grey-100 rounded-lg border-teesaBlueDark border-2 flex flex-col p-10 h-auto mb-10'
       >
         {/* nombre */}
         <label className='flex flex-col justify-center align-center items-center '>
