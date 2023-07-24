@@ -108,13 +108,12 @@ export default function NavBar(props) {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
-  //carrito
-  // const cartt = useSelector((state) => state.app.cart);
+  //UserName
 
-  //carrito
-  // const cartt = useSelector((state) => state.app.cart);
-
-  // console.log("Cart Length:", cartt.length);
+  const firstName = nombreGoogle
+    ? nombreGoogle.split(' ')[0]
+    : userName.split(' ')[0];
+  console.log('Primer nombre:', firstName);
 
   return (
     <div className='pr-5 flex flex-row justify-between items-center w-full h-[4em] border-b-2 border-teesaGreen bg-teesaBlueDark text-white text-xl sm:text-lg relative '>
@@ -182,7 +181,7 @@ export default function NavBar(props) {
             onMouseLeave={handleTooltipToggle}
           >
             <span className='hover:text-teesaGreen transition duration-300 ease-in-out'>
-              {nombreGoogle ? nombreGoogle : userName}
+              {nombreGoogle ? firstName : firstName}
             </span>
             <i
               className='fa-solid fa-user ml-5 flex transition duration-300 ease-in-out transform hover:text-teesaGreen'
