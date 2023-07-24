@@ -6,7 +6,7 @@ import { getBrands } from '../../features/reduxReducer/productSlice';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 
-const CreateProducts = (id) => {
+const CreateProducts = () => {
   //*Validar Admin - Juan:
 
   const navigate = useNavigate();
@@ -55,6 +55,7 @@ const CreateProducts = (id) => {
 
   const dispatch = useDispatch();
   const [brands, setBrands] = useState([]);
+  // eslint-disable-next-line no-unused-vars
   const [selectedFile, setSelectedFile] = useState([]);
   const selectedFileRef = useRef([]);
 
@@ -102,16 +103,16 @@ const CreateProducts = (id) => {
     }
     console.log('esto es data', data);
     dispatch(createProduct(data));
-    navigate('/admin')
+    navigate('/admin');
     reset();
   };
 
   return (
-    <div className='flex flex-col items-center bg-gradient-to-r from-teesaGreen to-teesaBlueDark h-screen w-full gap-2 overflow-hidden'>
-      <h1 className='text-white text-3xl font-bold mt-[2%]'>Crear productos</h1>
+    <div className='flex flex-col justify-start items-center w-full h-screen bg-gray-200'>
+      <h1 className='text-black text-4xl font-bold my-5'>Crear Producto</h1>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className='flex flex-col justify-center items-center h-auto gap-3'
+        className='w-full md:w-2/5 lg:w-2/5 xl:w-2/5 sm:w-4/5 xs:w-4/5   bg-teesaGrey rounded-lg border-teesaBlueDark border-2 flex flex-col p-10'
       >
         {/* nombre */}
         <label className='flex flex-col justify-center align-center items-center '>
@@ -119,69 +120,46 @@ const CreateProducts = (id) => {
             type='text'
             name='nombre'
             placeholder=' Nombre'
-            className='bg-teesaBlueDark text-teesaGrey rounded-md h-[2em] w-[15em]'
+            className='min-h-[auto] w-full rounded bg-transparent py-[0.32rem] px-3 leading-[1.6] outline-none  border-2 border-teesaBlueLight shadow-lg '
             {...register('nombre', {
               required: 'Este campo es obligatorio',
               pattern: {
-                value: /^[a-zA-Z\s]+$/,
-                message: 'Solo se aceptan letras y espacios',
+                value: /^[a-zA-Z0-9\s¡!¿?.,:;'\-´`{}()[\]<>|/@#$%^&*_+=\\]*$/,
+                message: 'Solo se aceptan letras, números, espacios y símbolos',
               },
             })}
             onBlur={() => handleBlur('nombre')}
           />
           {errors.nombre ? (
-            <span className='text-red-500'>{errors.nombre.message}</span>
+            <span className='text-red-500 w-full'>{errors.nombre.message}</span>
           ) : (
-            <div className='h-[5px]'></div>
+            <div className='h-[24px]'></div>
           )}
         </label>
         {/* TIPO */}
         <label className='flex flex-col justify-center align-center items-center'>
           <select
             name='tipo'
-            className='bg-teesaBlueDark text-teesaGrey rounded-md h-[2em] w-[15em]'
+            className='min-h-[auto] w-full rounded bg-transparent py-[0.32rem] px-3 leading-[1.6] outline-none  border-2 border-teesaBlueLight shadow-lg'
             {...register('tipo', {
               required: 'Este campo es obligatorio',
             })}
             onBlur={() => handleBlur('tipo')}
           >
-            <option value=''>Selecciona un tipo</option>
+            <option value=''>Selecciona una clase</option>
             <option>Equipo</option>
             <option>Repuesto</option>
           </select>
-          <div className='h-[5px]'></div>
+          <div className='h-[24px]'></div>
         </label>
-        {/* caracteriticas */}
-        <label className='flex flex-col justify-center align-center items-center '>
-          <input
-            type='text'
-            name='caracteristicas'
-            placeholder=' Caracteristicas'
-            className='bg-teesaBlueDark text-teesaGrey rounded-md h-[2em] w-[15em]'
-            {...register('caracteristicas', {
-              required: 'Este campo es obligatorio',
-              pattern: {
-                value: /^[a-zA-Z\s]+$/,
-                message: 'Solo se aceptan letras y espacios',
-              },
-            })}
-            onBlur={() => handleBlur('caracteristicas')}
-          />
-          {errors.caracteristicas ? (
-            <span className='text-red-500'>
-              {errors.caracteristicas.message}
-            </span>
-          ) : (
-            <div className='h-[5px]'></div>
-          )}
-        </label>
+
         {/* categoria */}
         <label className='flex flex-col justify-center align-center items-center '>
           <input
             type='text'
             name='categoria'
             placeholder=' Categoria'
-            className='bg-teesaBlueDark text-teesaGrey rounded-md h-[2em] w-[15em]'
+            className='min-h-[auto] w-full rounded bg-transparent py-[0.32rem] px-3 leading-[1.6] outline-none  border-2 border-teesaBlueLight shadow-lg'
             {...register('categoria', {
               required: 'Este campo es obligatorio',
               pattern: {
@@ -192,9 +170,11 @@ const CreateProducts = (id) => {
             onBlur={() => handleBlur('categoria')}
           />
           {errors.categoria ? (
-            <span className='text-red-500'>{errors.categoria.message}</span>
+            <span className='text-red-500 w-full'>
+              {errors.categoria.message}
+            </span>
           ) : (
-            <div className='h-[5px]'></div>
+            <div className='h-[24px]'></div>
           )}
         </label>
         {/* imagenes */}
@@ -214,14 +194,18 @@ const CreateProducts = (id) => {
                     handleInputChange(e);
                     field.onChange(e.target.files);
                   }}
-                  className='bg-teesaBlueDark text-teesaGrey rounded-md h-[2em] w-[15em]'
+                  className='min-h-[auto] w-full rounded bg-transparent py-[0.32rem] px-3 leading-[1.6] outline-none  border-2 border-teesaBlueLight shadow-lg'
                   accept='image/*'
                   multiple
                 />
-                {errors.imagenes && (
-                  <span className='text-red-500'>
-                    {errors.imagenes.message}
-                  </span>
+                {errors.imagenes ? (
+                  <div className='h-[24px]'>
+                    <span className='text-red-500 w-full'>
+                      {errors.imagenes.message}
+                    </span>
+                  </div>
+                ) : (
+                  <div className='h-[24px]'></div>
                 )}
               </>
             )}
@@ -233,7 +217,7 @@ const CreateProducts = (id) => {
             type='number'
             name='precio'
             placeholder=' Precio'
-            className='bg-teesaBlueDark text-teesaGrey rounded-md h-[2em] w-[15em]'
+            className='min-h-[auto] w-full rounded bg-transparent py-[0.32rem] px-3 leading-[1.6] outline-none  border-2 border-teesaBlueLight shadow-lg'
             {...register('precio', {
               required: 'Este campo es obligatorio',
               pattern: {
@@ -244,9 +228,9 @@ const CreateProducts = (id) => {
             onBlur={() => handleBlur('precio')}
           />
           {errors.precio ? (
-            <span className='text-red-500'>{errors.precio.message}</span>
+            <span className='text-red-500 w-full'>{errors.precio.message}</span>
           ) : (
-            <div className='h-[5px]'></div>
+            <div className='h-[24px]'></div>
           )}
         </label>
         {/* stock */}
@@ -255,7 +239,7 @@ const CreateProducts = (id) => {
             type='number'
             name='stock'
             placeholder=' Stock'
-            className='bg-teesaBlueDark text-teesaGrey rounded-md h-[2em] w-[15em]'
+            className='min-h-[auto] w-full rounded bg-transparent py-[0.32rem] px-3 leading-[1.6] outline-none  border-2 border-teesaBlueLight shadow-lg'
             {...register('stock', {
               required: 'Este campo es obligatorio',
               pattern: {
@@ -266,77 +250,101 @@ const CreateProducts = (id) => {
             onBlur={() => handleBlur('stock')}
           />
           {errors.stock ? (
-            <span className='text-red-500'>{errors.stock.message}</span>
+            <span className='text-red-500 w-full '>{errors.stock.message}</span>
           ) : (
-            <div className='h-[5px]'></div>
+            <div className='h-[24px]'></div>
           )}
         </label>
         {/* marca */}
         <label className='flex flex-col justify-center align-center items-center'>
-          <select
-            name='marca'
-            className='bg-teesaBlueDark text-teesaGrey rounded-md h-[2em] w-[15em]'
-            {...register('marca', {
-              required: 'Este campo es obligatorio',
-            })}
-            onBlur={() => handleBlur('marca')}
-          >
-            <option value=''>Selecciona una marca</option>
-            {brands.map((brand) => (
-              <option
-                key={brand}
-                value={brand.id}
-              >
-                {brand}
-              </option>
-            ))}
-          </select>
-          {errors.marca ? (
-            <span className='text-red-500'>{errors.marca.message}</span>
-          ) : (
-            <div className='h-[5px]'></div>
-          )}
-        </label>
-
-        {/* descripcion */}
-        <label className='flex flex-col justify-center align-center items-center '>
           <input
             type='text'
-            name='descripcion'
-            placeholder=' Descripción'
-            className='bg-teesaBlueDark text-teesaGrey rounded-md h-[2em] w-[15em]'
-            {...register('descripcion', {
+            name='marca'
+            placeholder='Marca'
+            className='min-h-[auto] w-full rounded bg-transparent py-[0.32rem] px-3 leading-[1.6] outline-none  border-2 border-teesaBlueLight shadow-lg '
+            {...register('marca', {
               required: 'Este campo es obligatorio',
               pattern: {
                 value: /^[a-zA-Z\s]+$/,
                 message: 'Solo se aceptan letras y espacios',
               },
             })}
+            onBlur={() => handleBlur('marca')}
+          />
+          {errors.marca ? (
+            <span className='text-red-500 w-full'>{errors.marca.message}</span>
+          ) : (
+            <div className='h-[24px]'></div>
+          )}
+        </label>
+
+        {/* caracteriticas */}
+        <label className='flex flex-col justify-center align-center items-center '>
+          <textarea
+            name='caracteristicas'
+            placeholder=' Caracteristicas'
+            rows={4}
+            className='min-h-[auto] w-full rounded bg-transparent py-[0.32rem] px-3 leading-[1.6] outline-none  border-2 border-teesaBlueLight shadow-lg'
+            {...register('caracteristicas', {
+              required: 'Este campo es obligatorio',
+              pattern: {
+                value: /^[\s\S]*$/, //,
+                message: 'Solo se aceptan letras, números, espacios y símbolos',
+              },
+            })}
+            onBlur={() => handleBlur('caracteristicas')}
+          />
+          {errors.caracteristicas ? (
+            <span className='text-red-500 w-full '>
+              {errors.caracteristicas.message}
+            </span>
+          ) : (
+            <div className='h-[24px]'></div>
+          )}
+        </label>
+
+        {/* descripcion */}
+        <label className='flex flex-col justify-center align-center items-center '>
+          <textarea
+            name='descripcion'
+            placeholder=' Descripción'
+            rows={4}
+            className='min-h-[auto] w-full rounded bg-transparent py-[0.32rem] px-3 leading-[1.6] outline-none  border-2 border-teesaBlueLight shadow-lg'
+            {...register('descripcion', {
+              required: 'Este campo es obligatorio',
+              pattern: {
+                value: /^[\s\S]*$/, //,
+                message: 'Solo se aceptan letras, números, espacios y símbolos',
+              },
+            })}
             onBlur={() => handleBlur('descripcion')}
           />
           {errors.descripcion ? (
-            <span className='text-red-500'>{errors.descripcion.message}</span>
+            <span className='text-red-500 w-full'>
+              {errors.descripcion.message}
+            </span>
           ) : (
-            <div className='h-[5px]'></div>
+            <div className='h-[24px]'></div>
           )}
         </label>
+
         {/* ref */}
         <label className='flex flex-col justify-center align-center items-center '>
           <input
             type='text'
             name='ref'
             placeholder=' Referencia'
-            className='bg-teesaBlueDark text-teesaGrey rounded-md h-[2em] w-[15em]'
+            className='min-h-[auto] w-full rounded bg-transparent py-[0.32rem] px-3 leading-[1.6] outline-none  border-2 border-teesaBlueLight shadow-lg'
             {...register('ref')}
             onBlur={() => handleBlur('ref')}
           />
-          <div className='h-[5px]'></div>
+          <div className='h-[24px]'></div>
         </label>
         {/* estado */}
         <label className='flex flex-col justify-center align-center items-center'>
           <select
             name='estado'
-            className='bg-teesaBlueDark text-teesaGrey rounded-md h-[2em] w-[15em]'
+            className='min-h-[auto] w-full rounded bg-transparent py-[0.32rem] px-3 leading-[1.6] outline-none  border-2 border-teesaBlueLight shadow-lg'
             {...register('estado', {
               required: 'Este campo es obligatorio',
             })}
@@ -346,13 +354,13 @@ const CreateProducts = (id) => {
             <option>Nuevo</option>
             <option>Usado</option>
           </select>
-          <div className='h-[5px]'></div>
+          <div className='h-[24px]'></div>
         </label>
         <button
           type='submit'
-          className='bg-teesaGreen font-bold rounded-lg w-[50%] h-[50%] hover:bg-green-500'
+          className='my-[20px] inline-block w-full rounded bg-teesaBlueLight  px-6 pt-2.5 pb-2 text-md font-medium uppercase leading-normal text-white shadow-lg hover:bg-teesaBlueDark cursor-pointer'
         >
-          Crear
+          CREAR PRODUCTO
         </button>
       </form>
     </div>

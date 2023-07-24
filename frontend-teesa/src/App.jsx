@@ -23,6 +23,8 @@ import Dashboard from './Components/Dashboard/Dashboard';
 import Cart from './Components/Carrito/Cart';
 import EditProducts from './Components/Dashboard/EditProducts';
 import Footer from './views/Footer/Footer';
+import Metrics from './Components/Dashboard/Metrics';
+import Users from './Components/Dashboard/Users';
 
 function App() {
   const location = useLocation();
@@ -101,14 +103,6 @@ function App() {
           element={<Cart />}
         />
         <Route
-          path='/admin'
-          element={<Dashboard />}
-        />
-        <Route
-          path='/dashboard/editproduct/:id'
-          element={<EditProducts />}
-        />
-        <Route
           path='/checkoutsuccess'
           element={<CheckoutSucess />}
         />
@@ -121,8 +115,25 @@ function App() {
           element={<CheckoutFailed />}
         />
         <Route
+          path='/admin'
+          element={<Dashboard />}
+        />
+        {/* ADMIN */}
+        <Route
+          path='/dashboard/editproduct/:id'
+          element={<EditProducts />}
+        />
+        <Route
           path='/admin/createproduct'
           element={<CreateProducts />}
+        />
+        <Route
+          path='/admin/users'
+          element={<Users />}
+        />
+        <Route
+          path='/admin/metrics'
+          element={<Metrics />}
         />
       </Routes>
       {!hideFooter && <Footer />}

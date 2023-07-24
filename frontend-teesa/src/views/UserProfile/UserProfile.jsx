@@ -21,7 +21,6 @@ const UserProfile = () => {
   useEffect(() => {
     if (userProducts) {
       console.log('userProfile');
-      // console.log('userProfile', userProducts);
     }
   });
 
@@ -65,13 +64,6 @@ const UserProfile = () => {
   useEffect(() => {
     dispatch(fetchUserById(userDataId));
   }, [dispatch, userData.userData]);
-
-  //Mirar datos:
-
-  // const userDetailData = useSelector((state) => state.userState.userDetail);
-  // console.log(userDetailData);
-
-  //Alerts
 
   const onClose = () => {
     Swal.fire({
@@ -279,9 +271,10 @@ const UserProfile = () => {
               </div>
 
               <div className='flex flex-col gap-1 text-teesaWhite'>
-                
                 <div className='flex flex-row'>
-                <h1 className='font-bold xl:text-3xl lg:text-3xl md:text-2xl sm:text-xl xs:text-xl'>{userName}</h1>
+                  <h1 className='font-bold xl:text-3xl lg:text-3xl md:text-2xl sm:text-xl xs:text-xl'>
+                    {userName}
+                  </h1>
                   <button onClick={() => setEditing(true)}>
                     <i
                       className='bx bx-pencil text-white hover:text-slate-600 ml-6'

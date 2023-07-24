@@ -65,20 +65,11 @@ export default function NavBar(props) {
 
   useEffect(() => {
     const nombreGoogleCookie = cookies.get('nombreGoogle');
-    // const idGoogleCookie = cookies.get('idGoogle');
-    // const emailGoogleCookie = cookies.get('correoGoogle');
-
     if (nombreGoogleCookie) {
       dispatch(updateUserDataFromCookie());
       setNombreGoogle(nombreGoogleCookie);
     }
-
-    //Parte Original:
-    // if (nombreGoogleCookie && !user) {
-    //   dispatch(saveUserDataToCookie({ nombre: nombreGoogleCookie }));
-    //   setNombreGoogle(nombreGoogleCookie);
-    // }
-  }, [cookies, dispatch]);
+  }, [dispatch]);
 
   //Log Out Button
 
@@ -115,7 +106,6 @@ export default function NavBar(props) {
     : userName
     ? userName.split(' ')[0]
     : null;
-  console.log('Primer nombre:', firstName);
 
   return (
     <div className='pr-5 flex flex-row justify-between items-center w-full h-[4em] border-b-2 border-teesaGreen bg-teesaBlueDark text-white text-xl sm:text-lg relative '>

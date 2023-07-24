@@ -143,13 +143,12 @@ const EditProducts = () => {
   //delete product
   const handleDelete = () => {
     dispatch(deleteProduct(ProductID));
-    navigate('/home')
-    console.log('producto borrado')
+    navigate('/home');
+    console.log('producto borrado');
   };
 
-
   return (
-    <div className='flex flex-col justify-center items-center w-full h-screen bg-gradient-to-r from-teesaGreen to-teesaBlueDark'>
+    <div className='flex flex-col justify-center items-center w-full h-screen bg-teesaGrey'>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className=' w-full md:w-2/5 lg:w-2/5 xl:w-2/5 sm:w-4/5 xs:w-4/5  my-10 bg-gray-100 p-5 rounded-lg border-teesaBlueDark border-2 flex flex-col mt-[-5%]'
@@ -169,7 +168,7 @@ const EditProducts = () => {
           <input
             type='number'
             name='stock'
-            className={`min-h-[auto] w-full rounded bg-transparent py-[0.32rem] px-3 leading-[1.6] outline-none transition-all duration-200 ease-linear  border-2 border-teesaBlueLight shadow-lg ${
+            className={`min-h-[auto] w-full rounded bg-transparent py-[0.32rem] px-3 leading-[1.6] outline-none  border-2 border-teesaBlueLight shadow-lg ${
               errors.stock ? 'border-red-500' : ''
             }`}
             placeholder={stock}
@@ -226,9 +225,9 @@ const EditProducts = () => {
             )}
           />{' '}
         </div>
-      
+
         {/* <div className='inline-block min-h-1.5rem justify-center pl-1.5rem md:flex'></div> */}
-        
+
         <input
           type='submit'
           value='Enviar'
@@ -236,7 +235,12 @@ const EditProducts = () => {
         />
       </form>
       <div className='xl:w-[30em] lg:w-[30em] md:w-[20em] sm:w-[15em] xs:w-[15em] border-t-2 border-teesaBlueDark mt-[-2%] '></div>
-      <button onClick={handleDelete} className='bg-red-600 rounded-lg h-[3em] w-[9em] hover:bg-red-800 text-white font-bold mt-[1%]'>Eliminar producto</button>
+      <button
+        onClick={handleDelete}
+        className='bg-red-600 rounded-lg h-[3em] w-[9em] hover:bg-red-800 text-white font-bold mt-[1%]'
+      >
+        Eliminar producto
+      </button>
     </div>
   );
 };
