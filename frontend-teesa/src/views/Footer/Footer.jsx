@@ -8,7 +8,7 @@ const Footer = () => {
     });
   };
   return (
-    <div className='flex flex-col w-full'>
+    <div className='flex flex-col w-full h-full '>
       <div className='flex justify-end p-5 '>
         <i
           className='fa-solid fa-circle-arrow-up text-teesaBlueLight transition duration-100 transform hover:scale-125 '
@@ -19,12 +19,18 @@ const Footer = () => {
           onClick={scrollToTop}
         ></i>
       </div>
-      <div className='flex w-full bg-teesaBlueDark text-white py-2 px-2 justify-between'>
-        <h1>TEESA S.A.S © 2023 | Derechos Reservados</h1>
-        <h2>
-          Creado por:{' '}
+      <div className='flex w-full bg-teesaBlueDark text-white py-2 px-2 justify-between font-bold'>
+        <h1 className='flex'>
+          TEESA S.A.S © 2023
+          <span className='hidden md:flex'>
+            {' '}
+            &nbsp; | &nbsp;Derechos Reservados
+          </span>
+        </h1>
+        <h2 className='flex'>
+          <span className='hidden md:flex'>Creado por: &nbsp;</span>
           <span className='text-teesaGreen hover:text-green-300'>
-            <Link to='/aboutdevs'>Teesa Dev Team</Link>
+            <Link to='/aboutdevs'> Teesa Dev Team</Link>
           </span>
         </h2>
       </div>

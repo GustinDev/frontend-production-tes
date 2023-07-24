@@ -106,9 +106,9 @@ function Home() {
   }, [dispatch]);
 
   return (
-    <div className='flex flex-col'>
+    <div className='flex flex-col h-full sm:h-screen'>
       {/* Second Navbar */}
-      <div className='flex flex-col bg-teesaBlueDark w-full h-[3em] items-center justify-center mt-[-3px] border-t-[6px] border-teesaGreen text-teesaWhite text-[16px]'>
+      <div className='flex flex-col bg-teesaBlueDark w-full h-[3em] items-center justify-center mt-[-3px] border-t-[6px] border-teesaGreen text-teesaWhite text-[16px] py-2'>
         <SearchBar />
       </div>
       {/* Hero */}
@@ -141,7 +141,7 @@ function Home() {
               Error al cargar los productos. {error}
             </div>
           )}
-          {status === 'succeeded' && (
+          {status === 'succeeded' && products.products.length > 0 ? (
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 sm:grid-cols-1 gap-4 mx-auto'>
               {products.products?.map((product) => (
                 <Card
@@ -155,11 +155,23 @@ function Home() {
                 />
               ))}
             </div>
+          ) : (
+            <div className='h-full font-bold text-3xl flex justify-center items center my-40 flex-col mx-auto'>
+              <div className='bg-teesaBlueDark p-5 rounded-lg text-white'>
+                <h1>No se encontraron productos.</h1>
+              </div>
+            </div>
           )}
-          <Pagination
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
-          />
+          {status === 'succeeded' &&
+            products.products.length >
+            (
+              <div>
+                <Pagination
+                  currentPage={currentPage}
+                  setCurrentPage={setCurrentPage}
+                />
+              </div>
+            )}
         </div>
       </div>
     </div>
