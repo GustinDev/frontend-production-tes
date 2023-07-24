@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect, useRef } from 'react';
 import { getBrands } from '../../features/reduxReducer/productSlice';
 import Swal from 'sweetalert2';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 const CreateProducts = () => {
   //*Validar Admin - Juan:
@@ -54,6 +54,7 @@ const CreateProducts = () => {
   //*Yose
 
   const dispatch = useDispatch();
+  // eslint-disable-next-line no-unused-vars
   const [brands, setBrands] = useState([]);
   // eslint-disable-next-line no-unused-vars
   const [selectedFile, setSelectedFile] = useState([]);
@@ -108,11 +109,18 @@ const CreateProducts = () => {
   };
 
   return (
-    <div className='flex flex-col justify-start items-center w-full h-screen bg-gray-200'>
+    <div className='flex flex-col justify-start items-center w-full h-screen'>
+      <div className='w-full flex '>
+        <NavLink to='/admin'>
+          <button className='bg-teesaBlueLight  text-white flex flex-row hover:bg-teesaBlueDark p-2 m-5 rounded-xl'>
+            Volver
+          </button>
+        </NavLink>
+      </div>
       <h1 className='text-black text-4xl font-bold my-5'>Crear Producto</h1>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className='w-full md:w-2/5 lg:w-2/5 xl:w-2/5 sm:w-4/5 xs:w-4/5   bg-teesaGrey rounded-lg border-teesaBlueDark border-2 flex flex-col p-10'
+        className='w-full md:w-2/5 lg:w-2/5 xl:w-2/5 sm:w-4/5 xs:w-4/5   bg-grey-100 rounded-lg border-teesaBlueDark border-2 flex flex-col p-10 h-auto'
       >
         {/* nombre */}
         <label className='flex flex-col justify-center align-center items-center '>
