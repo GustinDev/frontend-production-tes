@@ -106,13 +106,13 @@ function Home() {
   }, [dispatch]);
 
   return (
-    <div className='flex flex-col  h-screen'>
+    <div className='flex flex-wrap overflow-y-auto min-h-screen'>
       {/* Second Navbar */}
       <div className='flex flex-col bg-teesaBlueDark w-full h-[3em] items-center justify-center mt-[-3px] border-t-[6px] border-teesaGreen text-teesaWhite text-[16px] py-2'>
         <SearchBar />
       </div>
       {/* Hero */}
-      <div className='heroContainer flex flex-wrap'>
+      <div className='heroContainer flex flex-wrap mx-auto'>
         {/* Inicia parte de Sol. */} {/* FILTROS */}
         <div className='filters w-full md:w-1/6 m-4 bg-gray-100 p-4 rounded-lg'>
           <h1 className='text-xl font-bold mb-4 text-teesaBlueDark'>
@@ -127,7 +127,7 @@ function Home() {
         {/* Termina parte de Sol. */}
         {/* Inicia parte de Juan. */}
         {/* Cards */}
-        <div className='cardsContainer w-full md:w-2/3 m-5 bg-teesaWhite flex flex-wrap justify-center flex-col'>
+        <div className='cardsContainer w-full md:w-2/3 m-5 bg-teesaWhite flex flex-wrap justify-center flex-col min-h-0'>
           {status === 'loading' && (
             <div className='flex justify-center items-center w-full h-[800px]'>
               <img
@@ -142,7 +142,7 @@ function Home() {
             </div>
           )}
           {status === 'succeeded' && products.products.length > 0 ? (
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 sm:grid-cols-1 gap-4 mx-auto'>
+            <div className=' grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 sm:grid-cols-1 gap-4 mx-auto h-fu'>
               {products.products?.map((product) => (
                 <Card
                   id={product?.id}
