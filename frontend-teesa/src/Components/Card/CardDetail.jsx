@@ -32,6 +32,7 @@ const CardDetail = ({
   stock,
   marca,
   estado,
+  productRef,
 }) => {
   const navigate = useNavigate();
 
@@ -227,7 +228,8 @@ const CardDetail = ({
           <h2 className='text-teesaBlueDark text-3xl font-light mb-4'>
             {nombre}
           </h2>
-          <div className='flex my-4 items-center '>
+
+          <div className='flex items-center '>
             {avgStars !== null && totalReviews !== null ? (
               <div className='flex my-4 items-center '>
                 <Rating
@@ -242,9 +244,12 @@ const CardDetail = ({
                 <span className='ml-2 text-teesaBlueDark '>{`(${totalReviews} opiniones).`}</span>
               </div>
             ) : (
-              <div className='h-[24px]'></div>
+              <div className=''></div>
             )}
           </div>
+          <h2 className='font-bold text-xl text-gray-900 mb-4'>
+            Referencia <br /> <span className=' font-normal'>{productRef}</span>
+          </h2>
           <p className='text-gray-900 text-xl mb-6'>
             <span className='font-bold text-md'>Descripcion</span> <br />{' '}
             {descripcion}

@@ -51,6 +51,7 @@ function Detail() {
               marca={detail?.marca}
               stock={detail?.stock}
               estado={detail?.estado}
+              productRef={detail?.ref}
             />
           )}
         </div>
