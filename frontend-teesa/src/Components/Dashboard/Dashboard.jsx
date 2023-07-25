@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-
+import admin from '../../assets/icon/admin.png';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 
@@ -57,25 +57,31 @@ function Dashboard() {
         Dashboard
       </h1>
 
-      <h2 className='font-bold text-2xl text-black'>
-        Selecciona la acción a realizar.
-      </h2>
-      <div className='flex flex-row justify-center items-center mt-4 gap-[6%]'>
-        <NavLink to='/admin/createproduct'>
-          <button className='bg-teesaBlueLight  text-white flex flex-row hover:bg-teesaBlueDark p-2'>
-            Crear Producto Nuevo
-          </button>
-        </NavLink>
-        <NavLink to='/admin/users'>
-          <button className='bg-teesaBlueLight  text-white flex flex-row hover:bg-teesaBlueDark p-2'>
-            Administrar Usuarios
-          </button>
-        </NavLink>
-        <NavLink to='/admin/metrics'>
-          <button className='bg-teesaBlueLight  text-white flex flex-row hover:bg-teesaBlueDark p-2'>
-            Métricas y Gráficas
-          </button>
-        </NavLink>
+      <div className='flex flex-col justify-center items-center mt-4 bg-blue-500 p-5 rounded-xl '>
+        <div className='flex gap-5 flex-row justify-center items-start bg-blue-500 w-full'>
+          <NavLink to='/admin/createproduct'>
+            <button className='bg-teesaBlueLight  text-white flex flex-row hover:bg-teesaBlueDark p-3 rounded-xl text-xl font-bold'>
+              Crear Producto Nuevo
+            </button>
+          </NavLink>
+          <NavLink to='/admin/users'>
+            <button className='bg-teesaBlueLight  text-white flex flex-row hover:bg-teesaBlueDark p-3 rounded-xl text-xl font-bold'>
+              Administrar Usuarios
+            </button>
+          </NavLink>
+          <NavLink to='/admin/metrics'>
+            <button className='bg-teesaBlueLight  text-white flex flex-row hover:bg-teesaBlueDark p-3 rounded-xl text-xl font-bold'>
+              Métricas y Gráficas
+            </button>
+          </NavLink>
+        </div>
+        <div className='w-1/2 flex mt-5'>
+          <img
+            src={admin}
+            alt='admin'
+            className=' h-60 ml-[80px]'
+          />
+        </div>
       </div>
     </div>
   );

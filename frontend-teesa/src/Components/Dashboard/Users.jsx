@@ -22,8 +22,12 @@ const Users = () => {
           </button>
         </NavLink>
       </div>
-      <div className=' w-full text-center'>
-        <h1 className='text-4xl font-bold my-2 w-30 '>Administrar Usuarios</h1>
+      <div className=' w-full text-center flex justify-center'>
+        <div>
+          <h1 className='text-white text-4xl font-bold my-5 bg-teesaBlueDark rounded-2xl p-2 w-full'>
+            Administrar Usuarios
+          </h1>
+        </div>
       </div>
       <div className='grid grid-cols-2 gap-1  mx-auto w-3/4'>
         {users?.map((usuario) => (
