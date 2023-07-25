@@ -148,10 +148,10 @@ function Register() {
       className='relative bg-cover w-full h-screen flex flex-row justify-center align-center items-center overflow-hidden m-auto'
       style={{ backgroundImage: `url(${waves})` }}
     >
-      <div className=' w-1/4 2xl:w-[25%]  bg-teesaBlueDark rounded-2xl flex flex-col justify-center align-center items-center h-auto mb-[12%] lg:mt-[10%] border-green-700 border-[2px]'>
+      <div className='w-full md:w-2/4 lg:w-1/4 2xl:w-[25%]  bg-teesaBlueDark rounded-2xl flex flex-col justify-center align-center items-center h-auto mb-[12%] lg:mt-[10%] border-green-700 border-[2px] mx-5'>
         <div className='flex flex-col justify-center align-center items-center  w-full px-7 py-1'>
           <div className='w-full mb-5'>
-            <h1 className='font-bold  xl:text-4xl lg:text-3xl text-teesaGrey  mt-[5%] '>
+            <h1 className='text-3xl md:text-4xl font-bold  xl:text-4xl lg:text-4xl text-teesaGrey  mt-[5%] '>
               Regístrate
             </h1>
           </div>
@@ -270,7 +270,7 @@ function Register() {
               className='w-full'
             >
               <button
-                className='flex justify-cetner items-center mb-[24px] w-full h-[2.5em] justify-center rounded  bg-teesaWhite text-md font-medium uppercase leading-normal text-black shadow-lg border-2 border-black hover:bg-gray-300 hover:transform hover:scale-105'
+                className='flex justify-cetner items-center mb-[24px] w-full h-[2.5em] justify-center rounded  bg-teesaWhite text-md font-medium uppercase leading-normal text-black shadow-lg border-2 border-black hover:bg-gray-300 hover:transform hover:scale-105 text-md md:text-lg'
                 type='submit'
               >
                 <img
