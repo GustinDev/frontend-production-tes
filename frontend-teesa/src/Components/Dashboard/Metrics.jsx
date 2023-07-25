@@ -27,7 +27,7 @@ const Metrics = () => {
           </button>
         </NavLink>
       </div>
-      <h1 className='text-white text-4xl font-bold my-5 bg-teesaBlueDark rounded-2xl p-2'>
+      <h1 className='text-white text-5xl font-bold my-5 bg-teesaBlueDark rounded-2xl p-2'>
         Métricas
       </h1>
       <section className='flex flex-row gap-[3em] items-center justify-center bg-teesaGrey rounded-xl py-5 px-10'>

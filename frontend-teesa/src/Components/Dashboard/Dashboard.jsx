@@ -53,7 +53,7 @@ function Dashboard() {
 
   return (
     <div className='flex flex-col items-center min-h-screen  bg-teesaGrey'>
-      <h1 className='text-5xl text-black font-bold my-6 underline'>
+      <h1 className='text-white text-5xl font-bold my-5 bg-teesaBlueDark rounded-2xl p-4'>
         Dashboard
       </h1>
 
