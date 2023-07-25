@@ -15,6 +15,9 @@ import { useNavigate } from 'react-router-dom';
 const EditProducts = () => {
   const navigate = useNavigate();
 
+  const handleGoBack = () => {
+    navigate(-1); // Navegar hacia atrás (-1)
+  };
   //Data Detail
 
   const dispatch = useDispatch();
@@ -148,10 +151,18 @@ const EditProducts = () => {
   };
 
   return (
-    <div className='flex flex-col justify-center items-center w-full h-screen bg-teesaGrey'>
+    <div className='flex flex-col justify-center items-center w-full h-full bg-teesaGrey'>
+      <div className='w-full flex '>
+        <button
+          onClick={handleGoBack}
+          className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-20 m-5'
+        >
+          Volver
+        </button>
+      </div>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className=' w-full md:w-2/5 lg:w-2/5 xl:w-2/5 sm:w-4/5 xs:w-4/5  my-10 bg-gray-100 p-5 rounded-lg border-teesaBlueDark border-2 flex flex-col mt-[-5%]'
+        className=' w-full md:w-2/5 lg:w-2/5 xl:w-2/5 sm:w-4/5 xs:w-4/5  my-10 bg-gray-100 p-5 rounded-lg border-teesaBlueDark border-2 flex flex-col '
       >
         <h1 className='font-bold text-lg md:text-3xl text-teesaBlueDark my-1'>
           Editar Producto
@@ -164,7 +175,7 @@ const EditProducts = () => {
         <h1 className='font-bold text-lg text-teesaBlueDark my-2'>{`Nombre: ${nombre} `}</h1>
 
         <div className='relative'>
-          <h1 className='text-sm'>Stock</h1>
+          <h1 className='text-lg'>Stock</h1>
           <input
             type='number'
             name='stock'
@@ -180,7 +191,7 @@ const EditProducts = () => {
           {!errors.stock}
         </div>
         <div className='relative mb-1'>
-          <h1 className='text-sm'>Precio</h1>
+          <h1 className='text-lg'>Precio</h1>
           <input
             type='number'
             name='precio'
@@ -197,7 +208,7 @@ const EditProducts = () => {
         </div>
 
         <div className='relative mb-1'>
-          <h1 className='text-sm'>Imágenes</h1>
+          <h1 className='text-lg'>Imágenes</h1>
           <Controller
             name='imagenes'
             control={control}
@@ -212,7 +223,7 @@ const EditProducts = () => {
                     handleInputChange(e);
                     field.onChange(e.target.files);
                   }}
-                  className='bg-teesaBlueDark text-teesaGrey text-lg rounded-md h-8 w-full'
+                  className='bg-teesaBlueDark text-teesaGrey text-lg rounded-md h-11 w-full p-1'
                   accept='image/*'
                   multiple
                 />
@@ -233,14 +244,14 @@ const EditProducts = () => {
           value='Enviar'
           className='my-[20px] inline-block w-full rounded bg-teesaBlueLight  px-6 pt-2.5 pb-2 text-md font-medium uppercase leading-normal text-white shadow-lg hover:bg-teesaBlueDark cursor-pointer'
         />
+        <div className='w-full  border-t-2 border-teesaBlueDark mb-3 '></div>
+        <button
+          onClick={handleDelete}
+          className='bg-red-600 rounded-lg h-[3em] w-full hover:bg-red-800 text-white font-bold mt-[1%]'
+        >
+          ELIMINAR PRODUCTO
+        </button>
       </form>
-      <div className='xl:w-[30em] lg:w-[30em] md:w-[20em] sm:w-[15em] xs:w-[15em] border-t-2 border-teesaBlueDark mt-[-2%] '></div>
-      <button
-        onClick={handleDelete}
-        className='bg-red-600 rounded-lg h-[3em] w-[9em] hover:bg-red-800 text-white font-bold mt-[1%]'
-      >
-        Eliminar producto
-      </button>
     </div>
   );
 };
