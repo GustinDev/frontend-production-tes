@@ -5,7 +5,7 @@ import { setUser } from '../../features/reduxReducer/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import googleIcon from '../../assets/icon/Google.svg';
 import { useNavigate } from 'react-router-dom';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import jwt_decode from 'jwt-decode';
 import { loginUser } from '../../features/reduxReducer/loginSlice';
@@ -18,7 +18,6 @@ import waves from '../../assets/icon/layered-waves.svg';
 function Register() {
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.registerState.loading);
-  const error = useSelector((state) => state.registerState.error);
   const errorMessage = useSelector((state) => state.registerState.errorMessage);
   const userData = useSelector((state) => state.userState.userData);
   const nav = useNavigate();
@@ -27,8 +26,7 @@ function Register() {
   //Data del Usuario - Token.
 
   const [tokenValue, setTokenValue] = useState('');
-  const [isUserLoaded, setIsUserLoaded] = useState(false);
-  const token = useSelector((state) => state.loginState.token);
+  const [, setIsUserLoaded] = useState(false);
 
   const setUserWithTokenData = () => {
     if (tokenValue) {
@@ -144,35 +142,29 @@ function Register() {
   };
 
   const contrasena = watch('contrasena');
-  const confirmarContrasena = watch('confirmarContrasena');
 
   return (
     <div
-      className='relative bg-cover w-screen h-screen flex flex-row justify-center align-center items-center overflow-hidden m-auto'
+      className='relative bg-cover w-full h-screen flex flex-row justify-center align-center items-center overflow-hidden m-auto'
       style={{ backgroundImage: `url(${waves})` }}
     >
-      <div className='flex-col xl:mb-[] lg:mb-[]'>
-        <img
-          src={logo}
-          alt='logo'
-          className='mt-[15%] xl:h-[800px] lg:h-[700px] md:h-[400px] xs:hidden'
-        />
-      </div>
-      <div className='bg-gradient-to-r from-teesaGreenDark to-teesaGreen rounded-lg flex flex-col justify-center align-center items-center h-auto mb-[12%] lg:mt-[12%]'>
-        <h1 className='font-bold  xl:text-4xl lg:text-3xl text-teesaGrey  mt-[5%] '>
-          Registrate
-        </h1>
-        <div className='flex flex-col justify-center align-center items-center p-8'>
+      <div className=' w-1/4 2xl:w-[25%]  bg-teesaBlueDark rounded-2xl flex flex-col justify-center align-center items-center h-auto mb-[12%] lg:mt-[10%] border-green-700 border-[2px]'>
+        <div className='flex flex-col justify-center align-center items-center  w-full px-7 py-1'>
+          <div className='w-full mb-5'>
+            <h1 className='font-bold  xl:text-4xl lg:text-3xl text-teesaGrey  mt-[5%] '>
+              Regístrate
+            </h1>
+          </div>
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className='flex flex-col justify-center align-center items-center gap-[0.5em]'
+            className='flex flex-col justify-center align-center items-center gap-1 w-full'
           >
-            <label className='flex flex-col justify-center align-center items-center '>
+            <label className='flex flex-col justify-center align-center items-center w-full'>
               <input
                 type='text'
                 name='nombre'
                 placeholder=' Nombre'
-                className='bg-teesaBlueDark text-teesaGrey rounded-md h-[2em] w-[15em]'
+                className='bg-white text-black rounded-md  w-full px-1 py-2'
                 {...register('nombre', {
                   required: 'Este campo es obligatorio',
                   pattern: {
@@ -183,17 +175,19 @@ function Register() {
                 onBlur={() => handleBlur('nombre')}
               />
               {errors.nombre ? (
-                <span className='text-red-500'>{errors.nombre.message}</span>
+                <span className='text-red-500 w-full'>
+                  {errors.nombre.message}
+                </span>
               ) : (
-                <div className='h-[5px]'></div>
+                <div className='h-[24px]'></div>
               )}
             </label>
-            <label className='flex flex-col justify-center align-center items-center gap-[3%]'>
+            <label className='flex flex-col justify-center align-center items-center gap-1 w-full'>
               <input
                 type='text'
                 name='correo'
                 placeholder=' Email'
-                className='bg-teesaBlueDark border-teesaGrey text-teesaGrey rounded-md h-[2em] w-[15em]'
+                className='bg-white text-black  rounded-md  w-full px-1 py-2'
                 {...register('correo', {
                   required: 'Este campo es obligatorio',
                   pattern: {
@@ -204,43 +198,44 @@ function Register() {
                 onBlur={() => handleBlur('correo')}
               />
               {errors.correo ? (
-                <span className='text-red-500'>{errors.correo.message}</span>
+                <span className='text-red-500 w-full'>
+                  {errors.correo.message}
+                </span>
               ) : (
-                <div className='h-[5px]'></div>
+                <div className='h-[24px]'></div>
               )}
             </label>
 
-            <label className='flex flex-col justify-center align-center items-center gap-[3%]'>
+            <label className='flex flex-col justify-center align-center items-center gap-1 w-full'>
               <input
                 type='password'
                 name='contrasena'
                 placeholder=' Contraseña'
-                className='bg-teesaBlueDark text-teesaGrey rounded-md h-[2em] w-[15em]'
+                className='bg-white text-black rounded-md  w-full px-1 py-2'
                 {...register('contrasena', {
                   required: 'Este campo es obligatorio',
                   pattern: {
                     value:
                       /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&()_+\-=[\]{};':"\\|,.<>/?]).{6,20}$/,
-                    message:
-                      'La contraseña debe contener al menos una mayúscula, un número y un caracter especial',
+                    message: 'Usa una mayúscula, número y símbolo',
                   },
                 })}
                 onBlur={() => handleBlur('contrasena')}
               />
               {errors.contrasena ? (
-                <span className='text-red-500'>
+                <span className='text-red-500 w-full'>
                   {errors.contrasena.message}
                 </span>
               ) : (
-                <div className='h-[5px]'></div>
+                <div className='h-[24px]'></div>
               )}
             </label>
-            <label className='flex flex-col justify-center align-center items-center gap-[3%]'>
+            <label className='flex flex-col justify-center align-center items-center gap-1 w-full'>
               <input
                 type='password'
                 name='confirmarContrasena'
                 placeholder=' Confirmar contraseña'
-                className='bg-teesaBlueDark text-teesaGrey rounded-md h-[2em] w-[15em]'
+                className='bg-white text-black rounded-md w-full px-1 py-2'
                 {...register('confirmarContrasena', {
                   required: 'Este campo es obligatorio',
                   validate: (value) =>
@@ -248,36 +243,41 @@ function Register() {
                 })}
                 onBlur={() => handleBlur('confirmarContrasena')}
               />
-              {errors.confirmarContrasena && (
-                <span className='text-red-500'>
+              {errors.confirmarContrasena ? (
+                <span className='text-red-500 w-full'>
                   {errors.confirmarContrasena.message}
                 </span>
+              ) : (
+                <div className='h-[24px]'></div>
               )}
             </label>
-            <button className='bg-teesaGreen font-bold h-[2em] w-[12em] hover:bg-green-600 hover:transform hover:scale-105 rounded-md'>
+            <button className='bg-teesaGreen font-bold h-[2em] w-full hover:bg-green-600 hover:transform hover:scale-105 rounded-md'>
               INGRESAR
             </button>
-            <p className='text-end'>
+            <p className='w-full text-white'>
               ¿Ya tienes cuenta?{' '}
               <Link to='/login'>
-                <span className='text-teesaBlueDark hover:cursor-pointer hover:text-teesaBlueLight font-bold'>
-                  Log In
+                <span className='text-green-400 hover:cursor-pointer hover:text-green-200 font-bold'>
+                  Ingresa
                 </span>
               </Link>
             </p>
-            <div className='w-[75%] border-t-2 border-black '></div>
+            <div className='w-full border-t-4 border-green-400 my-2'></div>
           </form>
-          <div className='flex justify-center items-center align-center text-center mt-2 w-[70%]'>
-            <a href='https://teesa-backend.onrender.com/google/signup'>
+          <div className='flex justify-center items-center align-center text-center mt-2 w-full'>
+            <a
+              href='https://teesa-backend.onrender.com/google/signup'
+              className='w-full'
+            >
               <button
-                className='flex justify-cetner items-center mb-[5px] w-[16em] h-[2.5em] justify-center rounded  bg-teesaWhite text-md font-medium uppercase leading-normal text-black shadow-lg border-2 border-black hover:bg-gray-300 hover:transform hover:scale-105'
+                className='flex justify-cetner items-center mb-[24px] w-full h-[2.5em] justify-center rounded  bg-teesaWhite text-md font-medium uppercase leading-normal text-black shadow-lg border-2 border-black hover:bg-gray-300 hover:transform hover:scale-105'
                 type='submit'
               >
                 <img
                   src={googleIcon}
                   className=' w-22  h-5 mx-3 my-auto'
                 />{' '}
-                Ingresar con Google
+                Regístrate con Google
               </button>
             </a>
           </div>

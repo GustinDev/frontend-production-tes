@@ -137,7 +137,6 @@ const Login = () => {
     }
   }, [isUserLoaded, navigate]);
 
-  
   return (
     <div
       style={{
@@ -235,8 +234,11 @@ const Login = () => {
               type='submit'
               onClick={handleGoogleLogin}
             >
-              <img src={googleIcon} className='w-5 h-5 mx-3 my-auto' /> Ingresa
-              con Google
+              <img
+                src={googleIcon}
+                className='w-5 h-5 mx-3 my-auto'
+              />{' '}
+              Ingresa con Google
             </button>
           </div>
         </div>
