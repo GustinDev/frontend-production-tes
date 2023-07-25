@@ -57,8 +57,8 @@ function Dashboard() {
         Dashboard
       </h1>
 
-      <div className='flex flex-col justify-center items-center mt-4 bg-blue-500 p-5 rounded-xl '>
-        <div className='flex gap-5 flex-row justify-center items-start bg-blue-500 w-full'>
+      <div className='flex flex-col justify-center items-center mt-4 bg-blue-400 p-5 rounded-xl '>
+        <div className='flex gap-5 flex-row justify-center items-start  w-full'>
           <NavLink to='/admin/createproduct'>
             <button className='bg-teesaBlueLight  text-white flex flex-row hover:bg-teesaBlueDark p-3 rounded-xl text-xl font-bold'>
               Crear Producto Nuevo

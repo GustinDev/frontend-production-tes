@@ -198,8 +198,13 @@ const CreateProducts = () => {
           )}
         </label>
         {/* ref */}
-        <label className='flex flex-col justify-center align-center items-center '>
-          <label className='w-full font-bold'>Referencia</label>
+        <label className='flex flex-col justify-center align-center items-center'>
+          <label
+            className='w-full font-bold'
+            required
+          >
+            Referencia
+          </label>
           <input
             type='text'
             name='ref'
@@ -207,10 +212,6 @@ const CreateProducts = () => {
             className='min-h-[auto] w-full rounded bg-transparent py-[0.32rem] px-3 leading-[1.6] outline-none  border-2 border-teesaBlueLight shadow-lg'
             {...register('ref', {
               required: 'Este campo es obligatorio',
-              pattern: {
-                value: /^[a-zA-Z\s]+$/,
-                message: 'Solo se aceptan letras y espacios',
-              },
             })}
             onBlur={() => handleBlur('ref')}
           />
@@ -220,6 +221,7 @@ const CreateProducts = () => {
             <div className='h-[24px]'></div>
           )}
         </label>
+
         {/* precio */}
         <label className='flex flex-col justify-center align-center items-center '>
           <label className='w-full font-bold'>Precio</label>

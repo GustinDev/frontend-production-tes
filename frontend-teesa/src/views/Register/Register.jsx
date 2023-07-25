@@ -1,5 +1,4 @@
 import { useForm } from 'react-hook-form';
-import logo from '../../img/SVGs/logoSolo.svg';
 import { registerUser } from '../../features/reduxReducer/registerSlice';
 import { setUser } from '../../features/reduxReducer/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
