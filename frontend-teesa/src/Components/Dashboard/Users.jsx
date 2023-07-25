@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { useEffect, useState } from 'react';
@@ -6,7 +7,6 @@ import {
   getUser,
   enableUser,
   enableUserfalse,
-  getShopId,
 } from '../../features/reduxReducer/adminSlice';
 
 const columns = [
@@ -29,63 +29,71 @@ const columns = [
   {
     Header: 'Historial de Compras',
     accessor: 'historialCompras',
-    Cell: ({ value }) => {
-      return (
-        <div>
-          {value?.length > 0 ? (
-            <ul className='divide-y divide-gray-300'>
-              {value.map((compra) => (
-                <li
-                  key={compra.id}
-                  className='py-2'
-                >
-                  <div className='flex items-center'>
-                    <img
-                      src={compra.Product.imagenes[0]}
-                      alt='Producto'
-                      className='w-8 h-8 mr-2'
-                    />
-                    <div>
-                      <p className='text-sm font-semibold'>
-                        {compra.Product.nombre}
-                      </p>
-                      <p className='text-xs text-gray-500'>
-                        Fecha: {compra.fechaDeCompra}
-                      </p>
-                    </div>
+    Cell: ({ value }) => (
+      <>
+        {value.length ? (
+          <ul>
+            {value.map((compra, index) => (
+              <li key={index}>
+                <div className='flex items-center'>
+                  <img
+                    src={compra.Product.imagenes[0]}
+                    alt='Producto'
+                    className='w-8 h-8 mr-2'
+                  />
+                  <div>
+                    <p className='text-sm font-semibold'>
+                      {compra.Product.nombre}
+                    </p>
+                    <p className='text-xs text-gray-500'>
+                      Fecha: {compra.fechaDeCompra}
+                    </p>
                   </div>
-                  <div className='text-xs'>
-                    Precio: {compra.precio}, Cantidad: {compra.cantidad},
-                    Estado: {compra.estado}
-                  </div>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p className='text-white'>
-              Este usuario no ha realizado ninguna compra.
-            </p>
-          )}
-        </div>
-      );
-    },
+                </div>
+                <div className='text-xs'>
+                  Precio: {compra.precio}, Cantidad: {compra.cantidad}, Estado:{' '}
+                  {compra.estado}
+                </div>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>Este usuario no realizó ninguna compra.</p>
+        )}
+      </>
+    ),
   },
   {
     Header: 'Inhabilitar Usuario',
-    accessor: 'inhabilitarUsuario',
-    Cell: ({ row }) => {
-      const usuario = row.original;
+    accessor: 'enable',
+    Cell: ({ value, row }) => {
+      const [isUsuarioHabilitado, setIsUsuarioHabilitado] = useState(value);
+      const dispatch = useDispatch();
+
+      const handleHabilitarUsuario = () => {
+        setIsUsuarioHabilitado(true);
+        dispatch(enableUser(row.original.id));
+      };
+
+      const handleDesactivarUsuario = () => {
+        setIsUsuarioHabilitado(false);
+        dispatch(enableUserfalse(row.original.id));
+      };
 
       return (
         <button
-          className={`px-3 py-2 rounded-md text-white ${
-            usuario.enable
+          onClick={
+            isUsuarioHabilitado
+              ? handleDesactivarUsuario
+              : handleHabilitarUsuario
+          }
+          className={`px-3 py-2 ${
+            isUsuarioHabilitado
               ? 'bg-red-600 hover:bg-red-700'
               : 'bg-green-600 hover:bg-green-700'
-          }`}
-          onClick={() => handleHabilitarUsuario(usuario.id, !usuario.enable)}
+          } text-white rounded-md`}
         >
-          {usuario.enable ? 'Inhabilitar' : 'Habilitar'}
+          {isUsuarioHabilitado ? 'Inhabilitar Usuario' : 'Habilitar Usuario'}
         </button>
       );
     },
@@ -101,26 +109,21 @@ const Users = () => {
 
   const users = useSelector((state) => state.admin.users);
 
-  const [historialCompras, setHistorialCompras] = useState([]);
+  const data = users.map((usuario) => ({
+    id: usuario.id,
+    nombre: usuario.nombre,
+    correo: usuario.correo || 'N/A',
+    direccion: usuario.direccion || 'N/A',
+    telefono: usuario.telefono || 'N/A',
+    historialCompras: [],
+    enable: usuario.enable, // Estado para controlar si el usuario está habilitado o no.
+  }));
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable({ columns, data: users });
-
-  const handleHabilitarUsuario = async (userId, enableValue) => {
-    try {
-      if (enableValue) {
-        await dispatch(enableUser(userId));
-      } else {
-        await dispatch(enableUserfalse(userId));
-      }
-      dispatch(getUser()); // Actualizamos la lista de usuarios después de habilitar o inhabilitar al usuario
-    } catch (error) {
-      console.error('Error al habilitar o inhabilitar al usuario:', error);
-    }
-  };
+    useTable({ columns, data });
 
   return (
-    <div className='w-full h-screen items-center justify-center'>
+    <div className='w-full h-full items-center justify-center'>
       <div className='w-full flex items-center'>
         <NavLink to='/admin'>
           <button className='bg-teesaBlueLight text-white flex flex-row hover:bg-teesaBlueDark p-2 m-5 rounded-xl text-center'>
@@ -135,7 +138,7 @@ const Users = () => {
           </h1>
         </div>
       </div>
-      <div className='grid grid-cols-4 gap-1 mx-auto w-3/4'>
+      <div className='h-full gap-1 mx-auto w-3/4 mb-[10px] border-black border-2'>
         <table
           {...getTableProps()}
           className='w-full border-collapse'
@@ -145,11 +148,13 @@ const Users = () => {
               <tr
                 {...headerGroup.getHeaderGroupProps()}
                 className='text-left font-bold border-b border-black'
+                key={headerGroup.id}
               >
                 {headerGroup.headers.map((column) => (
                   <th
                     {...column.getHeaderProps()}
                     className='px-3 py-2 border-r border-black'
+                    key={column.id}
                   >
                     {column.render('Header')}
                   </th>
@@ -164,11 +169,13 @@ const Users = () => {
                 <tr
                   {...row.getRowProps()}
                   className='border-b border-black'
+                  key={row.id}
                 >
                   {row.cells.map((cell) => (
                     <td
                       {...cell.getCellProps()}
                       className='px-3 py-2 border-r border-black'
+                      key={cell.column.id}
                     >
                       {cell.render('Cell')}
                     </td>
@@ -179,6 +186,7 @@ const Users = () => {
           </tbody>
         </table>
       </div>
+      <div className='w-full h-10'></div>
     </div>
   );
 };

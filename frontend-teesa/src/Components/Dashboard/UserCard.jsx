@@ -9,9 +9,7 @@ import {
 
 const UserCard = ({ usuario }) => {
   const dispatch = useDispatch();
-  const [isUsuarioHabilitado, setIsUsuarioHabilitado] = useState(
-    usuario.enable
-  );
+
   const [historialCompras, setHistorialCompras] = useState([]);
 
   const [mostrarHistorial, setMostrarHistorial] = useState(false); // Estado para controlar la visibilidad del historial
@@ -31,6 +29,12 @@ const UserCard = ({ usuario }) => {
   const handleMostrarHistorial = () => {
     setMostrarHistorial(!mostrarHistorial);
   };
+
+  //User Habilitado
+
+  const [isUsuarioHabilitado, setIsUsuarioHabilitado] = useState(
+    usuario.enable
+  );
 
   const handleHabilitarUsuario = () => {
     const enableValue = !isUsuarioHabilitado;
