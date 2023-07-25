@@ -98,13 +98,24 @@ const CreateProducts = () => {
     }
   };
 
+  const alertCreated = () => {
+    Swal.fire({
+      title: 'Producto Creado',
+      text: 'El producto fue creado exitosamente.',
+      icon: 'success',
+      confirmButtonText: 'Aceptar',
+      confirmButtonColor: '#192C8C',
+    });
+  };
+
   const onSubmit = (data) => {
     if (selectedFileRef.current) {
       data.imagenes = selectedFileRef.current;
     }
     console.log('esto es data', data);
     dispatch(createProduct(data));
-    navigate('/admin');
+    //navigate('/admin');}
+    alertCreated();
     reset();
   };
 
