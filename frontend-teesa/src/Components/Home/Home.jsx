@@ -162,16 +162,14 @@ function Home() {
               </div>
             </div>
           ) : null}
-          {status === 'succeeded' &&
-            products.products.length >
-            (
-              <div>
-                <Pagination
-                  currentPage={currentPage}
-                  setCurrentPage={setCurrentPage}
-                />
-              </div>
-            )}
+          {status === 'succeeded' && products.products.length && (
+            <div>
+              <Pagination
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+              />
+            </div>
+          )}
         </div>
       </div>
     </div>

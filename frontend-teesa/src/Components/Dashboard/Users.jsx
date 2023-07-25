@@ -1,8 +1,13 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useTable } from 'react-table';
-import { getUser } from '../../features/reduxReducer/adminSlice';
+import {
+  getUser,
+  enableUser,
+  enableUserfalse,
+  getShopId,
+} from '../../features/reduxReducer/adminSlice';
 
 const columns = [
   {
@@ -22,22 +27,68 @@ const columns = [
     accessor: 'telefono',
   },
   {
-    Header: 'Historial de Compras', // Nueva columna: Historial de Compras
-    accessor: 'historialCompras', // El accessor para esta columna no es necesario, ya que la información de compras está disponible en los datos.
-    Cell: () => (
-      <button className='px-3 py-2 bg-blue-600 text-white rounded-md'>
-        Ver Historial
-      </button>
-    ),
+    Header: 'Historial de Compras',
+    accessor: 'historialCompras',
+    Cell: ({ value }) => {
+      return (
+        <div>
+          {value?.length > 0 ? (
+            <ul className='divide-y divide-gray-300'>
+              {value.map((compra) => (
+                <li
+                  key={compra.id}
+                  className='py-2'
+                >
+                  <div className='flex items-center'>
+                    <img
+                      src={compra.Product.imagenes[0]}
+                      alt='Producto'
+                      className='w-8 h-8 mr-2'
+                    />
+                    <div>
+                      <p className='text-sm font-semibold'>
+                        {compra.Product.nombre}
+                      </p>
+                      <p className='text-xs text-gray-500'>
+                        Fecha: {compra.fechaDeCompra}
+                      </p>
+                    </div>
+                  </div>
+                  <div className='text-xs'>
+                    Precio: {compra.precio}, Cantidad: {compra.cantidad},
+                    Estado: {compra.estado}
+                  </div>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className='text-white'>
+              Este usuario no ha realizado ninguna compra.
+            </p>
+          )}
+        </div>
+      );
+    },
   },
   {
-    Header: 'Inhabilitar Usuario', // Nueva columna: Inhabilitar Usuario
-    accessor: 'inhabilitarUsuario', // El accessor para esta columna no es necesario, ya que la información para el botón está disponible en los datos.
-    Cell: () => (
-      <button className='px-3 py-2 bg-red-600 text-white rounded-md'>
-        Inhabilitar
-      </button>
-    ),
+    Header: 'Inhabilitar Usuario',
+    accessor: 'inhabilitarUsuario',
+    Cell: ({ row }) => {
+      const usuario = row.original;
+
+      return (
+        <button
+          className={`px-3 py-2 rounded-md text-white ${
+            usuario.enable
+              ? 'bg-red-600 hover:bg-red-700'
+              : 'bg-green-600 hover:bg-green-700'
+          }`}
+          onClick={() => handleHabilitarUsuario(usuario.id, !usuario.enable)}
+        >
+          {usuario.enable ? 'Inhabilitar' : 'Habilitar'}
+        </button>
+      );
+    },
   },
 ];
 
@@ -50,17 +101,23 @@ const Users = () => {
 
   const users = useSelector((state) => state.admin.users);
 
-  const data = users.map((usuario) => ({
-    nombre: usuario.nombre,
-    correo: usuario.correo || 'N/A',
-    direccion: usuario.direccion || 'N/A',
-    telefono: usuario.telefono || 'N/A',
-    historialCompras: '', // Aquí puedes colocar la lógica para obtener el historial de compras del usuario y mostrarlo aquí.
-    inhabilitarUsuario: '', // Aquí puedes colocar la lógica para inhabilitar al usuario.
-  }));
+  const [historialCompras, setHistorialCompras] = useState([]);
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable({ columns, data });
+    useTable({ columns, data: users });
+
+  const handleHabilitarUsuario = async (userId, enableValue) => {
+    try {
+      if (enableValue) {
+        await dispatch(enableUser(userId));
+      } else {
+        await dispatch(enableUserfalse(userId));
+      }
+      dispatch(getUser()); // Actualizamos la lista de usuarios después de habilitar o inhabilitar al usuario
+    } catch (error) {
+      console.error('Error al habilitar o inhabilitar al usuario:', error);
+    }
+  };
 
   return (
     <div className='w-full h-screen items-center justify-center'>
