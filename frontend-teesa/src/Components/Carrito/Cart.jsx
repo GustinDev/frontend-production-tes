@@ -124,7 +124,7 @@ export const Cart = () => {
 
   return (
     <div className='flex flex-col items-center justify-start mt-10 h-screen'>
-      <h2 className='text-4xl font-medium text-gray-800 mb-4'>
+      <h2 className='text-4xl text-gray-800 mb-4 font-extrabold'>
         Carrito de Productos
       </h2>
       <main>
@@ -162,13 +162,13 @@ export const Cart = () => {
                     <div className='flex justify-center mt-8'>
                       <Link
                         to='/home'
-                        className='7-80 px-4 py-3 border-4 bg-teesaBlueDark rounded-lg text-white hover:bg-blue-600 transition duration-100 transform hover:scale-105 mr-4'
+                        className='7-80 px-4 py-3 border-4 bg-blue-900 rounded-lg text-white hover:bg-blue-900 transition duration-100 transform hover:scale-105 mr-4'
                       >
                         Seguir comprando
                       </Link>
 
                       <a href={linkMercadoPago}>
-                        <button className='7-80 px-4 py-3 border-4 bg-teesaGreen rounded-lg text-white hover:bg-blue-600 transition duration-100 transform hover:scale-105'>
+                        <button className='7-80 px-4 py-3 border-4 bg-blue-500  rounded-lg text-white hover:bg-blue-600 transition duration-100 transform hover:scale-105'>
                           Comprar con MercadoPago
                         </button>
                       </a>
@@ -181,7 +181,7 @@ export const Cart = () => {
                     </p>
                     <Link
                       to='/home'
-                      className='7-80 px-4 py-3 border-4 bg-teesaBlueDark rounded-lg text-white hover:bg-blue-600 transition duration-100 transform hover:scale-105'
+                      className='7-80 px-4 py-3 border-4 bg-blue-800 rounded-lg text-white hover:bg-blue-900 transition duration-100 transform hover:scale-105'
                     >
                       Seguir comprando
                     </Link>
