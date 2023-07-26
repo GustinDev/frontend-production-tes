@@ -57,7 +57,7 @@ function Dashboard() {
         Dashboard
       </h1>
 
-      <div className='flex flex-col justify-center items-center mt-4 bg-blue-400 p-5 rounded-xl '>
+      <div className='flex flex-col justify-center items-center mt-4 bg-gray-300 p-5 rounded-xl border-4 border-teesaBlueDark'>
         <div className='flex gap-5 flex-col md:flex-row justify-center items-center  w-full'>
           <NavLink to='/admin/createproduct'>
             <button className='bg-teesaBlueLight  text-white flex flex-row hover:bg-teesaBlueDark p-3 rounded-xl text-xl font-bold'>

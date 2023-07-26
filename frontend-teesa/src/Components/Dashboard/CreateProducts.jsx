@@ -1,7 +1,7 @@
 import { useForm, Controller } from 'react-hook-form';
 import { createProduct } from '../../features/reduxReducer/admproductSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { getBrands } from '../../features/reduxReducer/productSlice';
 import Swal from 'sweetalert2';
 import { NavLink, useNavigate } from 'react-router-dom';
@@ -58,7 +58,7 @@ const CreateProducts = () => {
   const [brands, setBrands] = useState([]);
   // eslint-disable-next-line no-unused-vars
   const [selectedFile, setSelectedFile] = useState([]);
-  const selectedFileRef = useRef([]);
+  //const selectedFileRef = useRef([]);
 
   useEffect(() => {
     dispatch(getBrands())
