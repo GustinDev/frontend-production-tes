@@ -124,6 +124,8 @@ const CreateProducts = () => {
       icon: 'success',
       confirmButtonText: 'Aceptar',
       confirmButtonColor: '#192C8C',
+    }).then(() => {
+      navigate(0);
     });
   };
 
@@ -139,8 +141,8 @@ const CreateProducts = () => {
     delete finalData.imagenesAdicionales;
     console.log('Data producto:', finalData);
     dispatch(createProduct(finalData));
-    alertCreated();
     reset();
+    alertCreated();
   };
 
   return (
@@ -169,10 +171,6 @@ const CreateProducts = () => {
             className='min-h-[auto] w-full rounded bg-transparent py-[0.32rem] px-3 leading-[1.6] outline-none  border-2 border-teesaBlueLight shadow-lg '
             {...register('nombre', {
               required: 'Este campo es obligatorio',
-              pattern: {
-                value: /^[a-zA-Z0-9\s¡!¿?.,:;'\-´`{}()[\]<>|/@#$%^&*_+=\\]*$/,
-                message: 'Solo se aceptan letras, números, espacios y símbolos',
-              },
             })}
             onBlur={() => handleBlur('nombre')}
           />
@@ -193,10 +191,6 @@ const CreateProducts = () => {
             className='min-h-[auto] w-full rounded bg-transparent py-[0.32rem] px-3 leading-[1.6] outline-none  border-2 border-teesaBlueLight shadow-lg'
             {...register('categoria', {
               required: 'Este campo es obligatorio',
-              pattern: {
-                value: /^[a-zA-Z\s]+$/,
-                message: 'Solo se aceptan letras y espacios',
-              },
             })}
             onBlur={() => handleBlur('categoria')}
           />
@@ -219,10 +213,6 @@ const CreateProducts = () => {
             className='min-h-[auto] w-full rounded bg-transparent py-[0.32rem] px-3 leading-[1.6] outline-none  border-2 border-teesaBlueLight shadow-lg '
             {...register('marca', {
               required: 'Este campo es obligatorio',
-              pattern: {
-                value: /^[a-zA-Z\s]+$/,
-                message: 'Solo se aceptan letras y espacios',
-              },
             })}
             onBlur={() => handleBlur('marca')}
           />
