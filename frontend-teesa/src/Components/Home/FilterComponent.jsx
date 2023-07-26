@@ -169,7 +169,7 @@ const FilterComponent = ({ currentPage, setCurrentPage }) => {
       </label>
       <br />
       <div className='flex flex-col  text-teesaBlueDark'>
-        <span className='mb-2 font-semibold'>Marca:</span>
+        <span className=' font-semibold'>Marca:</span>
         <select
           value={marca}
           onChange={(e) => {
