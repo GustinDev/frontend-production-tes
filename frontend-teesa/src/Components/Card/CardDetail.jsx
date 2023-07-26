@@ -255,7 +255,7 @@ const CardDetail = ({
             {descripcion}
           </p>
           <p className='text-gray-900 text-xl mb-6'>
-            <span className='font-bold text-md'>Caracteristicas</span> <br />{' '}
+            <span className='font-bold text-md'>Características</span> <br />{' '}
             {caracteristicas}
           </p>
           <div className='flex flex-col mb-6'>

@@ -76,7 +76,6 @@ export const Cart = () => {
 
   // const userUUID = props.userId;
   // console.log(userUUID);
-  const [cartId, setCartId] = useState('');
 
   // const [cart, setCart] = useState({
   //   CartId: cartId,
@@ -114,7 +113,6 @@ export const Cart = () => {
     (state) => state.mercadoState.linkMercado
   );
   const status = useSelector((state) => state.mercadoState.status);
-  const error = useSelector((state) => state.mercadoState.error);
 
   useEffect(() => {
     if (userId !== null) {

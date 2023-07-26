@@ -84,15 +84,34 @@ const CreateProducts = () => {
     trigger(fieldName);
   };
 
-  const handleInputChange = (event) => {
+  //* Images
+
+  const [mainImage, setMainImage] = useState(null);
+  const [additionalImages, setAdditionalImages] = useState([]);
+
+  const handleMainImageChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onloadend = () => {
+        setMainImage(reader.result);
+      };
+    }
+  };
+
+  const handleAdditionalImagesChange = (event) => {
     const { files } = event.target;
     if (files.length > 0) {
+      const newImages = [];
       for (let i = 0; i < files.length; i++) {
         const reader = new FileReader();
         reader.readAsDataURL(files[i]);
         reader.onloadend = () => {
-          setSelectedFile([reader.result]);
-          selectedFileRef.current = [...selectedFileRef.current, reader.result];
+          newImages.push(reader.result);
+          if (newImages.length === files.length) {
+            setAdditionalImages(newImages); // Actualizamos el estado con las nuevas imágenes seleccionadas
+          }
         };
       }
     }
@@ -109,12 +128,17 @@ const CreateProducts = () => {
   };
 
   const onSubmit = (data) => {
-    if (selectedFileRef.current) {
-      data.imagenes = selectedFileRef.current;
-    }
-    console.log('esto es data', data);
-    dispatch(createProduct(data));
-    //navigate('/admin');}
+    // if (selectedFileRef.current) {
+    //   data.imagenes = selectedFileRef.current;
+    // }
+    const finalData = {
+      ...data,
+      imagenes: [mainImage, ...additionalImages],
+    };
+    delete finalData.imagenPrincipal;
+    delete finalData.imagenesAdicionales;
+    console.log('Data producto:', finalData);
+    dispatch(createProduct(finalData));
     alertCreated();
     reset();
   };
@@ -323,40 +347,71 @@ const CreateProducts = () => {
             <div className='h-[24px]'></div>
           )}
         </label>
-        {/* imagenes */}
-        <label className='flex flex-col justify-center align-center items-center'>
-          <label className='w-full font-bold'>Imágenes</label>
+        {/* Input de la imagen principal */}
+        <label>
+          <label className='w-full font-bold'>Imagen Principal</label>
           <Controller
-            name='imagenes'
+            name='imagenPrincipal'
             control={control}
-            defaultValue={[]}
-            rules={{ required: true }}
+            defaultValue={''}
+            rules={{ required: 'Este campo es obligatorio' }}
             render={({ field }) => (
               <>
                 <input
-                  name='imagenes'
-                  // filelist={selectedFile}
                   type='file'
                   onChange={(e) => {
-                    handleInputChange(e);
+                    handleMainImageChange(e);
                     field.onChange(e.target.files);
                   }}
-                  className='min-h-[auto] w-full rounded bg-transparent py-[0.32rem] px-3 leading-[1.6] outline-none  border-2 border-teesaBlueLight shadow-lg'
+                  className='min-h-[auto] w-full rounded bg-transparent py-[0.32rem] px-3 leading-[1.6] outline-none border-2 border-teesaBlueLight shadow-lg'
                   accept='image/*'
-                  multiple
                 />
-                {errors.imagenes ? (
-                  <div className='h-[24px]'>
-                    <span className='text-red-500 w-full'>
-                      {errors.imagenes.message}
-                    </span>
-                  </div>
-                ) : (
-                  <div className='h-[24px]'></div>
-                )}
               </>
             )}
           />
+          {errors.imagenPrincipal ? (
+            <div className='h-[24px]'>
+              <span className='text-red-500 w-full'>
+                {errors.imagenPrincipal.message}
+              </span>
+            </div>
+          ) : (
+            <div className='h-[24px]'></div>
+          )}
+        </label>
+
+        {/* Imágenes Adicionales */}
+        <label>
+          <label className='w-full font-bold'>Imágenes Secundarias</label>
+          <Controller
+            name='imagenesAdicionales'
+            control={control}
+            defaultValue={[]}
+            rules={{ required: 'Este campo es obligatorio' }}
+            render={({ field }) => (
+              <>
+                <input
+                  type='file'
+                  onChange={(e) => {
+                    handleAdditionalImagesChange(e);
+                    field.onChange(e.target.files);
+                  }}
+                  className='min-h-[auto] w-full rounded bg-transparent py-[0.32rem] px-3 leading-[1.6] outline-none border-2 border-teesaBlueLight shadow-lg'
+                  accept='image/*'
+                  multiple
+                />
+              </>
+            )}
+          />
+          {errors.imagenesAdicionales ? (
+            <div className='h-[24px]'>
+              <span className='text-red-500 w-full'>
+                {errors.imagenesAdicionales.message}
+              </span>
+            </div>
+          ) : (
+            <div className='h-[24px]'></div>
+          )}
         </label>
         {/* caracteriticas */}
         <label className='flex flex-col justify-center align-center items-center '>
