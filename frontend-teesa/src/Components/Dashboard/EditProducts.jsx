@@ -151,7 +151,7 @@ const EditProducts = () => {
   };
 
   return (
-    <div className='flex flex-col justify-center items-center w-full h-full bg-teesaGrey'>
+    <div className='flex flex-col justify-center items-center w-full h-full '>
       <div className='w-full flex '>
         <button
           onClick={handleGoBack}
