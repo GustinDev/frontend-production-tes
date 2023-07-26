@@ -100,16 +100,11 @@ const FilterComponent = ({ currentPage, setCurrentPage }) => {
       >
         Resetear filtros
       </button>
-      <div className='block mb-2 font-semibold text-teesaBlueDark'>
-        <label
-          htmlFor='sort'
-          className='block mb-2 font-semibold'
-        >
-          Orden Alfabético
-        </label>
+      <div className='block mb-5 text-teesaBlueDark'>
+        <span className='mb-2 font-semibold'>Orden Alfabético:</span>
         <select
           id='sort'
-          className='w-full border border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-teesaGreen'
+          className='w-full border border-gray-300 rounded px-3 py-2 focus:outline-none'
           value={orderName}
           onChange={(e) => handleSort(e)}
         >
@@ -123,16 +118,11 @@ const FilterComponent = ({ currentPage, setCurrentPage }) => {
           <option value='descendente'>Z-A</option>
         </select>
       </div>
-      <div className='block mb-2 font-semibold text-teesaBlueDark'>
-        <label
-          htmlFor='sortPrice'
-          className='block mb-2 font-semibold'
-        >
-          Precio
-        </label>
+      <div className='block mb-5  text-teesaBlueDark'>
+        <span className='mb-2 font-semibold'>Precio:</span>
         <select
           id='sortPrice'
-          className='w-full border border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-teesaGreen'
+          className='w-full border border-gray-300 rounded px-3 py-2 focus:outline-none'
           value={orderPrice}
           onChange={(e) => handleSortPrices(e)}
         >
@@ -146,11 +136,11 @@ const FilterComponent = ({ currentPage, setCurrentPage }) => {
           <option value='precio_max'>Precio Máximo</option>
         </select>
       </div>
-      <label className='block mb-2 font-semibold text-teesaBlueDark'>
-        Estado:
+      <label className='block  text-teesaBlueDark'>
+        <span className='mb-2 font-semibold'>Estado:</span>
         <select
           value={estado}
-          className='w-full border border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-teesaGreen'
+          className='w-full border border-gray-300 rounded px-3 py-2 focus:outline-none'
           onChange={(e) => {
             setEstado(e.target.value);
             handleChange();
@@ -162,11 +152,11 @@ const FilterComponent = ({ currentPage, setCurrentPage }) => {
         </select>
       </label>
       <br />
-      <label className='block mb-2 font-semibold text-teesaBlueDark'>
-        Tipo:
+      <label className='block  text-teesaBlueDark'>
+        <span className='mb-2 font-semibold'>Tipo:</span>
         <select
           value={tipo}
-          className='w-full border border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-teesaGreen'
+          className='w-full border border-gray-300 rounded px-3 py-2 focus:outline-none'
           onChange={(e) => {
             setTipo(e.target.value);
             handleChange();
@@ -178,37 +168,38 @@ const FilterComponent = ({ currentPage, setCurrentPage }) => {
         </select>
       </label>
       <br />
-      <div className='flex flex-col mb-4 text-teesaBlueDark'>
+      <div className='flex flex-col  text-teesaBlueDark'>
         <span className='mb-2 font-semibold'>Marca:</span>
-        {brands.map((brand) => (
-          <label
-            className='flex items-center mb-1'
-            key={brand}
-          >
-            <input
-              type='checkbox'
+        <select
+          value={marca}
+          onChange={(e) => {
+            setMarca(e.target.value);
+            handleChange();
+          }}
+          className='w-full border border-gray-300 rounded px-3 py-2 focus:outline-none'
+        >
+          <option value=''>Seleccionar marca</option>
+          {brands.map((brand) => (
+            <option
               value={brand}
-              checked={marca === brand}
-              onChange={(e) => {
-                setMarca(e.target.checked ? brand : '');
-                handleChange();
-              }}
-              className='mr-2 leading-tight focus:outline-none'
-            />
-            <span>{brand}</span>
-          </label>
-        ))}
+              key={brand}
+            >
+              {brand}
+            </option>
+          ))}
+        </select>
       </div>
+
       <br />
-      <label className='block mb-2 font-semibold text-teesaBlueDark'>
-        Precio:
+      <label className='block mb-2  text-teesaBlueDark'>
+        <span className='mb-2 font-semibold'>Precio:</span>
         <select
           value={precio}
           onChange={(e) => {
             setPrecio(e.target.value);
             handleChange();
           }}
-          className='w-full border border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-teesaGreen'
+          className='w-full border border-gray-300 rounded px-3 py-2 focus:outline-none'
         >
           <option value=''>Todos</option>
           <option value='0-10000000'>0 - 10,000,000</option>
