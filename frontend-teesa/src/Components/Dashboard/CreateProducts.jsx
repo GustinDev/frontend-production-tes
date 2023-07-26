@@ -387,7 +387,7 @@ const CreateProducts = () => {
             name='imagenesAdicionales'
             control={control}
             defaultValue={[]}
-            rules={{ required: 'Este campo es obligatorio' }}
+            //rules={{ required: 'Este campo es obligatorio' }}
             render={({ field }) => (
               <>
                 <input

@@ -105,6 +105,14 @@ function Home() {
     }
   }, [dispatch]);
 
+  //Fiter Panel:
+
+  const [isPanelOpen, setPanelOpen] = useState(false);
+
+  const togglePanel = () => {
+    setPanelOpen(!isPanelOpen);
+  };
+
   return (
     <div className='flex flex-wrap overflow-y-auto min-h-screen'>
       {/* Second Navbar */}
@@ -114,7 +122,11 @@ function Home() {
       {/* Hero */}
       <div className='heroContainer flex flex-wrap mx-auto'>
         {/* Inicia parte de Sol. */} {/* FILTROS */}
-        <div className='filters w-full md:w-1/6 m-4 bg-gray-100 p-4 rounded-lg'>
+        <div
+          className={`filters w-full md:w-1/6 m-4 bg-gray-100 p-4 rounded-lg ${
+            isPanelOpen ? 'block' : 'hidden'
+          } md:block lg:block`}
+        >
           <h1 className='text-xl font-bold mb-4 text-teesaBlueDark'>
             Filtrar por:
           </h1>
@@ -123,6 +135,13 @@ function Home() {
             setCurrentPage={setCurrentPage}
             onApplyFilters={handleApplyFilters}
           />
+          <button
+            className='flex lg:hidden m-4 h-10'
+            onClick={togglePanel}
+          >
+            FILTROS
+            <span>{isPanelOpen ? 'Cerrar' : 'Abrir'}</span>
+          </button>
         </div>
         {/* Termina parte de Sol. */}
         {/* Inicia parte de Juan. */}
