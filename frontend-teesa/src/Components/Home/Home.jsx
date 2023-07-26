@@ -116,37 +116,40 @@ function Home() {
   return (
     <div className='flex flex-wrap overflow-y-auto min-h-screen'>
       {/* Second Navbar */}
-      <div className='flex flex-col bg-teesaBlueDark w-full h-[3em] items-center justify-center mt-[-3px] border-t-[6px] border-teesaGreen text-teesaWhite text-[16px] py-2'>
+      <div className='flex flex-col bg-teesaBlueDark w-full h-[3em] items-center justify-center mt-[-3px] border-t-[6px] border-teesaGreen text-teesaWhite text-[16px] py-2 '>
         <SearchBar />
       </div>
       {/* Hero */}
-      <div className='heroContainer flex flex-wrap mx-auto'>
-        {/* Inicia parte de Sol. */} {/* FILTROS */}
-        <div
-          className={`filters w-full md:w-1/6 m-4 bg-gray-100 p-4 rounded-lg ${
-            isPanelOpen ? 'block' : 'hidden'
-          } md:block lg:block`}
+      <div className='heroContainer flex flex-wrap mx-auto mt-5 flex-col lg:flex-row '>
+        {/* BOTON FILTROS */}
+        <button
+          className='flex lg:hidden  h-10 bg-white lg:bg-gray-200 w-11/12 mx-auto md:w-full text-md justify-center items-center gap-1 font-bold rounded-t-lg border-[1px] border-teesaBlueLight border-b-teesaBlueLight md:px-0 px-5'
+          onClick={togglePanel}
         >
-          <h1 className='text-xl font-bold mb-4 text-teesaBlueDark'>
-            Filtrar por:
-          </h1>
+          Filtros
+          <span className=''>
+            {isPanelOpen ? (
+              <i className='fa-solid fa-arrow-up-wide-short fa-sm w-2'></i>
+            ) : (
+              <i className='fa-solid fa-arrow-down-wide-short fa-md w-2'></i>
+            )}
+          </span>
+        </button>
+        {/* TODOS LOS FILTROS */}
+        <div
+          className={`filters  w-11/12 mx-auto md:w-full lg:w-1/6 2xl:w-3/12 lg:mx-0 lg:mt-2 bg-white lg:bg-gray-200 p-4 rounded-b-lg lg:rounded-lg border-[1px] border-teesaBlueLight border-t-0 lg:border-0  ${
+            isPanelOpen ? 'block' : 'hidden'
+          } lg:block  `}
+        >
           <FilterComponent
             currentPage={currentPage}
             setCurrentPage={setCurrentPage}
             onApplyFilters={handleApplyFilters}
           />
-          <button
-            className='flex lg:hidden m-4 h-10'
-            onClick={togglePanel}
-          >
-            FILTROS
-            <span>{isPanelOpen ? 'Cerrar' : 'Abrir'}</span>
-          </button>
         </div>
-        {/* Termina parte de Sol. */}
-        {/* Inicia parte de Juan. */}
+
         {/* Cards */}
-        <div className='cardsContainer w-full md:w-2/3 m-5 bg-teesaWhite flex flex-wrap justify-center flex-col min-h-0'>
+        <div className='cardsContainer w-full lg:w-2/3 2xl:w-8/12  bg-teesaWhite flex flex-wrap justify-center flex-col min-h-0 mt-4 lg:mt-0'>
           {status === 'loading' && (
             <div className='flex justify-center items-center w-full h-[800px]'>
               <img
@@ -161,7 +164,7 @@ function Home() {
             </div>
           )}
           {status === 'succeeded' && products.products.length > 0 ? (
-            <div className=' grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 sm:grid-cols-1 gap-4 mx-auto h-fu'>
+            <div className=' grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 sm:grid-cols-1  lg:gap-4 mx-auto w-12/12 md:w-full'>
               {products.products?.map((product) => (
                 <Card
                   id={product?.id}
@@ -182,7 +185,7 @@ function Home() {
             </div>
           ) : null}
           {status === 'succeeded' && products.products.length && (
-            <div>
+            <div className='w-10/12 mx-auto'>
               <Pagination
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}

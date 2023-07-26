@@ -4,11 +4,11 @@ import { changePage } from '../../features/reduxReducer/filterSlice';
 
 const Pagination = () => {
   const dispatch = useDispatch();
+  // eslint-disable-next-line no-unused-vars
   const [currentPage, setCurrentPage] = useState(1);
   const page = useSelector((state) => state?.filters?.page);
 
   const general = useSelector((state) => state?.filters?.products);
-  const total = useSelector((state) => state?.filters);
 
   function arrayPaginas(total) {
     let pages = [];
@@ -37,15 +37,15 @@ const Pagination = () => {
   };
 
   return (
-    <div className='pagination-container flex justify-center items-center mb-20'>
+    <div className='pagination-container flex justify-center items-center mb-20 w-dull'>
       {/* Renderizar los productos aquí */}
 
       {/* Paginación */}
       <div
-        className='flex justify-center items-center pagination-wrapper w-[40px] bg-white py-4'
+        className='flex justify-center items-center pagination-wrapper bg-white py-4 w-10/12'
         style={{ marginTop: '20px' }}
       >
-        <div className='pagination-inner flex justify-center'>
+        <div className='pagination-inner flex justify-center flex-wrap md:flex-nowrap w-full flex-row'>
           <button
             className={`px-4 py-2 mx-1 rounded-lg ${
               currentPage
@@ -59,7 +59,7 @@ const Pagination = () => {
           {paginasFinal?.map((pagina) => (
             <button
               onClick={() => pagesChange(pagina)}
-              className={`px-4 py-2 mx-1 rounded-lg ${
+              className={`px-4 py-2 m-1 rounded-lg ${
                 page === pagina
                   ? 'bg-teesaBlueDark text-teesaWhite'
                   : 'bg-gray-300 text-teesaBlueDark'
