@@ -32,7 +32,7 @@ export const putUser = createAsyncThunk('user/putUser', async (payload) => {
     console.log('Respuesta de la solicitud PUT:', response);
     Swal.fire({
       title: 'Cambios realizados',
-      text: 'Tus cambios se realizaron con éxito 😁.',
+      text: 'Tus cambios se realizaron con éxito 😁',
       icon: 'success',
       confirmButtonText: 'Ok.',
       confirmButtonColor: '#192C8C',

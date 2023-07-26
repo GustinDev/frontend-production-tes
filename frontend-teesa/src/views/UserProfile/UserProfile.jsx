@@ -159,16 +159,21 @@ const UserProfile = () => {
   }, [dispatch, userId]);
 
   return (
-    <div className='allContainer bg-teesaBlueDark flex xl:flex-row lg:flex-row md:flex-row sm-flex-col xs:flex-col justify-center items-center gap-[5%] w-full h-screen overflow-hidden'>
+    <div className='allContainer bg-gray-100 flex xl:flex-row lg:flex-row md:flex-row sm-flex-col xs:flex-col justify-center items-start gap-5 w-full h-screen overflow-hidden pt-5'>
       {/* info section */}
-      <section className='bg-gradient-to-r from-teesaGreenDark to-teesaGreen rounded-lg flex flex-col justify-center items-center h-auto xl:w-[30em] lg:w-[30em] md:w-[20em] sm:w-auto xs:w-auto gap-7'>
+      <section className='bg-gray-100 border-2 border-teesaBlueLight rounded-lg flex flex-col justify-center items-center  xl:w-[30em] lg:w-[30em] md:w-[18em]  gap-3  mx-auto w-11/12'>
         {editing ? (
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className='rounded-lg flex flex-col justify-center items-center h-auto gap-2'
+            className='rounded-lg flex flex-col justify-center items-center h-auto gap-2 w-3/4 '
           >
-            <h1 className='font-bold text-white text-3xl '>Editar tus datos</h1>
-            <label className='flex flex-col justify-center align-center items-center gap-[0.5em]'>
+            <h1 className='font-bold text-black text-3xl mt-4'>
+              Editar tus datos:
+            </h1>
+            <label className='flex flex-col justify-center align-center items-center w-full'>
+              <div className='w-full'>
+                <p className='font-bold'>Nombre</p>
+              </div>
               <input
                 {...register('userName', {
                   required: 'Este campo es obligatorio',
@@ -177,17 +182,23 @@ const UserProfile = () => {
                     message: 'Solo se aceptan letras y espacios',
                   },
                 })}
+                className='border-2 border-black p-1 rounded-lg w-full'
                 onBlur={() => handleBlur('userName')}
                 placeholder='Nombre'
               />
               {errors.userName ? (
-                <span className='text-red-500'>{errors.userName.message}</span>
+                <div className='w-full text-red-500'>
+                  {errors.userName.message}
+                </div>
               ) : (
-                <div className='h-[5px]'></div>
+                <div className='h-[24px]'></div>
               )}
             </label>
 
-            <label className='flex flex-col justify-center align-center items-center gap-[0.5em]'>
+            <label className='flex flex-col justify-center align-center items-center w-full'>
+              <div className='w-full'>
+                <p className='font-bold'>Cédula / Nit</p>
+              </div>
               <input
                 {...register('userNit', {
                   required: 'Este campo es obligatorio',
@@ -196,109 +207,138 @@ const UserProfile = () => {
                     message: 'Solo se aceptan números',
                   },
                 })}
+                className='border-2 border-black p-1 rounded-lg w-full'
                 onBlur={() => handleBlur('userNit')}
-                placeholder='Nit'
+                placeholder='Cédula / Nit'
               />
               {errors.userNit ? (
-                <span className='text-red-500'>{errors.userNit.message}</span>
+                <div className='w-full'>
+                  <span className='text-red-500'>{errors.userNit.message}</span>
+                </div>
               ) : (
-                <div className='h-[5px]'></div>
+                <div className='h-[24px]'></div>
               )}
             </label>
 
-            <label className='flex flex-col justify-center align-center items-center gap-[0.5em]'>
+            <label className='flex flex-col justify-center align-center items-center w-full'>
+              <div className='w-full'>
+                <p className='font-bold'>Dirección:</p>
+              </div>
               <input
                 {...register('userAddress', {
                   required: 'Este campo es obligatorio',
-                  pattern: {
-                    value: /^[a-zA-Z0-9\s\-#.']+$/,
-                    message: 'Ingrese una dirección válida',
-                  },
                 })}
+                className='border-2 border-black p-1 rounded-lg w-full'
                 onBlur={() => handleBlur('userAddress')}
                 placeholder='Dirección'
               />
               {errors.userAddress ? (
-                <span className='text-red-500'>
+                <div className='w-full text-red-500'>
                   {errors.userAddress.message}
-                </span>
+                </div>
               ) : (
-                <div className='h-[5px]'></div>
+                <div className='h-[24px]'></div>
               )}
             </label>
 
-            <label className='flex flex-col justify-center align-center items-center gap-[0.5em]'>
+            <label className='flex flex-col justify-center align-center items-center w-full'>
+              <div className='w-full'>
+                <p className='font-bold'>Celular:</p>
+              </div>
               <input
                 {...register('userPhone', {
-                  required: 'Este campo es obligatorio',
                   pattern: {
-                    value: /^[0-9]{7,14}$/,
-                    message: 'Solo se aceptan números',
+                    value: /^[0-9\s+]{0,14}$/,
+                    message: 'Solo se aceptan números, espacios y el símbolo +',
                   },
                 })}
+                className='border-2 border-black p-1 rounded-lg w-full'
                 onBlur={() => handleBlur('userPhone')}
                 placeholder='Número de teléfono'
               />
+
               {errors.userPhone ? (
-                <span className='text-red-500'>{errors.userPhone.message}</span>
+                <div className='w-full text-red-500'>
+                  {errors.userPhone.message}
+                </div>
               ) : (
-                <div className='h-[5px]'></div>
+                <div className='h-[24px]'></div>
               )}
             </label>
-            <div className='flex flex-row justify-center items-center gap-[15%] text-lg text-white mb-[3%]'>
+            <div className='flex flex-row justify-center items-center gap-[15%] text-lg text-black mb-[3%]'>
               <button
                 type='submit'
-                className='bg-teesaGreen rounded-xl p-[3%] hover:bg-green-600'
+                className='bg-teesaBlueLight rounded-xl p-3 hover:bg-green-600 font-bold text-white'
               >
                 Guardar
               </button>
               <label
                 onClick={onClose}
-                className='cursor-pointer bg-red-700 rounded-xl p-[3%] hover:bg-red-800'
+                className='cursor-pointer bg-red-700 rounded-xl p-3 font-bold hover:bg-red-800 text-white'
               >
                 Cancelar
               </label>
             </div>
           </form>
         ) : (
-          <>
-            <div className='flex flex-row gap-10 justify center align-middle items-center mt-[3%]'>
+          <div className='px-5 py-3 w-full '>
+            <div className='flex justify-end items-center gap-2 '>
+              <button onClick={() => setEditing(true)}>
+                <i
+                  className='bx bx-pencil text-black hover:text-slate-600 '
+                  style={{ fontSize: '22px' }}
+                ></i>
+              </button>
+            </div>
+            <div className='flex flex-row gap-10 justify center align-middle items-center mt-[3%] w-full'>
               <div className=''>
                 <i
-                  className='bx bxs-user ml-5 flex transition duration-300 ease-in-out transform text-white'
+                  className='bx bxs-user ml-5 flex transition duration-300 ease-in-out transform text-black'
                   style={{ fontSize: '4em' }}
                 ></i>
               </div>
 
-              <div className='flex flex-col gap-1 text-teesaWhite'>
+              <div className='flex flex-col gap-1 text-black'>
                 <div className='flex flex-row'>
                   <h1 className='font-bold xl:text-3xl lg:text-3xl md:text-2xl sm:text-xl xs:text-xl'>
                     {userName}
                   </h1>
-                  <button onClick={() => setEditing(true)}>
-                    <i
-                      className='bx bx-pencil text-white hover:text-slate-600 ml-6'
-                      style={{ fontSize: '22px' }}
-                    ></i>
-                  </button>
                 </div>
-                <div className='xl:w-[20em] lg:w-[15em] md:w-[10em] sm:w-[10em] xs:w-[10em] border-t-2 border-white '></div>
               </div>
             </div>
-            <div className='flex flex-col justify-center items-center gap-5 text-teesaWhite xl:text-xl lg:text-xl md:text-xl sm:text-lg xs:text-md pb-[5%]'>
-              <h3>NIT/Cédula: {userNit}</h3>
-              <h3>Dirección: {userAddress}</h3>
-              <h3>Teléfono: {userPhone}</h3>
+
+            <div className='w-full border-t-4 border-teesaBlueLight px-5 mt-4 rounded-xl'></div>
+            <div className='flex flex-col justify-start items-start gap-5 text-black xl:text-xl lg:text-xl md:text-xl sm:text-lg xs:text-md pb-[5%] w-full pt-4 '>
+              <h3>
+                <span className='font-bold'>Cédula / Nit:</span>{' '}
+                {userNit == 0 ? 'N/A' : userNit}
+              </h3>
+              <h3>
+                <span className='font-bold'>Dirección:</span>{' '}
+                {userAddress == undefined ||
+                userAddress == null ||
+                userAddress == '' ||
+                userAddress == ' '
+                  ? 'N/A'
+                  : userAddress}
+              </h3>
+              <h3>
+                <span className='font-bold'>Teléfono:</span>{' '}
+                {userAddress == undefined ||
+                userPhone == null ||
+                userPhone == '' ||
+                userPhone == ' '
+                  ? 'N/A'
+                  : userPhone}
+              </h3>
             </div>
-          </>
+          </div>
         )}
       </section>
       {/* Products section */}
 
-      <section className='flex flex-col items-center mb-[5%] bg-gradient-to-r from-teesaGreenDark to-teesaGreen overflow-y-scroll rounded-lg xl:w-[55%] h-[80%]'>
-        <h1 className='font-bold text-teesaWhite mt-[2%] text-2xl'>
-          Mis Compras
-        </h1>
+      <section className='flex flex-col items-center mb-[5%] bg-gray-100 border-2 border-teesaBlueLight overflow-y-scroll rounded-lg xl:w-[55%] h-[80%] mx-5'>
+        <h1 className='font-bold text-black mt-[2%] text-4xl'>Compras</h1>
         <article className='w-[95%] '>
           {userProducts && userProducts.length > 0 ? (
             userProducts.map((product) => (
@@ -344,16 +384,18 @@ const UserProfile = () => {
               </section>
             ))
           ) : (
-            <div className='flex flex-col items-center '>
-              <p className='text-teesaWhite mb-4'>
-                Todavía no has realizado compras.
+            <div className='flex flex-col items-center justify-row mt-2'>
+              <p className='text-black mb-4'>
+                Aún no has realizado compras.{' '}
+                <span>
+                  <Link
+                    to='/home'
+                    className='text-teesaBlueDark  font-bold'
+                  >
+                    ¡Vamos a comprar!
+                  </Link>
+                </span>
               </p>
-              <Link
-                to='/home'
-                className='text-teesaBlueDark underline font-bold'
-              >
-                Ir a comprar
-              </Link>
             </div>
           )}
         </article>
