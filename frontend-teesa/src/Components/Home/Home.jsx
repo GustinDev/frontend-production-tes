@@ -2,6 +2,7 @@
 //Instalaciones:
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { motion } from 'framer-motion';
 //Redux:
 import {
   addFilter,
@@ -26,9 +27,6 @@ import {
   saveUserDataToCookie,
 } from '../../features/reduxReducer/userSlice';
 import Cookies from 'universal-cookie';
-import axios from 'axios';
-import Carrito from '../Carrito/Carrito';
-import NoHayProductosSearch from '../NoHayProductosSearch/NoHayProductosSearch';
 
 function Home() {
   const [effectExecuted, setEffectExecuted] = useState(false);
@@ -166,15 +164,21 @@ function Home() {
           {status === 'succeeded' && products.products.length > 0 ? (
             <div className=' grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 sm:grid-cols-1  lg:gap-4 mx-auto w-12/12 2xl:w-12/12 md:w-full'>
               {products.products?.map((product) => (
-                <Card
-                  id={product?.id}
+                <motion.div
                   key={product?.id}
-                  nombre={product?.nombre}
-                  categoria={product?.categoria}
-                  precio={product?.precio}
-                  imagenes={product?.imagenes}
-                  marca={product?.marca}
-                />
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 1 }} // Puedes ajustar la duración de la animación aquí
+                >
+                  <Card
+                    id={product?.id}
+                    nombre={product?.nombre}
+                    categoria={product?.categoria}
+                    precio={product?.precio}
+                    imagenes={product?.imagenes}
+                    marca={product?.marca}
+                  />
+                </motion.div>
               ))}
             </div>
           ) : status === 'succeeded' ? (

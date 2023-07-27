@@ -85,6 +85,7 @@ const initialState = {
   userDetailStatus: null,
   userGoogle: null,
   userOurs: null,
+  userProducts: null,
   userData: {
     userId: null,
     userName: null,
@@ -94,7 +95,6 @@ const initialState = {
     userAddress: null,
     userPhone: null,
   },
-  userProducts: null,
 };
 
 // Slice Login

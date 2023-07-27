@@ -95,10 +95,10 @@ const FilterComponent = ({ currentPage, setCurrentPage }) => {
   return (
     <div className='mb-4 flex flex-col bg-white lg:bg-gray-200'>
       <button
-        className='bg-teesaGreen text-white px-4 py-2 rounded-lg mb-4'
+        className=' text-black px-4 py-2 rounded-lg mb-4 border-gray-900 b-2 text md font-bold bg-green-400'
         onClick={() => setResetFilters(true)}
       >
-        Resetear filtros
+        Limpiar Filtros
       </button>
       <div className='block mb-5 text-teesaBlueDark'>
         <span className='mb-2 font-semibold'>Orden Alfabético</span>

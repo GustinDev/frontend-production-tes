@@ -12,9 +12,6 @@ import {
   updateUserDataFromCookie,
 } from '../../features/reduxReducer/userSlice';
 import { getCartGuestProducts } from '../../features/reduxReducer/cartGuestSlice';
-// import { addToCartWithQuantity } from '../../features/reduxReducer/carritoSlice';
-// import Cookies from 'universal-cookie';
-// import CartIcon from '../Carrito/CartIcon';
 
 export default function NavBar(props) {
   //Traer Data del User - Nuestro Login y Register

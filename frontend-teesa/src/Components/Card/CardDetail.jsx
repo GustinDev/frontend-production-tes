@@ -1,5 +1,5 @@
 import { useNavigate, NavLink } from 'react-router-dom';
-// import { Carousel } from 'react-responsive-carousel';
+import { motion } from 'framer-motion';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import Carrusel from '../Carrusel/Carrusel';
 //Reviews
@@ -59,46 +59,94 @@ const CardDetail = ({
     // userId: localStorage.getItem('guestUserId') || uuidv4(),
   });
 
+  //Cart - Fix
+
+  const user = useSelector((state) => state.userState.user);
+  const [loadingUser, setLoadingUser] = useState(null);
+
   useEffect(() => {
-    dispatch(getUser()).then((action) => {
-      const response = action.payload;
-      // console.log(response);
-      const cartId = response.find((user) => user.id === userData.userId)?.Cart
-        .id;
-      // console.log(cartId);
-      setCartId(cartId);
-      setCart((prevCart) => ({
-        ...prevCart,
-        CartId: cartId,
-      }));
-    });
+    if (user) {
+      setLoadingUser(true);
+      dispatch(getUser())
+        .then((action) => {
+          const response = action.payload;
+          // console.log(response);
+          const cartId = response.find((user) => user.id === userData.userId)
+            ?.Cart.id;
+          // console.log(cartId);
+          setCartId(cartId);
+          setCart((prevCart) => ({
+            ...prevCart,
+            CartId: cartId,
+          }));
+        })
+        .finally(() => {
+          setLoadingUser(false); // Se establece loadingUser en false al finalizar la carga
+        });
+    }
   }, [dispatch, userData]);
 
   const handleIncrement = () => {
-    if (cart.CartId) {
-      setCart((prevCart) => ({
-        ...prevCart,
-        cantidad: Number(prevCart.cantidad) + 1,
-      }));
-    } else
-      setCartGuest((prevCartGuest) => ({
-        ...prevCartGuest,
-        cantidad: Number(prevCartGuest.cantidad) + 1,
-      }));
-  };
-
-  const handleDecrement = () => {
-    if (cart.cantidad > 0) {
+    if (user) {
       if (cart.CartId) {
         setCart((prevCart) => ({
           ...prevCart,
-          cantidad: Number(prevCart.cantidad) - 1,
+          cantidad: Number(prevCart.cantidad) + 1,
         }));
       } else
         setCartGuest((prevCartGuest) => ({
           ...prevCartGuest,
-          cantidad: Number(prevCartGuest.cantidad) - 1,
+          cantidad: Number(prevCartGuest.cantidad) + 1,
         }));
+    } else {
+      Swal.fire({
+        icon: 'warning',
+        title: '¡Error!',
+        text: 'Ingresa a tu cuenta para agregar productos.',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        toast: true,
+        position: 'top-end',
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer);
+          toast.addEventListener('mouseleave', Swal.resumeTimer);
+          toast.style.marginTop = '80px';
+        },
+      });
+    }
+  };
+
+  const handleDecrement = () => {
+    if (user) {
+      if (cart.cantidad > 0) {
+        if (cart.CartId) {
+          setCart((prevCart) => ({
+            ...prevCart,
+            cantidad: Number(prevCart.cantidad) - 1,
+          }));
+        } else
+          setCartGuest((prevCartGuest) => ({
+            ...prevCartGuest,
+            cantidad: Number(prevCartGuest.cantidad) - 1,
+          }));
+      }
+    } else {
+      Swal.fire({
+        icon: 'warning',
+        title: '¡Error!',
+        text: 'Ingresa a tu cuenta para agregar productos.',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        toast: true,
+        position: 'top-end',
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer);
+          toast.addEventListener('mouseleave', Swal.resumeTimer);
+          toast.style.marginTop = '80px';
+        },
+      });
     }
   };
 
@@ -113,9 +161,25 @@ const CardDetail = ({
       });
       Swal.fire({
         icon: 'success',
-        title: 'Producto agregado al carrito',
+        title: 'Producto agregado al carrito.',
         showConfirmButton: false,
         timer: 2000,
+        timerProgressBar: true,
+        toast: true,
+        position: 'top-end',
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer);
+          toast.addEventListener('mouseleave', Swal.resumeTimer);
+          toast.style.marginTop = '80px';
+        },
+      });
+    } else if (!user) {
+      Swal.fire({
+        icon: 'warning',
+        title: '¡Error!',
+        text: 'Ingresa a tu cuenta para agregar productos.',
+        showConfirmButton: false,
+        timer: 3000,
         timerProgressBar: true,
         toast: true,
         position: 'top-end',
@@ -128,8 +192,8 @@ const CardDetail = ({
     } else if (cartGuest.cantidad > 0) {
       Swal.fire({
         icon: 'warning',
-        title: '¡Error!',
-        text: 'Debes registrate para agregar productos al carrito.',
+        title: 'Error',
+        text: 'Lo sentimos, inténtalo de nuevo.',
         showConfirmButton: false,
         timer: 2000,
         timerProgressBar: true,
@@ -143,6 +207,24 @@ const CardDetail = ({
       });
     }
   };
+
+  //*Animation - Fix Boton Carrito:
+
+  const containerVariants = {
+    initial: {
+      opacity: 0,
+    },
+    animateInstant: {
+      opacity: 1,
+    },
+    animateFadeIn: {
+      opacity: 1,
+      transition: {
+        duration: 0.5,
+      },
+    },
+  };
+
   console.log(cartGuest);
 
   //* Datos Descripción:
@@ -271,36 +353,57 @@ const CardDetail = ({
             </h2>
           </div>
           <form onSubmit={(e) => handleSubmit(e)}>
-            <div className='flex items-center mt-2'>
-              <button
+            <motion.div
+              className='flex items-center justify-start mt-2 gap-[8px]'
+              variants={containerVariants}
+              initial={user ? 'animateInstant' : 'initial'}
+              animate={
+                loadingUser
+                  ? 'initial'
+                  : user
+                  ? 'animateFadeIn'
+                  : 'animateInstant'
+              }
+            >
+              <motion.button
                 type='button'
                 id='decrement'
                 onClick={handleDecrement}
-                className='px-3 py-1 border rounded-md border-gray-400 text-sm'
+                className={`px-[11px] py-1 border rounded-md border-gray-600 text-2xl ${
+                  loadingUser ? 'bg-red-500' : ''
+                }`}
+                style={{
+                  opacity: loadingUser ? 0 : 1,
+                }}
               >
                 -
-              </button>
+              </motion.button>
               <span
                 id='quantity'
-                className='px-2'
+                className='px-[4px] py-1 rounded-md border-gray-600 text-2xl'
               >
                 {cart.CartId ? cart.cantidad : cartGuest.cantidad}
               </span>
-              <button
+              <motion.button
                 type='button'
                 id='increment'
                 onClick={handleIncrement}
-                className='px-3 py-1 border rounded-md border-gray-400 text-sm'
+                className={`px-2 py-1 border rounded-md border-gray-600 text-2xl ${
+                  loadingUser ? 'bg-red-500' : ''
+                }`}
+                style={{
+                  opacity: loadingUser ? 0 : 1,
+                }}
               >
                 +
-              </button>
-              <button
+              </motion.button>
+              <motion.button
                 type='submit'
-                className='ml-2 px-8 py-3 bg-teesaBlueDark text-white rounded-md hover:bg-blue-900'
+                className={`text-white px-[10px] py-1 border-blue-800 rounded-md border-2 text-2xl font-bold bg-blue-700`}
               >
-                Agregar al Carrito{' '}
-                <i className='fa-solid fa-cart-shopping rounded-md'></i>
-              </button>
+                Agregar
+                <i className='fa-solid fa-cart-shopping  ml-1'></i>
+              </motion.button>
               {userAdmin == true ? (
                 <button
                   onClick={handleEdit}
@@ -311,7 +414,7 @@ const CardDetail = ({
               ) : (
                 <div></div>
               )}
-            </div>
+            </motion.div>
             <h6 className='hidden'>{id}</h6>
             <h6 className='hidden'>{cart.CartId}</h6>
           </form>

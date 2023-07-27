@@ -3,6 +3,7 @@ import axios from 'axios';
 
 const initialState = {
   loading: false,
+  loadingUser: false,
   error: null,
   success: false,
   errorMessage: '',
@@ -99,18 +100,18 @@ const cartSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getUser.pending, (state) => {
-        state.loading = true;
+        state.loadingUser = true;
         state.error = null;
       })
       .addCase(getUser.fulfilled, (state, action) => {
-        state.loading = false;
+        state.loadingUser = false;
         state.success = true;
-        state.users = action.payload; // Actualiza la propiedad 'users' con los datos de respuesta
+        state.users = action.payload;
       })
       .addCase(getUser.rejected, (state, action) => {
-        state.loading = false;
+        state.loadingUser = false;
         state.error = true;
-        state.errorMessage = action.error.message; // Utiliza action.error.message para obtener el mensaje de error
+        state.errorMessage = action.error.message;
       })
       .addCase(postCart.pending, (state) => {
         state.loading = true;
@@ -127,7 +128,7 @@ const cartSlice = createSlice({
         state.error = true;
         state.errorMessage = action.payload;
       })
-      .addCase(getCart.pending, (state, action) => {
+      .addCase(getCart.pending, (state) => {
         state.loading = true;
         state.error = null;
         state.cart = null;
@@ -142,7 +143,7 @@ const cartSlice = createSlice({
         state.error = true;
         state.errorMessage = action.payload;
       })
-      .addCase(updateCart.pending, (state, action) => {
+      .addCase(updateCart.pending, (state) => {
         state.loading = true;
         state.error = null;
         state.errorMessage = null;
@@ -157,7 +158,7 @@ const cartSlice = createSlice({
         state.error = true;
         state.errorMessage = action.payload;
       })
-      .addCase(deleteCart.pending, (state, action) => {
+      .addCase(deleteCart.pending, (state) => {
         state.loading = true;
         state.error = null;
         state.errorMessage = null;
