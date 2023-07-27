@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { postLinkMercado } from '../../features/reduxReducer/mercadoSlice';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
+import loadingGif from '../../assets/icon/Loading.gif';
 
 export const Cart = () => {
   //*Validar User:
@@ -25,7 +26,7 @@ export const Cart = () => {
   };
 
   const user = useSelector((state) => state.userState.user);
-  console.log(user);
+  //console.log(user);
   const [waiting, setWaiting] = useState(true);
 
   useEffect(() => {
@@ -103,7 +104,8 @@ export const Cart = () => {
       }
     });
   }, [dispatch, userData, info]);
-  console.log(info.items);
+  //Cambio: [dispatch, userData, info]
+  //console.log(info.items);
 
   //*MercadoPago Button:
 
@@ -128,7 +130,12 @@ export const Cart = () => {
       <main>
         <div className='max-w-3xl p-8 bg-white shadow-lg rounded-lg'>
           {status === 'pending' ? (
-            <p className='text-2xl font-bold text-gray-800'>Cargando...</p>
+            <div className='flex justify-center items-center w-full h-[800px]'>
+              <img
+                src={loadingGif}
+                alt='gif'
+              />
+            </div>
           ) : (
             <>
               {info.items ? (
@@ -186,7 +193,12 @@ export const Cart = () => {
                   </div>
                 )
               ) : (
-                <p className='text-2xl font-bold text-gray-800'>Cargando...</p>
+                <div className='flex justify-center items-center w-full h-[800px]'>
+                  <img
+                    src={loadingGif}
+                    alt='gif'
+                  />
+                </div>
               )}
             </>
           )}

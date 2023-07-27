@@ -7,8 +7,12 @@ import {
   updateCart,
   deleteCart,
 } from '../../features/reduxReducer/carritoSlice';
-import { updateCartGuestProducts, deleteCartGuestProducts } from '../../features/reduxReducer/cartGuestSlice';
-
+import {
+  updateCartGuestProducts,
+  deleteCartGuestProducts,
+} from '../../features/reduxReducer/cartGuestSlice';
+import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 export const Carrito = ({
   id,
@@ -17,7 +21,7 @@ export const Carrito = ({
   nombre,
   precio,
   imagen,
-  userUUID
+  userUUID,
 }) => {
   const options = {
     style: 'decimal',
@@ -34,42 +38,53 @@ export const Carrito = ({
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if(userData.userId){
-    setCart((prevCart) => ({
-      ...prevCart,
-      cantidad: cantidad,
-    }))}else setCartGuest((prevCartGuest) => ({
-      ...prevCartGuest,
-      cantidad: cantidad
-    }))
+    if (userData.userId) {
+      setCart((prevCart) => ({
+        ...prevCart,
+        cantidad: cantidad,
+      }));
+    } else
+      setCartGuest((prevCartGuest) => ({
+        ...prevCartGuest,
+        cantidad: cantidad,
+      }));
   }, [cantidad, userData.userId]);
 
   useEffect(() => {
-    if(userData.userId){
-    const total = precio * cart.cantidad;
-    setCart((prevCart) => ({
-      ...prevCart,
-      precioTotal: total,
-    }))} else {const totalGuest = precio * cartGuest.cantidad;
-    setCartGuest((prevCartGuest) => ({
-      ...prevCartGuest,
-      precioTotal: totalGuest,
-    }))}
+    if (userData.userId) {
+      const total = precio * cart.cantidad;
+      setCart((prevCart) => ({
+        ...prevCart,
+        precioTotal: total,
+      }));
+    } else {
+      const totalGuest = precio * cartGuest.cantidad;
+      setCartGuest((prevCartGuest) => ({
+        ...prevCartGuest,
+        precioTotal: totalGuest,
+      }));
+    }
   }, [precio, cart.cantidad, cartGuest.cantidad, userData.userId]);
 
   const handleIncrement = () => {
     if (userData.userId) {
-    setCart((prevCart) => ({
-      ...prevCart,
-      cantidad: prevCart.cantidad + 1,
-    }));
+      setCart((prevCart) => ({
+        ...prevCart,
+        cantidad: prevCart.cantidad + 1,
+      }));
 
-    dispatch(updateCart({ CartProductId: id, cantidad: cart.cantidad + 1 }))
-    } else setCartGuest((prevCartGuest) => ({
-      ...prevCartGuest,
-      cantidad: prevCartGuest.cantidad + 1,
-    })); 
-    dispatch(updateCartGuestProducts({CartGuestProductId: id, cantidad: cartGuest.cantidad +1 }))
+      dispatch(updateCart({ CartProductId: id, cantidad: cart.cantidad + 1 }));
+    } else
+      setCartGuest((prevCartGuest) => ({
+        ...prevCartGuest,
+        cantidad: prevCartGuest.cantidad + 1,
+      }));
+    dispatch(
+      updateCartGuestProducts({
+        CartGuestProductId: id,
+        cantidad: cartGuest.cantidad + 1,
+      })
+    );
   };
 
   const handleDecrement = () => {
@@ -99,19 +114,33 @@ export const Carrito = ({
     }
   };
 
+  const navigate = useNavigate();
+  const alertConfirm = () => {
+    Swal.fire({
+      title: 'Producto Eliminado',
+      icon: 'success',
+      confirmButtonText: 'Aceptar',
+      confirmButtonColor: '#192C8C',
+    }).then(() => {
+      navigate(0);
+    });
+  };
+
   const handleDelete = (e) => {
     e.preventDefault();
-    if(userData.userId){
-    dispatch(deleteCart(id))
-      .then(() => {
-        // window.location.reload();
-      })
-    } else dispatch(deleteCartGuestProducts(id))
-      .then(() => {
-      })
-      .catch((error) => {
-        console.error('Error al eliminar el producto del carrito de invitado:', error);
+    if (userData.userId) {
+      dispatch(deleteCart(id)).then(() => {
+        alertConfirm();
       });
+    } else
+      dispatch(deleteCartGuestProducts(id))
+        .then(() => {})
+        .catch((error) => {
+          console.error(
+            'Error al eliminar el producto del carrito de invitado:',
+            error
+          );
+        });
   };
 
   return (
@@ -123,7 +152,19 @@ export const Carrito = ({
       />
       <div className='ml-4'>
         <h2 className='text-lg font-medium text-gray-800 mb-1'>{nombre}</h2>
-        <div className='flex items-center mt-2'>
+        <label
+          htmlFor='quantity'
+          className='mr-2'
+        >
+          Cantidad:
+          <span
+            id='quantity'
+            className='px-2 text-gray-700'
+          >
+            {userData.userId ? cart.cantidad : cartGuest.cantidad}
+          </span>
+        </label>
+        {/* <div className='flex items-center mt-2'>
           <label
             htmlFor='quantity'
             className='mr-2'
@@ -153,11 +194,15 @@ export const Carrito = ({
           >
             +
           </button>
-        </div>
+        </div> */}
         <h4 className='text-gray-600 text-base font-medium mt-2'>
-  $ {cart.precioTotal ? cart.precioTotal.toLocaleString('en-US', options) : 
-  (cartGuest.precioTotal ? cartGuest.precioTotal.toLocaleString('en-US', options) : '0')}
-</h4>
+          ${' '}
+          {cart.precioTotal
+            ? cart.precioTotal.toLocaleString('en-US', options)
+            : cartGuest.precioTotal
+            ? cartGuest.precioTotal.toLocaleString('en-US', options)
+            : '0'}
+        </h4>
         <button
           onClick={handleDelete}
           className='mt-4 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none'
