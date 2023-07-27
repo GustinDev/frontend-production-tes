@@ -101,7 +101,7 @@ const FilterComponent = ({ currentPage, setCurrentPage }) => {
         Resetear filtros
       </button>
       <div className='block mb-5 text-teesaBlueDark'>
-        <span className='mb-2 font-semibold'>Orden Alfabético:</span>
+        <span className='mb-2 font-semibold'>Orden Alfabético</span>
         <select
           id='sort'
           className='w-full border border-gray-300 rounded px-3 py-2 focus:outline-none'
@@ -119,7 +119,7 @@ const FilterComponent = ({ currentPage, setCurrentPage }) => {
         </select>
       </div>
       <div className='block mb-5  text-teesaBlueDark'>
-        <span className='mb-2 font-semibold'>Precio:</span>
+        <span className='mb-2 font-semibold'>Precio</span>
         <select
           id='sortPrice'
           className='w-full border border-gray-300 rounded px-3 py-2 focus:outline-none'
@@ -137,7 +137,7 @@ const FilterComponent = ({ currentPage, setCurrentPage }) => {
         </select>
       </div>
       <label className='block  text-teesaBlueDark'>
-        <span className='mb-2 font-semibold'>Estado:</span>
+        <span className='mb-2 font-semibold'>Estado</span>
         <select
           value={estado}
           className='w-full border border-gray-300 rounded px-3 py-2 focus:outline-none'
@@ -169,7 +169,7 @@ const FilterComponent = ({ currentPage, setCurrentPage }) => {
       </label>
       <br />
       <div className='flex flex-col  text-teesaBlueDark'>
-        <span className=' font-semibold'>Marca:</span>
+        <span className=' font-semibold'>Marca</span>
         <select
           value={marca}
           onChange={(e) => {
@@ -192,7 +192,7 @@ const FilterComponent = ({ currentPage, setCurrentPage }) => {
 
       <br />
       <label className='block mb-2  text-teesaBlueDark'>
-        <span className='mb-2 font-semibold'>Precio:</span>
+        <span className='mb-2 font-semibold'>Precio</span>
         <select
           value={precio}
           onChange={(e) => {

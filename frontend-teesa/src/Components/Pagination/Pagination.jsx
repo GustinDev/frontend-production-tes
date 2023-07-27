@@ -42,7 +42,7 @@ const Pagination = () => {
 
       {/* Paginación */}
       <div
-        className='flex justify-center items-center pagination-wrapper bg-white py-4 w-10/12'
+        className='flex justify-center items-center pagination-wrapper  py-4 w-10/12'
         style={{ marginTop: '20px' }}
       >
         <div className='pagination-inner flex justify-center flex-wrap md:flex-nowrap w-full flex-row'>

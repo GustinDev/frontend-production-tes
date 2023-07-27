@@ -114,13 +114,13 @@ function Home() {
   };
 
   return (
-    <div className='flex flex-wrap overflow-y-auto min-h-screen'>
+    <div className='flex flex-wrap overflow-y-auto min-h-screen w-full'>
       {/* Second Navbar */}
       <div className='flex flex-col bg-teesaBlueDark w-full h-[3em] items-center justify-center mt-[-3px] border-t-[6px] border-teesaGreen text-teesaWhite text-[16px] py-2 '>
         <SearchBar />
       </div>
       {/* Hero */}
-      <div className='heroContainer flex flex-wrap mx-auto mt-5 flex-col lg:flex-row '>
+      <div className='heroContainer flex flex-wrap mx-auto mt-5 flex-col lg:flex-row 2xl:w-9/12'>
         {/* BOTON FILTROS */}
         <button
           className='flex lg:hidden  h-10 bg-white lg:bg-gray-200 w-11/12 mx-auto md:w-full text-md justify-center items-center gap-1 font-bold rounded-t-lg border-[1px] border-teesaBlueLight border-b-teesaBlueLight md:px-0 px-5'
@@ -164,7 +164,7 @@ function Home() {
             </div>
           )}
           {status === 'succeeded' && products.products.length > 0 ? (
-            <div className=' grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 sm:grid-cols-1  lg:gap-4 mx-auto w-12/12 md:w-full'>
+            <div className=' grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 sm:grid-cols-1  lg:gap-4 mx-auto w-12/12 2xl:w-12/12 md:w-full'>
               {products.products?.map((product) => (
                 <Card
                   id={product?.id}
