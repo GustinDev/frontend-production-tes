@@ -114,13 +114,13 @@ function Home() {
   };
 
   return (
-    <div className='flex flex-wrap overflow-y-auto min-h-screen w-full'>
+    <div className='flex flex-wrap overflow-y-auto min-h-screen w-full mx-auto justify-center'>
       {/* Second Navbar */}
-      <div className='flex flex-col bg-teesaBlueDark w-full h-[3em] items-center justify-center mt-[-3px] border-t-[6px] border-teesaGreen text-teesaWhite text-[16px] py-2 '>
+      <div className='flex flex-col bg-teesaBlueDark w-full h-[3em] items-center justify-center mt-[-3px] border-t-[6px] border-teesaGreen text-teesaWhite text-[16px] py-2 mx-auto'>
         <SearchBar />
       </div>
       {/* Hero */}
-      <div className='heroContainer flex flex-wrap mx-auto mt-5 flex-col lg:flex-row 2xl:w-9/12'>
+      <div className='heroContainer flex flex-wrap mx-auto mt-5 flex-col lg:flex-row w-full 2xl:w-9/12 md:m-5 justify-center'>
         {/* BOTON FILTROS */}
         <button
           className='flex lg:hidden  h-10 bg-white lg:bg-gray-200 w-11/12 mx-auto md:w-full text-md justify-center items-center gap-1 font-bold rounded-t-lg border-[1px] border-teesaBlueLight border-b-teesaBlueLight md:px-0 px-5'
