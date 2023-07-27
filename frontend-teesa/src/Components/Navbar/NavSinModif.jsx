@@ -236,7 +236,7 @@ export default function NavBar(props) {
                     )}
                   </span>
                 ) : info.items?.cartGuestProducts?.length > 0 ? (
-                  <span className='absolute -top-1 -right-3 bg-teesaGreen text-black rounded-full text-xs px-1.5 py-.05'>
+                  <span className='absolute -top-1 -right-3 bg-teesaGreen text-white rounded-full text-xs px-1.5 py-.05'>
                     {info.items.cartGuestProducts.reduce(
                       (total, item) => total + item.cantidad,
                       0
