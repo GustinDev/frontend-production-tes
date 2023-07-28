@@ -13,6 +13,7 @@ import { Link } from 'react-router-dom';
 //EmailJS - Mailer
 import emailjs from '@emailjs/browser';
 import waves from '../../assets/icon/layered-waves.svg';
+import { motion } from 'framer-motion';
 
 function Register() {
   const dispatch = useDispatch();
@@ -147,7 +148,12 @@ function Register() {
       className='relative bg-cover w-full h-screen flex flex-row justify-center align-center items-center overflow-hidden m-auto'
       style={{ backgroundImage: `url(${waves})` }}
     >
-      <div className='w-full md:w-2/4 lg:w-1/4 2xl:w-[25%]  bg-teesaBlueDark rounded-2xl flex flex-col justify-center align-center items-center h-auto mb-[12%] lg:mt-[10%] border-green-700 border-[2px] mx-5'>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className='w-full md:w-2/4 lg:w-1/4 2xl:w-[25%]  bg-teesaBlueDark rounded-2xl flex flex-col justify-center align-center items-center h-auto mb-[12%] lg:mt-[10%] border-green-700 border-[2px] mx-5'
+      >
         <div className='flex flex-col justify-center align-center items-center  w-full px-7 py-1'>
           <div className='w-full mb-5'>
             <h1 className='text-3xl md:text-4xl font-bold  xl:text-4xl lg:text-4xl text-teesaGrey  mt-[5%] '>
@@ -281,7 +287,7 @@ function Register() {
             </a>
           </div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }

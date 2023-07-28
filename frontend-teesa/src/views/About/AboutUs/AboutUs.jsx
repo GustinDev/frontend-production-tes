@@ -1,10 +1,16 @@
 import tech from '../../../assets/about/tech-kitchen.jpg';
 import tech1 from '../../../assets/about/kitone.jpg';
 import tech2 from '../../../assets/about/kittwo.jpg';
+import { motion } from 'framer-motion';
 
 const AboutUs = () => {
   return (
-    <div className='flex flex-col justify-center aling-center w-full h-full mt-0 bg-stone-100'>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1 }}
+      className='flex flex-col justify-center aling-center w-full h-full mt-0 bg-stone-100'
+    >
       {/* First Part */}
       <section className='py-10 lg:py-20 bg-stone-100 font-poppins '>
         <div className='max-w-6xl py-4 mx-auto lg:py-6 md:px-6'>
@@ -50,7 +56,12 @@ const AboutUs = () => {
       </section>
       {/* MISION Y VISION */}
       <div className='containerboth flex flex-col max-w-7xl xl:mx-auto gap-20 bg-stone-100 mx-10'>
-        <section className='flex'>
+        <motion.section
+          initial={{ opacity: 0, x: -100 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6 }}
+          className='flex'
+        >
           <img
             src={tech1}
             alt='photo'
@@ -70,9 +81,14 @@ const AboutUs = () => {
               calidad a su necesidad.
             </p>
           </div>
-        </section>
+        </motion.section>
 
-        <section className='flex  mb-40'>
+        <motion.section
+          initial={{ opacity: 0, x: 100 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6 }}
+          className='flex  mb-40'
+        >
           <div className='bg-stone-200 md:w-1/2 rounded-lg md:rounded-l-3xl p-5 xl:p-10'>
             <h2 className='mt-2 text-3xl font-black text-gray-700 md:text-5xl'>
               Visión
@@ -92,9 +108,9 @@ const AboutUs = () => {
             src={tech2}
             alt='photo'
           />
-        </section>
+        </motion.section>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

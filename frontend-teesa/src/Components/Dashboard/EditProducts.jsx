@@ -11,6 +11,7 @@ import {
 } from '../../features/reduxReducer/detailSlice';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 const EditProducts = () => {
   const navigate = useNavigate();
@@ -151,7 +152,12 @@ const EditProducts = () => {
   };
 
   return (
-    <div className='flex flex-col justify-center items-center w-full h-full '>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1 }}
+      className='flex flex-col justify-center items-center w-full h-full '
+    >
       <div className='w-full flex '>
         <button
           onClick={handleGoBack}
@@ -252,7 +258,7 @@ const EditProducts = () => {
           ELIMINAR PRODUCTO
         </button>
       </form>
-    </div>
+    </motion.div>
   );
 };
 

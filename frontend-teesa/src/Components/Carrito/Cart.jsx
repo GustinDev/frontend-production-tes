@@ -8,6 +8,7 @@ import { postLinkMercado } from '../../features/reduxReducer/mercadoSlice';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import loadingGif from '../../assets/icon/Loading.gif';
+import { motion } from 'framer-motion';
 
 export const Cart = () => {
   //*Validar User:
@@ -123,7 +124,12 @@ export const Cart = () => {
   }, [dispatch, userId]);
 
   return (
-    <div className='flex flex-col items-center justify-start mt-10 h-screen'>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1 }}
+      className='flex flex-col items-center justify-start mt-10 h-screen'
+    >
       <h2 className='text-4xl text-gray-800 mb-4 font-extrabold'>
         Carrito de Productos
       </h2>
@@ -204,7 +210,7 @@ export const Cart = () => {
           )}
         </div>
       </main>
-    </div>
+    </motion.div>
   );
 };
 

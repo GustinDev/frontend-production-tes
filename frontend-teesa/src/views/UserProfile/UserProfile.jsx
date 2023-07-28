@@ -11,6 +11,7 @@ import 'boxicons/css/boxicons.min.css';
 // import Cookies from 'universal-cookie';
 import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 const UserProfile = () => {
   const nav = useNavigate();
@@ -161,7 +162,12 @@ const UserProfile = () => {
   return (
     <div className='allContainer bg-gray-100 flex xl:flex-row lg:flex-row md:flex-row sm-flex-col xs:flex-col justify-center items-start gap-5 w-full h-screen overflow-hidden pt-5'>
       {/* info section */}
-      <section className='bg-gray-100 border-2 border-teesaBlueLight rounded-lg flex flex-col justify-center items-center  xl:w-[30em] lg:w-[30em] md:w-[18em]  gap-3  mx-auto w-11/12'>
+      <motion.section
+        initial={{ opacity: 0, x: -50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.6 }}
+        className='bg-gray-100 border-2 border-teesaBlueLight rounded-lg flex flex-col justify-center items-center  xl:w-[30em] lg:w-[30em] md:w-[18em]  gap-3  mx-auto w-11/12'
+      >
         {editing ? (
           <form
             onSubmit={handleSubmit(onSubmit)}
@@ -334,10 +340,15 @@ const UserProfile = () => {
             </div>
           </div>
         )}
-      </section>
+      </motion.section>
       {/* Products section */}
 
-      <section className='flex flex-col items-center mb-[5%] bg-gray-100 border-2 border-teesaBlueLight overflow-y-scroll rounded-lg xl:w-[55%] h-[80%] mx-5'>
+      <motion.section
+        initial={{ opacity: 0, x: 50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.6 }}
+        className='flex flex-col items-center mb-[5%] bg-gray-100 border-2 border-teesaBlueLight overflow-y-scroll rounded-lg xl:w-[55%] h-[80%] mx-5'
+      >
         <h1 className='font-bold text-black mt-[2%] text-4xl'>Compras</h1>
         <article className='w-[95%] '>
           {userProducts && userProducts.length > 0 ? (
@@ -399,7 +410,7 @@ const UserProfile = () => {
             </div>
           )}
         </article>
-      </section>
+      </motion.section>
     </div>
   );
 };

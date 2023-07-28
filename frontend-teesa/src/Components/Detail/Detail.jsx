@@ -8,7 +8,7 @@ import {
 } from '../../features/reduxReducer/detailSlice';
 import { useParams } from 'react-router-dom';
 import CardDetail from '../Card/CardDetail';
-
+import { motion } from 'framer-motion';
 import loadingGif from '../../assets/icon/Loading.gif';
 
 function Detail() {
@@ -26,7 +26,11 @@ function Detail() {
   }, [dispatch, id]);
 
   return (
-    <div>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}
+    >
       {loading && (
         <div className='flex justify-center items-center w-full h-[800px]'>
           <img
@@ -56,7 +60,7 @@ function Detail() {
           )}
         </div>
       )}
-    </div>
+    </motion.div>
   );
 }
 

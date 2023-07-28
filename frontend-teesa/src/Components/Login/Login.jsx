@@ -14,6 +14,7 @@ import Swal from 'sweetalert2';
 import kichen from '../../assets/kitchen.jpg';
 import googleIcon from '../../assets/icon/Google.svg';
 import waves from '../../assets/icon/waves.svg';
+import { motion } from 'framer-motion';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -146,7 +147,12 @@ const Login = () => {
       }}
       className='allContainer flex flex-col justify-center items-center w-full h-screen bg-bottom bg-cover -mt-1'
     >
-      <div className='formContainer flex justify-center items-center flex-col-reverse sm:flex-col-reverse  lg:flex-row w-3/4 p-5 -mt-36'>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className='formContainer flex justify-center items-center flex-col-reverse sm:flex-col-reverse  lg:flex-row w-3/4 p-5 -mt-36'
+      >
         <div className='hidden w-2/3 h-full lg:flex -mr-5'>
           <img
             className='filter-green-500 rounded-l-xl'
@@ -247,7 +253,7 @@ const Login = () => {
       >
         Solucitud del Token
       </button> */}
-      </div>
+      </motion.div>
     </div>
   );
 };

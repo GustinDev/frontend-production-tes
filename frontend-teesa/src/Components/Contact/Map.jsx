@@ -1,6 +1,13 @@
+import { motion } from 'framer-motion';
+
 const Map = () => {
   return (
-    <div className='ml-10 md:px-0 w-[300px] md:w-[500px] shadow-gray-400 shadow-md rounded-lg'>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1 }}
+      className='ml-10 md:px-0 w-[300px] md:w-[500px] shadow-gray-400 shadow-md rounded-lg'
+    >
       <section className='mb-32 text-center'>
         <div className='relative h-[705px] rounded-lg shadow-lg '>
           <iframe
@@ -13,7 +20,7 @@ const Map = () => {
           ></iframe>
         </div>
       </section>
-    </div>
+    </motion.div>
   );
 };
 

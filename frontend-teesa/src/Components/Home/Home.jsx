@@ -135,9 +135,9 @@ function Home() {
         </button>
         {/* TODOS LOS FILTROS */}
         <motion.div
-          initial={{ opacity: 0, x: -100 }} // Inicialmente la opacidad es 0 y la posición x es 200px hacia la derecha
+          initial={{ opacity: 0, x: -50 }} // Inicialmente la opacidad es 0 y la posición x es 200px hacia la derecha
           animate={{ opacity: 1, x: 0 }} // Al animar, la opacidad llega a 1 y la posición x es 0 (posición original)
-          transition={{ duration: 1 }}
+          transition={{ duration: 0.6 }}
           className={`filters  w-11/12 mx-auto md:w-full lg:w-1/6 2xl:w-3/12 lg:mx-0 lg:mt-2 bg-white lg:bg-gray-200 p-4 rounded-b-lg lg:rounded-lg border-[1px] border-teesaBlueLight border-t-0 lg:border-0  ${
             isPanelOpen ? 'block' : 'hidden'
           } lg:block  `}
@@ -192,7 +192,12 @@ function Home() {
             </div>
           ) : null}
           {status === 'succeeded' && products.products.length && (
-            <motion.div className='w-10/12 mx-auto'>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+              className='w-10/12 mx-auto'
+            >
               <Pagination
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}

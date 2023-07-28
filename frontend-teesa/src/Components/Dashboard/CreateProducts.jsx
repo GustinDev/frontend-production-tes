@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { getBrands } from '../../features/reduxReducer/productSlice';
 import Swal from 'sweetalert2';
 import { NavLink, useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 const CreateProducts = () => {
   //*Validar Admin - Juan:
@@ -146,7 +147,12 @@ const CreateProducts = () => {
   };
 
   return (
-    <div className='flex flex-col justify-start items-center w-full h-full'>
+    <motion.div
+      initial={{ opacity: 0, x: -50 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.6 }}
+      className='flex flex-col justify-start items-center w-full h-full'
+    >
       <div className='w-full flex '>
         <NavLink to='/admin'>
           <button className='bg-teesaBlueLight  text-white flex flex-row hover:bg-teesaBlueDark p-2 m-5 rounded-xl'>
@@ -462,7 +468,7 @@ const CreateProducts = () => {
           CREAR PRODUCTO
         </button>
       </form>
-    </div>
+    </motion.div>
   );
 };
 

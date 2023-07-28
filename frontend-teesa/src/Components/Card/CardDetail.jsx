@@ -352,6 +352,16 @@ const CardDetail = ({
               Estado: {estadoMayus}.
             </h2>
           </div>
+          {userAdmin == true ? (
+            <button
+              onClick={handleEdit}
+              className='my-2 px-8 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-800'
+            >
+              Editar{' '}
+            </button>
+          ) : (
+            <div></div>
+          )}
           <form onSubmit={(e) => handleSubmit(e)}>
             <motion.div
               className='flex items-center justify-start mt-2 gap-[8px]'
@@ -404,17 +414,8 @@ const CardDetail = ({
                 Agregar
                 <i className='fa-solid fa-cart-shopping  ml-1'></i>
               </motion.button>
-              {userAdmin == true ? (
-                <button
-                  onClick={handleEdit}
-                  className='ml-2 px-8 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-800'
-                >
-                  Editar{' '}
-                </button>
-              ) : (
-                <div></div>
-              )}
             </motion.div>
+
             <h6 className='hidden'>{id}</h6>
             <h6 className='hidden'>{cart.CartId}</h6>
           </form>

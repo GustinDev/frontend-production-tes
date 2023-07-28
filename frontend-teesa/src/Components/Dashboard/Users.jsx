@@ -8,6 +8,7 @@ import {
   enableUser,
   enableUserfalse,
 } from '../../features/reduxReducer/adminSlice';
+import { motion } from 'framer-motion';
 
 const columns = [
   {
@@ -123,7 +124,12 @@ const Users = () => {
     useTable({ columns, data });
 
   return (
-    <div className='w-full h-full items-center justify-center'>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}
+      className='w-full h-full items-center justify-center'
+    >
       <div className='w-full flex items-center'>
         <NavLink to='/admin'>
           <button className='bg-teesaBlueLight text-white flex flex-row hover:bg-teesaBlueDark p-2 m-5 rounded-xl text-center'>
@@ -187,7 +193,7 @@ const Users = () => {
         </table>
       </div>
       <div className='w-full h-10'></div>
-    </div>
+    </motion.div>
   );
 };
 

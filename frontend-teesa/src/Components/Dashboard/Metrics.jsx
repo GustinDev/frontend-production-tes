@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import SalesChart from './SalesChart';
 import { useEffect } from 'react';
 import { getProductsChart } from '../../features/reduxReducer/admproductSlice';
+import { motion } from 'framer-motion';
 
 const Metrics = () => {
   const ProductChart = useSelector(
@@ -19,7 +20,12 @@ const Metrics = () => {
   //console.log(ProductChart);
 
   return (
-    <div className='flex flex-col w-full h-screen items-center justify-start '>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}
+      className='flex flex-col w-full h-screen items-center justify-start '
+    >
       <div className='w-full flex '>
         <NavLink to='/admin'>
           <button className='bg-teesaBlueLight  text-white flex flex-row hover:bg-teesaBlueDark p-2 m-5 rounded-xl'>
@@ -51,7 +57,7 @@ const Metrics = () => {
           </div>
         </article>
       </section>
-    </div>
+    </motion.div>
   );
 };
 

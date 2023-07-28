@@ -2,16 +2,27 @@ import preventivo from '../../img/imgs/preventivo.png';
 import correctivo from '../../img/imgs/correctivo.png';
 import tech from '../../img/imgs/tech.jpg';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 //Responsive:
 
 function Services() {
   return (
-    <div className='flex flex-col justify-center items-center  h-full'>
-      <h1 className='text-white font-bold   xl:text-5xl lg:text-5xl md:text-4xl sm:text-4xl my-10 bg-teesaBlueDark py-5 px-10 rounded-xl'>
+    <motion.div className='flex flex-col justify-center items-center  h-full'>
+      <motion.h1
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+        className='text-white font-bold   xl:text-5xl lg:text-5xl md:text-4xl sm:text-4xl my-10 bg-teesaBlueDark py-5 px-10 rounded-xl'
+      >
         Nuestros Servicios
-      </h1>
-      <div className='flex flex-col  md:flex-row justify-center items-center md:gap-[10%] gap-4 mb-[3%] text-center'>
+      </motion.h1>
+      <motion.div
+        initial={{ opacity: 0, x: -50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.6 }}
+        className='flex flex-col  md:flex-row justify-center items-center md:gap-[10%] gap-4 mb-[3%] text-center'
+      >
         <div className='w-2/3 md:w-[25%] h-[40%] bg-teesaBlueDark flex flex-col justify-center items-center rounded-lg'>
           <img
             src={preventivo}
@@ -34,11 +45,16 @@ function Services() {
             precisos y tiempos mínimos.
           </p>
         </div>
-      </div>
+      </motion.div>
       {/* AGENDAR */}
-      <div className='bg-teesaBlueDark w-2/3 h-full text-teesaWhite flex flex-row justify-between items-center text-center   rounded-lg mb-40 '>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+        className='bg-teesaBlueDark w-2/3 h-full text-teesaWhite flex flex-row justify-between items-center text-center   rounded-lg mb-40 '
+      >
         <div className='flex flex-col justify-center items-center text-center w-full lg:w-1/2  p-4'>
-          <h1 className='xl:text-3xl  font-bold lg:text-3xl md:text-xl sm:text-lg pb-3'>
+          <h1 className='xl:text-2xl  font-bold lg:text-3xl md:text-xl sm:text-lg pb-3'>
             ¿Quieres agendar una visita técnica?
           </h1>
           <Link to='/contact'>
@@ -48,7 +64,7 @@ function Services() {
           </Link>
           {/* MITAD */}
           <hr className='border-2 w-full border-white cursor-pointer my-2  xl:my-4 2xl:my-8' />
-          <h2 className='mb-2 text-xl font-bold  xl:text-3xl'>
+          <h2 className='mb-2 text-xl font-bold  xl:text-2xl'>
             Escríbenos por:
           </h2>
           <div className='flex flex-row justify-center items-center xl:gap-6 lg:gap-6 md:gap-4 gap-2'>
@@ -82,8 +98,8 @@ function Services() {
             className=' rounded-r-lg object-contain h-full'
           />
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }
 

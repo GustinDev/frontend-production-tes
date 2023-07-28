@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom';
 import admin from '../../assets/icon/admin.png';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 function Dashboard() {
   //*Validar Admin - Juan:
@@ -52,7 +53,12 @@ function Dashboard() {
   }, [userAdmin, waiting]);
 
   return (
-    <div className='flex flex-col items-center min-h-screen  bg-teesaGrey'>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.4 }}
+      className='flex flex-col items-center min-h-screen  bg-teesaGrey'
+    >
       <h1 className='text-white text-5xl font-bold my-5 bg-teesaBlueDark rounded-2xl p-4'>
         Dashboard
       </h1>
@@ -83,7 +89,7 @@ function Dashboard() {
           />
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

@@ -5,6 +5,7 @@ import emailjs from '@emailjs/browser';
 //NPMs
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
+import { motion } from 'framer-motion';
 
 const Contact = () => {
   //Alert
@@ -78,7 +79,12 @@ const Contact = () => {
         </div>
         {/* Si le ponemos m-auto se centra el form */}
         <div className='m-auto flex flex-col lg:flex-row w-11/12 px-6 justify-center  gap-8'>
-          <div className='flex rounded-lg bg-teesaWhite px-6 py-12  border-[3px] border-teesaBlueLight md:py-16 md:px-4 -mt-[100px] backdrop-blur-[30px] shadow-lg h-fit justify-center'>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1 }}
+            className='flex rounded-lg bg-teesaWhite px-6 py-12  border-[3px] border-teesaBlueLight md:py-16 md:px-4 -mt-[100px] backdrop-blur-[30px] shadow-lg h-fit justify-center'
+          >
             <div className='flex flex-wrap  flex-row justify-center'>
               <div className='mb-12  shrink-0 grow-0 basis-auto md:px-3 lg:mb-0 lg:w-5/12 lg:px-0'>
                 {/* FORM */}
@@ -295,10 +301,10 @@ const Contact = () => {
                 </div>
               </div>
             </div>
-          </div>
-          <div className='-ml-10 mt-5  lg:-mt-[100px]'>
+          </motion.div>
+          <motion.div className='-ml-10 mt-5  lg:-mt-[100px]'>
             <Map />
-          </div>
+          </motion.div>
         </div>
       </section>
     </div>
