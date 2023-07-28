@@ -61,6 +61,7 @@ const FilterComponent = ({ currentPage, setCurrentPage, tipo, setTipo }) => {
       setPrecio('');
       setOrderPrice('');
       setOrderName('');
+      dispatch(changePage(1));
       setResetFilters(false);
       dispatch(fetchProducts({}));
     }
