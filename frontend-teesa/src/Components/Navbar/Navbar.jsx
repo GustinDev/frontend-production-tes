@@ -19,7 +19,7 @@ export default function NavBar(props) {
   const dispatch = useDispatch();
   const {
     user,
-    //userData: { userName },
+    userData: { userName },
     userData: { userId },
   } = userData;
 
@@ -98,11 +98,11 @@ export default function NavBar(props) {
 
   //UserName
 
-  // const firstName = nombreGoogle
-  //   ? nombreGoogle.split(' ')[0]
-  //   : userName
-  //   ? userName.split(' ')[0]
-  //   : null;
+  const firstName = nombreGoogle
+    ? nombreGoogle.split(' ')[0]
+    : userName
+    ? userName.split(' ')[0]
+    : null;
 
   return (
     <div className='pr-5 flex flex-row justify-between items-center w-full lg:px-10 h-[4em] border-b-2 border-teesaGreen bg-teesaBlueDark text-white text-xl sm:text-lg relative '>
@@ -163,14 +163,17 @@ export default function NavBar(props) {
         {/* Tooltip Start*/}
         {user || nombreGoogle ? (
           <div
-            className={` cursor-pointer relative flex items-center ${
+            className={` cursor-pointer relative flex items-center  ${
               isMobileMenuOpen ? 'hidden sm:flex' : 'flex'
             }`}
             onMouseEnter={handleTooltipToggle}
             onMouseLeave={handleTooltipToggle}
           >
+            <p className='w-full text-white py-1 px-2 text-center hover:text-teesaGreen hover:font-medium pl-14  text-lg'>
+              {firstName}
+            </p>
             <i
-              className='fa-solid fa-user flex transition duration-300 ease-in-out transform pl-12 py-5 pr-6 hover:text-teesaGreen'
+              className='fa-solid fa-user flex transition duration-300 ease-in-out transform pl-2 py-5 pr-6 hover:text-teesaGreen'
               style={{ fontSize: '20px' }}
             ></i>
 
