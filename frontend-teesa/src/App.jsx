@@ -25,6 +25,7 @@ import EditProducts from './Components/Dashboard/EditProducts';
 import Footer from './views/Footer/Footer';
 import Metrics from './Components/Dashboard/Metrics';
 import Users from './Components/Dashboard/Users';
+import { Helmet } from 'react-helmet';
 
 function App() {
   const location = useLocation();
@@ -43,6 +44,58 @@ function App() {
 
   return (
     <div>
+      {/* Inicio Metadata */}
+      <Helmet>
+        <title>
+          Teesa - Venta de Repuestos y Servicios de Equipos Alimenticios
+        </title>
+        <link
+          rel='icon'
+          href='./img/SVGs/TeesaAll.svg'
+          type='image/svg+xml'
+        />
+        <meta
+          name='description'
+          content='Tu tienda de venta de repuestos y servicios de equipos alimenticios en Colombia.'
+        />
+        <meta
+          name='keywords'
+          content='Teesa, equipos alimenticios, repuestos, servicios, Colombia, tienda, e-commerce, hornos, refrigeradores'
+        />
+        <meta
+          name='author'
+          content='Teesa S.A.S'
+        />
+        <meta
+          httpEquiv='Content-Language'
+          content='es'
+        />
+        <link
+          rel='canonical'
+          href='https://www.teesa.online/'
+        />
+
+        {/* Redes sociales */}
+        <meta
+          property='og:title'
+          content='Teesa - Venta de Repuestos y Servicios de Equipos Alimenticios'
+        />
+        <meta
+          property='og:description'
+          content='Tu tienda de venta de repuestos y servicios de equipos alimenticios en Colombia.'
+        />
+        {/* Reemplaza URL_DE_LA_IMAGEN_DESTACADA con la URL de la imagen que deseas mostrar */}
+        <meta
+          property='og:image'
+          content='./img/imgs/tech.jpg'
+        />
+        <meta
+          property='og:url'
+          content='https://www.teesa.online/'
+        />
+      </Helmet>
+      {/* Final Metada  */}
+      {/* Página */}
       {!hideNavbar && <Navbar />}
       <Routes>
         <Route
