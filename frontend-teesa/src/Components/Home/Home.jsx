@@ -168,13 +168,18 @@ function Home() {
           )}
           {status === 'failed' && (
             <div className='text-2xl w-1/2 h-1/2 font-bold text-center'>
-              Error al cargar los productos. {error}
+              Error al cargar los productos.
             </div>
           )}
           {status === 'succeeded' && products.products.length > 0 ? (
             <div className=' w-full flex flex-col justify-center items-center '>
               {/* BOTONES TIPO */}
-              <div className='flex jus gap-[1px] mt-4 w-11/12 bg-gray-200  mb-5 mx-auto rounded-2xl'>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5 }}
+                className='flex jus gap-[1px] mt-4 w-11/12 bg-gray-200  mb-5 mx-auto rounded-2xl'
+              >
                 <div className=' w-full flex justify-center rounded-l-xl'>
                   <button
                     className={`w-full h-full rounded-l-xl font-bold text-lg ${
@@ -209,7 +214,7 @@ function Home() {
                     Repuestos
                   </button>
                 </div>
-              </div>
+              </motion.div>
               {/* PRODUCTOS */}
               <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 sm:grid-cols-1  lg:gap-4 mx-auto w-full'>
                 {products.products?.map((product) => (
@@ -233,11 +238,16 @@ function Home() {
               </div>
             </div>
           ) : status === 'succeeded' ? (
-            <div className='min-h-screen font-bold text-3xl flex justify-center items center my-40 flex-col mx-auto'>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
+              className='min-h-screen font-bold text-3xl flex justify-center items center my-40 flex-col mx-auto'
+            >
               <div className='bg-teesaBlueDark p-5 rounded-lg text-white'>
                 <h1>No se encontraron productos.</h1>
               </div>
-            </div>
+            </motion.div>
           ) : null}
           {status === 'succeeded' && products.products.length && (
             <motion.div
