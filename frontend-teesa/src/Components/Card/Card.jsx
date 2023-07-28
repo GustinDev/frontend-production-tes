@@ -213,7 +213,7 @@ export const Card = ({ nombre, categoria, imagenes, precio, marca, id }) => {
               {nombre}
             </h2>
             <h4 className='text-black text-[15px] font-bold'>
-              {`$${precio.toLocaleString('es-ES', options)}`}
+              {`$${precio.toLocaleString('es-ES', options)} COP`}
             </h4>
             <form onSubmit={(e) => handleSubmit(e)}>
               <motion.div

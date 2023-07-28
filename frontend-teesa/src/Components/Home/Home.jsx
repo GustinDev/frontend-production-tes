@@ -111,13 +111,18 @@ function Home() {
     setPanelOpen(!isPanelOpen);
   };
 
+  //TIPO:
+
+  const [tipo, setTipo] = useState('');
+
   return (
-    <div className='flex flex-wrap overflow-y-auto min-h-screen w-full mx-auto justify-center'>
+    <div className='flex flex-wrap overflow-y-auto min-h-screen w-full mx-auto justify-center items'>
       {/* Second Navbar */}
       <div className='flex flex-col bg-teesaBlueDark w-full h-[60px] items-center justify-center mt-[-3px] border-t-[6px] border-teesaGreen text-teesaWhite text-[16px] py-4 mx-auto'>
         <SearchBar />
       </div>
       {/* Hero */}
+
       <div className='heroContainer flex flex-wrap mx-auto mt-5 flex-col lg:flex-row w-full 2xl:w-9/12 md:m-5 justify-center'>
         {/* BOTON FILTROS */}
         <button
@@ -146,6 +151,8 @@ function Home() {
             currentPage={currentPage}
             setCurrentPage={setCurrentPage}
             onApplyFilters={handleApplyFilters}
+            tipo={tipo}
+            setTipo={setTipo}
           />
         </motion.div>
 
@@ -165,27 +172,68 @@ function Home() {
             </div>
           )}
           {status === 'succeeded' && products.products.length > 0 ? (
-            <div className=' grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 sm:grid-cols-1  lg:gap-4 mx-auto w-12/12 2xl:w-12/12 md:w-full'>
-              {products.products?.map((product) => (
-                <motion.div
-                  key={product?.id}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 1 }} // Puedes ajustar la duración de la animación aquí
-                >
-                  <Card
-                    id={product?.id}
-                    nombre={product?.nombre}
-                    categoria={product?.categoria}
-                    precio={product?.precio}
-                    imagenes={product?.imagenes}
-                    marca={product?.marca}
-                  />
-                </motion.div>
-              ))}
+            <div className=' w-full flex flex-col justify-center items-center '>
+              {/* BOTONES TIPO */}
+              <div className='flex jus gap-[1px] mt-4 w-11/12 bg-gray-200  mb-5 mx-auto rounded-2xl'>
+                <div className=' w-full flex justify-center rounded-l-xl'>
+                  <button
+                    className={`w-full h-full rounded-l-xl font-bold text-lg ${
+                      tipo === '' ? 'bg-teesaGreen text-text-black' : 'bg-white'
+                    } px-4 py-2  border border-gray-200`}
+                    onClick={() => setTipo('')}
+                  >
+                    Todos
+                  </button>
+                </div>
+                <div className=' w-full flex justify-center'>
+                  <button
+                    className={` w-full h-full  font-bold text-lg ${
+                      tipo === 'equipo'
+                        ? 'bg-teesaGreen text-bleck'
+                        : 'bg-white'
+                    } px-4 py-2  border border-gray-200`}
+                    onClick={() => setTipo('equipo')}
+                  >
+                    Equipos
+                  </button>
+                </div>
+                <div className=' w-full flex justify-center rounded-r-xl  font-bold text-lg'>
+                  <button
+                    className={`w-full h-full rounded-r-xl ${
+                      tipo === 'repuesto'
+                        ? 'bg-teesaGreen text-black'
+                        : 'bg-white'
+                    } px-4 py-2  border border-gray-200`}
+                    onClick={() => setTipo('repuesto')}
+                  >
+                    Repuestos
+                  </button>
+                </div>
+              </div>
+              {/* PRODUCTOS */}
+              <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 sm:grid-cols-1  lg:gap-4 mx-auto w-full'>
+                {products.products?.map((product) => (
+                  <motion.div
+                    key={product?.id}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 1 }}
+                    className='mx-auto' // Puedes ajustar la duración de la animación aquí
+                  >
+                    <Card
+                      id={product?.id}
+                      nombre={product?.nombre}
+                      categoria={product?.categoria}
+                      precio={product?.precio}
+                      imagenes={product?.imagenes}
+                      marca={product?.marca}
+                    />
+                  </motion.div>
+                ))}
+              </div>
             </div>
           ) : status === 'succeeded' ? (
-            <div className='h-full font-bold text-3xl flex justify-center items center my-40 flex-col mx-auto'>
+            <div className='min-h-screen font-bold text-3xl flex justify-center items center my-40 flex-col mx-auto'>
               <div className='bg-teesaBlueDark p-5 rounded-lg text-white'>
                 <h1>No se encontraron productos.</h1>
               </div>

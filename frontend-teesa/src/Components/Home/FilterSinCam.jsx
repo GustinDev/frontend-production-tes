@@ -15,9 +15,9 @@ import { motion } from 'framer-motion';
 // import NoHayProductosRango from '../NoHayProductosRango/NoHayProductosRango';
 
 // eslint-disable-next-line react/prop-types
-const FilterComponent = ({ currentPage, setCurrentPage, tipo, setTipo }) => {
+const FilterComponent = ({ currentPage, setCurrentPage }) => {
   const [estado, setEstado] = useState('');
-  // const [tipo, setTipo] = useState('');
+  const [tipo, setTipo] = useState('');
   const [marca, setMarca] = useState(['']);
   const [precio, setPrecio] = useState('');
   const [orderPrice, setOrderPrice] = useState('');
@@ -81,17 +81,17 @@ const FilterComponent = ({ currentPage, setCurrentPage, tipo, setTipo }) => {
     dispatch(changePage(1));
   };
 
-  // const handleSort = (e) => {
-  //   e.preventDefault();
-  //   setOrderName(e.target.value);
-  //   dispatch(sortByName(e.target.value));
-  // };
+  //   const handleSort = (e) => {
+  //     e.preventDefault();
+  //     setOrderName(e.target.value);
+  //     dispatch(sortByName(e.target.value));
+  //   };
 
-  // const handleSortPrices = (e) => {
-  //   e.preventDefault();
-  //   setOrderPrice(e.target.value);
-  //   dispatch(sortByPrice(e.target.value.toLowerCase()));
-  // };
+  //   const handleSortPrices = (e) => {
+  //     e.preventDefault();
+  //     setOrderPrice(e.target.value);
+  //     dispatch(sortByPrice(e.target.value.toLowerCase()));
+  //   };
 
   return (
     <motion.div
@@ -155,8 +155,8 @@ const FilterComponent = ({ currentPage, setCurrentPage, tipo, setTipo }) => {
           <option value='nuevo'>Nuevo</option>
         </select>
       </label>
-
-      {/* <label className='block  text-teesaBlueDark'>
+      <br />
+      <label className='block  text-teesaBlueDark'>
         <span className='mb-2 font-semibold'>Tipo:</span>
         <select
           value={tipo}
@@ -170,7 +170,7 @@ const FilterComponent = ({ currentPage, setCurrentPage, tipo, setTipo }) => {
           <option value='equipo'>Equipo</option>
           <option value='repuesto'>Repuesto</option>
         </select>
-      </label> */}
+      </label>
       <br />
       <div className='flex flex-col  text-teesaBlueDark'>
         <span className=' font-semibold'>Marca</span>

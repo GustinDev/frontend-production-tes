@@ -74,7 +74,7 @@ export const SearchBar = () => {
       <div>
         <button
           type='submit'
-          className='bg-green-500 text-white px-4 py-1 rounded-md'
+          className='bg-green-500 text-black font-bold px-4 py-1 rounded-md'
           onClick={() => {
             handleSearch();
             clearSearch();

@@ -343,7 +343,7 @@ const CardDetail = ({
           <div className='flex flex-col mb-6'>
             <h2 className='text-teesaBlueDark text-2xl font-bold'>{`$${
               precio ? precio.toLocaleString('es-ES', options) : ''
-            }`}</h2>
+            } COP`}</h2>
 
             <h2 className='text-xl text-teesaBlueDark'>
               Stock: {stock === 0 ? 'Bajo Pedido.' : stock}
