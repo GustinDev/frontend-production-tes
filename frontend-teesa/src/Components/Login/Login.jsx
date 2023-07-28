@@ -177,9 +177,7 @@ const Login = () => {
                 onBlur={() => handleBlur('correo')}
               />
               {errors.correo ? (
-                <span className='text-teesaBlueDark'>
-                  {errors.correo.message}
-                </span>
+                <span className='text-red-500'>{errors.correo.message}</span>
               ) : (
                 <div className='h-[24px]'></div>
               )}
@@ -196,7 +194,7 @@ const Login = () => {
                 onBlur={() => handleBlur('contrasena')}
               />
               {errors.contrasena ? (
-                <span className='text-text-teesaBlueDark'>
+                <span className='text-red-500'>
                   {errors.contrasena.message}
                 </span>
               ) : (
