@@ -114,7 +114,7 @@ function Home() {
   return (
     <div className='flex flex-wrap overflow-y-auto min-h-screen w-full mx-auto justify-center'>
       {/* Second Navbar */}
-      <div className='flex flex-col bg-teesaBlueDark w-full h-[3em] items-center justify-center mt-[-3px] border-t-[6px] border-teesaGreen text-teesaWhite text-[16px] py-2 mx-auto'>
+      <div className='flex flex-col bg-teesaBlueDark w-full h-[60px] items-center justify-center mt-[-3px] border-t-[6px] border-teesaGreen text-teesaWhite text-[16px] py-4 mx-auto'>
         <SearchBar />
       </div>
       {/* Hero */}

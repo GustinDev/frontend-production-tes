@@ -19,7 +19,7 @@ export default function NavBar(props) {
   const dispatch = useDispatch();
   const {
     user,
-    userData: { userName },
+    //userData: { userName },
     userData: { userId },
   } = userData;
 
@@ -98,14 +98,14 @@ export default function NavBar(props) {
 
   //UserName
 
-  const firstName = nombreGoogle
-    ? nombreGoogle.split(' ')[0]
-    : userName
-    ? userName.split(' ')[0]
-    : null;
+  // const firstName = nombreGoogle
+  //   ? nombreGoogle.split(' ')[0]
+  //   : userName
+  //   ? userName.split(' ')[0]
+  //   : null;
 
   return (
-    <div className='pr-5 flex flex-row justify-between items-center w-full h-[4em] border-b-2 border-teesaGreen bg-teesaBlueDark text-white text-xl sm:text-lg relative '>
+    <div className='pr-5 flex flex-row justify-between items-center w-full lg:px-10 h-[4em] border-b-2 border-teesaGreen bg-teesaBlueDark text-white text-xl sm:text-lg relative '>
       <div className='flex items-center py-5'>
         <NavLink to='/home'>
           <img
@@ -159,35 +159,32 @@ export default function NavBar(props) {
           ></i>
         </div>
       </div>
-      <div className='flex items-end justify-end xl:mr-5 lg:mr-5 md:mr-5 sm:mr-5'>
+      <div className='flex items-center justify-end '>
         {/* Tooltip Start*/}
         {user || nombreGoogle ? (
           <div
-            className={`mr-5 cursor-pointer relative flex items-center ${
+            className={` cursor-pointer relative flex items-center ${
               isMobileMenuOpen ? 'hidden sm:flex' : 'flex'
             }`}
             onMouseEnter={handleTooltipToggle}
             onMouseLeave={handleTooltipToggle}
           >
-            <span className='hover:text-teesaGreen transition duration-300 ease-in-out'>
-              {nombreGoogle || user ? firstName : firstName}
-            </span>
             <i
-              className='fa-solid fa-user ml-5 flex transition duration-300 ease-in-out transform hover:text-teesaGreen'
-              style={{ fontSize: '1.4rem' }}
+              className='fa-solid fa-user flex transition duration-300 ease-in-out transform pl-12 py-5 pr-6 hover:text-teesaGreen'
+              style={{ fontSize: '20px' }}
             ></i>
 
             {showTooltip && (
-              <div className='absolute flex-col h-auto bg-black top-full'>
-                <div className=' right-0 w-40 bg-gray-100 text-gray-700 py-1 px-2 rounded-sm text-center hover:text-gray-900 hover:font-medium text-sm'>
-                  <NavLink to='/profile'>
-                    <p>Mi Perfil</p>
-                  </NavLink>
-                </div>
+              <div className='absolute z-50 flex-col h-auto bg-gray-100 top-full right-0 w-[180px] p-2 rounded-xl border-[2px] border-teesaBlueDark -mt-2'>
+                <NavLink to='/profile'>
+                  <p className='w-full text-black py-1 px-2 text-center hover:text-gray-900 hover:font-medium  text-md'>
+                    Perfil
+                  </p>
+                </NavLink>
 
                 <div
                   onClick={handleLogout}
-                  className=' right-0 w-40 bg-gray-100 text-gray-700 py-1 px-2 rounded-sm text-center hover:text-gray-900 hover:font-medium text-sm'
+                  className='w-full text-black py-1 px-2 text-center hover:text-gray-900 hover:font-medium text-md'
                 >
                   Cerrar sesión
                 </div>
@@ -197,39 +194,25 @@ export default function NavBar(props) {
         ) : (
           <NavLink
             to='/login'
-            className={`hidden sm:flex mr-5 transition duration-300 ease-in-out transform hover:text-teesaGreen focus:text-teesaGreen ${
-              isMobileMenuOpen ? 'hidden  sm:flex md:flex' : 'flex'
-            }`}
+            className={` sm:flex px-6 py-4 transition duration-300 ease-in-out transform hover:text-teesaGreen focus:text-teesaGreen text-md`}
           >
             Ingresar
           </NavLink>
         )}
-        {!user && (
-          <NavLink
-            to='/login'
-            className={`flex transition duration-300 ease-in-out transform hover:text-teesaGreen ${
-              isMobileMenuOpen ? 'flex  sm:flex' : 'flex'
-            }`}
-          >
-            <i
-              className='fa-solid fa-user mr-6'
-              style={{ fontSize: '1.6rem' }}
-            ></i>
-          </NavLink>
-        )}
+
         {/* Tooltip End*/}
-        {userAdmin == true ? (
+        {userAdmin == true || !user ? (
           <div></div>
         ) : (
           <div>
             <div className='relative'>
               <NavLink
                 to='/carrito'
-                className='flex items-center'
+                className='flex items-center my-auto'
               >
-                <i className='fa-solid fa-cart-shopping text-xl rounded-md hover:text-teesaGreen'></i>
+                <i className='fa-solid fa-cart-shopping text-xl rounded-md hover:text-teesaGreen p-1'></i>
                 {info.items?.cartProducts?.length > 0 ? (
-                  <span className='absolute -top-1 -right-3 bg-teesaGreen text-white rounded-full text-xs px-1.5 py-.05'>
+                  <span className='absolute -top-1 -right-3 bg-teesaGreen text-black rounded-full text-xs px-1.5 py-.05 font-bold'>
                     {info.items.cartProducts.reduce(
                       (total, item) => total + item.cantidad,
                       0
@@ -247,40 +230,38 @@ export default function NavBar(props) {
             </div>
           </div>
         )}
-
-        {/* Boton carrito Nav*/}
       </div>
 
       {isMobileMenuOpen && (
-        <div className='sm:hidden w-full absolute top-full left-0 bg-teesaBlueDark text-white p-2 z-10'>
+        <div className='sm:hidden w-full absolute top-full left-0 bg-teesaBlueDark text-white p-2 z-10 -mt-1'>
           <NavLink
             to='/home'
-            className='w-full px-4 py-2 hover:bg-teesaGreen hover:text-teesaBlueDark text-base block'
+            className='w-full px-4 py-2 hover:bg-teesaGreen hover:text-teesaBlueDark text-md block'
           >
             Inicio
           </NavLink>
           <NavLink
             to='/services'
-            className='w-full px-4 py-2 hover:bg-teesaGreen hover:text-teesaBlueDark text-base block'
+            className='w-full px-4 py-2 hover:bg-teesaGreen hover:text-teesaBlueDark text-md block'
           >
             Servicios
           </NavLink>
           <NavLink
             to='/contact'
-            className='w-full px-4 py-2 hover:bg-teesaGreen hover:text-teesaBlueDark text-base block'
+            className='w-full px-4 py-2 hover:bg-teesaGreen hover:text-teesaBlueDark text-md block'
           >
             Contáctanos
           </NavLink>
           <NavLink
             to='/about'
-            className='w-full px-4 py-2 hover:bg-teesaGreen hover:text-teesaBlueDark text-base block'
+            className='w-full px-4 py-2 hover:bg-teesaGreen hover:text-teesaBlueDark text-md block'
           >
             Nosotros
           </NavLink>
           {userAdmin == true ? (
             <NavLink
               to='/admin'
-              className='w-full px-4 py-2 hover:bg-teesaGreen hover:text-teesaBlueDark text-base block'
+              className='w-full px-4 py-2 hover:bg-teesaGreen hover:text-teesaBlueDark text-md block'
             >
               Dashboard
             </NavLink>

@@ -192,7 +192,7 @@ const FilterComponent = ({ currentPage, setCurrentPage }) => {
 
       <br />
       <label className='block mb-2  text-teesaBlueDark'>
-        <span className='mb-2 font-semibold'>Precio</span>
+        <span className='mb-2 font-semibold'>Rando de Precios</span>
         <select
           value={precio}
           onChange={(e) => {
