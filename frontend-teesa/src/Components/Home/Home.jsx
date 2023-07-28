@@ -134,7 +134,10 @@ function Home() {
           </span>
         </button>
         {/* TODOS LOS FILTROS */}
-        <div
+        <motion.div
+          initial={{ opacity: 0, x: -100 }} // Inicialmente la opacidad es 0 y la posición x es 200px hacia la derecha
+          animate={{ opacity: 1, x: 0 }} // Al animar, la opacidad llega a 1 y la posición x es 0 (posición original)
+          transition={{ duration: 1 }}
           className={`filters  w-11/12 mx-auto md:w-full lg:w-1/6 2xl:w-3/12 lg:mx-0 lg:mt-2 bg-white lg:bg-gray-200 p-4 rounded-b-lg lg:rounded-lg border-[1px] border-teesaBlueLight border-t-0 lg:border-0  ${
             isPanelOpen ? 'block' : 'hidden'
           } lg:block  `}
@@ -144,7 +147,7 @@ function Home() {
             setCurrentPage={setCurrentPage}
             onApplyFilters={handleApplyFilters}
           />
-        </div>
+        </motion.div>
 
         {/* Cards */}
         <div className='cardsContainer w-full lg:w-2/3 2xl:w-8/12  bg-teesaWhite flex flex-wrap justify-center flex-col min-h-0 mt-4 lg:mt-0'>
@@ -189,12 +192,12 @@ function Home() {
             </div>
           ) : null}
           {status === 'succeeded' && products.products.length && (
-            <div className='w-10/12 mx-auto'>
+            <motion.div className='w-10/12 mx-auto'>
               <Pagination
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}
               />
-            </div>
+            </motion.div>
           )}
         </div>
       </div>

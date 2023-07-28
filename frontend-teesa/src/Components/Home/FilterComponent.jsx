@@ -10,6 +10,7 @@ import {
   changePage,
 } from '../../features/reduxReducer/filterSlice';
 import { getBrands } from '../../features/reduxReducer/productSlice';
+import { motion } from 'framer-motion';
 // import NoRepuestosDisponibles from '../NoHayRep/NoRepuestos';
 // import NoHayProductosRango from '../NoHayProductosRango/NoHayProductosRango';
 
@@ -93,7 +94,10 @@ const FilterComponent = ({ currentPage, setCurrentPage }) => {
   };
 
   return (
-    <div className='mb-4 flex flex-col bg-white lg:bg-gray-200'>
+    <motion.div
+      // Duración de la animación en segundos
+      className='mb-4 flex flex-col bg-white lg:bg-gray-200'
+    >
       <button
         className=' text-black px-4 py-2 rounded-lg mb-4 border-gray-900 b-2 text md font-bold bg-green-400'
         onClick={() => setResetFilters(true)}
@@ -209,7 +213,7 @@ const FilterComponent = ({ currentPage, setCurrentPage }) => {
           <option value='40000000-50000000'>40,000,000 - 50,000,000</option>
         </select>
       </label>
-    </div>
+    </motion.div>
   );
 };
 
