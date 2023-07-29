@@ -153,7 +153,7 @@ export const Cart = () => {
         Carrito de Productos
       </h2>
       <main>
-        <div className='min-w-4xl p-8 bg-white shadow-lg rounded-lg border-2 border-teesaBlueDark mt-5 mb-10'>
+        <div className='max-w-5xl p-8 bg-white shadow-lg rounded-lg border-2 border-teesaBlueDark mt-5 mb-10'>
           {status === 'pending' ? (
             <div className='flex justify-center items-center w-[950px] h-[800px]'>
               <img
@@ -169,7 +169,7 @@ export const Cart = () => {
                   todosRepuestos ? (
                     // REPUESTOS
                     <div className='twoContainer flex flex-row w-full h-full'>
-                      <div className='w-full h-full '>
+                      <div className='w-8/12 h-full '>
                         {info.items.cartProducts.map((item) => (
                           <Carrito
                             key={item.id}
@@ -212,7 +212,7 @@ export const Cart = () => {
                         </div>
                       </div>
                       <div className='divider h-11/12 w-[8px] bg-gray-600 ml-12 mr-8 rounded-lg'></div>
-                      <div className=' w-6-12 h-11/12   rounded-lg p-5 flex flex-col gap-6 text-center'>
+                      <div className=' w-4/12 h-11/12   rounded-lg p-5 flex flex-col gap-6 text-center'>
                         <div>
                           <LocalShippingIcon
                             style={{ fontSize: '60px' }}
@@ -253,8 +253,8 @@ export const Cart = () => {
                     </div>
                   ) : (
                     // EQUIPOS
-                    <div className='twoContainer flex flex-row w-full h-full '>
-                      <div className='w-full h-full'>
+                    <div className='econtainer flex flex-row w-full h-full'>
+                      <div className='w-8/12 h-full '>
                         {info.items.cartProducts.map((item) => (
                           <Carrito
                             key={item.id}
@@ -266,25 +266,78 @@ export const Cart = () => {
                             imagen={item.Product?.imagenes}
                           />
                         ))}
-                        <div className='mt-8'>
-                          <h2 className='text-2xl font-bold text-gray-800'>
-                            Total:{' '}
-                            <span className='text-2xl font-bold text-black'>
-                              ${' '}
-                              {calculateTotal(
-                                info.items.cartProducts ||
-                                  info.items.cartGuestProducts
-                              ).toLocaleString('es-ES', options)}{' '}
-                              COP
-                            </span>
+                        <div>
+                          <div className='mt-8'>
+                            <h2 className='text-2xl font-bold text-gray-800'>
+                              Total:{' '}
+                              <span className='text-2xl font-bold text-black'>
+                                ${' '}
+                                {calculateTotal(
+                                  info.items.cartProducts ||
+                                    info.items.cartGuestProducts
+                                ).toLocaleString('es-ES', options)}{' '}
+                                COP
+                              </span>
+                            </h2>
+                          </div>
+                          <div className='flex justify-center mt-8'>
+                            <Link
+                              to='/home'
+                              className='7-80 px-4 py-3 border-4 bg-blue-900 rounded-lg text-white hover:bg-blue-900 transition duration-100 transform hover:scale-105 mr-4 font-bold text-lg'
+                            >
+                              Ver más productos
+                            </Link>
+
+                            <a href={linkMercadoPago}>
+                              <button className='7-80 px-4 py-3 border-4 bg-blue-500  rounded-lg text-white hover:bg-blue-600 transition duration-100 transform hover:scale-105 font-bold text-lg'>
+                                Comprar con MercadoPago
+                              </button>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                      <div className='divider h-11/12 w-[8px] bg-gray-600 ml-12 mr-8 rounded-lg'></div>
+                      <div className=' w-4/12 h-11/12   rounded-lg p-5 flex flex-col gap-6 text-center'>
+                        <div className='w-full'>
+                          <LocalShippingIcon
+                            style={{ fontSize: '60px' }}
+                            className=' text-blue-800'
+                          />
+                          <h1>Atención:</h1>
+                          <h2 className='text-md'>
+                            La compra de los equipos se realiza por medio un
+                            asesor especializado.
                           </h2>
                         </div>
-                        <div className='flex justify-center mt-8 w-full'>
-                          <div className='w-full h-full py-3 '>
-                            <button className='w-full h-full text-lg font-bold bg-blue-600 hover:bg-blue-700 rounded-lg py-3 text-white'>
-                              Consulta con un asesor para adquirir el producto
-                            </button>
-                          </div>
+                        <div>
+                          <MessageIcon
+                            style={{ fontSize: '60px' }}
+                            className=' text-blue-800'
+                          />
+                          <h2 className='text-md'>
+                            La compra de los repuestos se realiza en línea y los
+                            enviaremos a tu domicilio.
+                          </h2>
+                        </div>
+
+                        <div>
+                          <PaidIcon
+                            style={{ fontSize: '60px' }}
+                            className=' text-blue-800'
+                          />
+                          <h2 className='text-md'>
+                            Pagas el envío cuando llegue el producto.
+                          </h2>
+                        </div>
+                        <div>
+                          <SpeedIcon
+                            style={{ fontSize: '60px' }}
+                            className=' text-blue-800'
+                          />
+                          <h2 className='text-md'>
+                            Te bridamos los equipos de mejor calidad del
+                            mercado, tenemos a los mejores proveedores.
+                          </h2>
                         </div>
                       </div>
                     </div>

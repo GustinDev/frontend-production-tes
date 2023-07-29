@@ -49,16 +49,11 @@ function App() {
         <title>
           Teesa - Venta de Repuestos y Servicios de Equipos Alimenticios
         </title>
-        <link
+        {/* <link
           rel='icon'
           href='./img/SVGs/TeesaAll.svg'
           type='image/svg+xml'
-        />
-        <link
-          rel='icon'
-          href='./img/SVGs/TeesaAll.svg'
-          type='image/svg+xml'
-        />
+        /> */}
         <meta
           name='description'
           content='Tu tienda de venta de repuestos y servicios de equipos alimenticios en Colombia.'
@@ -90,10 +85,10 @@ function App() {
           content='Tu tienda de venta de repuestos y servicios de equipos alimenticios en Colombia.'
         />
         {/* Reemplaza URL_DE_LA_IMAGEN_DESTACADA con la URL de la imagen que deseas mostrar */}
-        <meta
+        {/* <meta
           property='og:image'
           content='./img/imgs/tech.jpg'
-        />
+        /> */}
         <meta
           property='og:url'
           content='https://www.teesa.online/'

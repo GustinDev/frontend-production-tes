@@ -19,11 +19,11 @@ const UserProfile = () => {
   const userData = useSelector((state) => state.userState);
   const userProducts = useSelector((state) => state.userState.userProducts);
 
-  useEffect(() => {
-    if (userProducts) {
-      console.log('userProfile');
-    }
-  });
+  // useEffect(() => {
+  //   if (userProducts) {
+  //     console.log('userProfile');
+  //   }
+  // });
 
   const {
     user,
