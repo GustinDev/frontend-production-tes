@@ -143,23 +143,33 @@ export const Carrito = ({
         });
   };
 
+  const [nombreN, setNombreN] = useState('');
+
+  function capitalizeFirstLetters(str) {
+    return str.replace(/\b\w/g, (char) => char.toUpperCase());
+  }
+  useEffect(() => {
+    const nombreEnMayusculas = capitalizeFirstLetters(nombre);
+    setNombreN(nombreEnMayusculas);
+  }, [nombre]);
+
   return (
-    <div className='flex items-center border-b-2 pb-4'>
+    <div className='flex items-center border-b-2 pb-4 my-2'>
       <img
-        className='w-40 h-36 object-cover rounded-lg'
+        className='w-40 h-36 object-cover rounded-lg '
         src={imagen[0]}
         alt={nombre}
       />
       <div className='ml-4'>
-        <h2 className='text-lg font-medium text-gray-800 mb-1'>{nombre}</h2>
+        <h2 className=' font-medium text-black mb-1 text-xl'>{nombreN}</h2>
         <label
           htmlFor='quantity'
-          className='mr-2'
+          className='mr-2 text-lg'
         >
           Cantidad:
           <span
             id='quantity'
-            className='px-2 text-gray-700'
+            className='px-2 text-gray-700 font-bold'
           >
             {userData.userId ? cart.cantidad : cartGuest.cantidad}
           </span>
@@ -195,13 +205,14 @@ export const Carrito = ({
             +
           </button>
         </div> */}
-        <h4 className='text-gray-600 text-base font-medium mt-2'>
+        <h4 className='text-black font-bold mt-2 text-lg'>
           ${' '}
           {cart.precioTotal
             ? cart.precioTotal.toLocaleString('en-US', options)
             : cartGuest.precioTotal
             ? cartGuest.precioTotal.toLocaleString('en-US', options)
-            : '0'}
+            : '0'}{' '}
+          COP
         </h4>
         <button
           onClick={handleDelete}

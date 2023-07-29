@@ -54,6 +54,11 @@ function App() {
           href='./img/SVGs/TeesaAll.svg'
           type='image/svg+xml'
         />
+        <link
+          rel='icon'
+          href='./img/SVGs/TeesaAll.svg'
+          type='image/svg+xml'
+        />
         <meta
           name='description'
           content='Tu tienda de venta de repuestos y servicios de equipos alimenticios en Colombia.'

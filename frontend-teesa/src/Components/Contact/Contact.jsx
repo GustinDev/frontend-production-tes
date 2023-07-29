@@ -245,10 +245,10 @@ const Contact = () => {
                       <div className='ml-4 grow'>
                         <p className='mb-2 font-bold text-3xl'>Ubicación</p>
                         <p className='text-neutral-800 text-xl'>
-                          Carrera 21 # 19a -03
+                          Carrera 17F4 #27d-72
                         </p>
                         <p className='text-neutral-800 text-xl'>
-                          Aranjuez, Cali, Colombia
+                          Cali, Colombia
                         </p>
                         <p className='text-neutral-800 text-xl'>
                           Horarios: L-V 7:30 - 17:30
