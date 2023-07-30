@@ -8,7 +8,6 @@ import {
   fetchUserById,
 } from '../../features/reduxReducer/userSlice';
 import 'boxicons/css/boxicons.min.css';
-// import Cookies from 'universal-cookie';
 import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -329,7 +328,7 @@ const UserProfile = () => {
                   : userAddress}
               </h3>
               <h3>
-                <span className='font-bold'>Teléfono:</span>{' '}
+                <span className='font-bold'>Celular:</span>{' '}
                 {userAddress == undefined ||
                 userPhone == null ||
                 userPhone == '' ||

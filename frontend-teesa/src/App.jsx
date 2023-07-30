@@ -26,6 +26,7 @@ import Footer from './views/Footer/Footer';
 import Metrics from './Components/Dashboard/Metrics';
 import Users from './Components/Dashboard/Users';
 import { Helmet } from 'react-helmet';
+import FormUserData from './Components/Carrito/FormUserData';
 
 function App() {
   const location = useLocation();
@@ -169,6 +170,10 @@ function App() {
         <Route
           path='/admin'
           element={<Dashboard />}
+        />
+        <Route
+          path='/carrito/userform/:id'
+          element={<FormUserData />}
         />
         {/* ADMIN */}
         <Route

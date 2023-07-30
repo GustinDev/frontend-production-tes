@@ -15,7 +15,7 @@ export const putUser = createAsyncThunk('user/putUser', async (payload) => {
     const nit = userNit;
     const direccion = userAddress;
     const telefono = userPhone;
-
+    console.log('Datos:' + nombre, nit, direccion, telefono);
     const response = await axios.put(
       `https://teesa-backend.onrender.com/user/${userId}`,
       {

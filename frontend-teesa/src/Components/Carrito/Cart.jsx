@@ -142,6 +142,12 @@ export const Cart = () => {
     setTodosRepuestos(!encontramosEquipo);
   }, [info.items]);
 
+  // COMPRAR - BUTTON (FORM USER DATA):
+
+  let handleBuyButton = () => {
+    navigate(`/carrito/userform/${userId}`);
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -281,18 +287,12 @@ export const Cart = () => {
                             </h2>
                           </div>
                           <div className='flex justify-center mt-8'>
-                            <Link
-                              to='/home'
+                            <button
+                              onClick={handleBuyButton}
                               className='7-80 px-4 py-3 border-4 bg-blue-900 rounded-lg text-white hover:bg-blue-900 transition duration-100 transform hover:scale-105 mr-4 font-bold text-lg'
                             >
-                              Ver más productos
-                            </Link>
-
-                            <a href={linkMercadoPago}>
-                              <button className='7-80 px-4 py-3 border-4 bg-blue-500  rounded-lg text-white hover:bg-blue-600 transition duration-100 transform hover:scale-105 font-bold text-lg'>
-                                Comprar con MercadoPago
-                              </button>
-                            </a>
+                              Consulta con un asesor para adquirir el producto
+                            </button>
                           </div>
                         </div>
                       </div>
@@ -326,7 +326,8 @@ export const Cart = () => {
                             className=' text-blue-800'
                           />
                           <h2 className='text-md'>
-                            Pagas el envío cuando llegue el producto.
+                            Se requiere pagar un adelanto para adquirir un
+                            equipo.
                           </h2>
                         </div>
                         <div>
@@ -336,7 +337,7 @@ export const Cart = () => {
                           />
                           <h2 className='text-md'>
                             Te bridamos los equipos de mejor calidad del
-                            mercado, tenemos a los mejores proveedores.
+                            mercado.
                           </h2>
                         </div>
                       </div>
