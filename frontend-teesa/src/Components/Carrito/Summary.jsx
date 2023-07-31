@@ -101,7 +101,7 @@ const Summary = () => {
         <div className='twoContainer w-full flex justify-between items-start flex-row'>
           <div className='product bg-red-300 w-5/12 h-full'>
             <h1>Products</h1>
-            <div className='w-8/12 h-full '>
+            <div className='w-full h-full '>
               {info?.items?.cartProducts?.map((item) => (
                 <Carrito
                   key={item.id}
