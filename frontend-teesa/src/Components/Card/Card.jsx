@@ -9,7 +9,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
 import { motion } from 'framer-motion';
 
-export const Card = ({ nombre, categoria, imagenes, precio, marca, id }) => {
+export const Card = ({
+  nombre,
+  categoria,
+  imagenes,
+  precio,
+  marca,
+  id,
+  tipo,
+}) => {
   const options = {
     style: 'decimal',
     useGrouping: true,
@@ -194,6 +202,16 @@ export const Card = ({ nombre, categoria, imagenes, precio, marca, id }) => {
     },
   };
 
+  const [nombreN, setNombreN] = useState('');
+
+  function capitalizeFirstLetters(str) {
+    return str.replace(/\b\w/g, (char) => char.toUpperCase());
+  }
+  useEffect(() => {
+    const nombreEnMayusculas = capitalizeFirstLetters(nombre);
+    setNombreN(nombreEnMayusculas);
+  }, [nombre]);
+
   return (
     <div className='flex w-[260px] h-[460px] my-2 mx-6 transition duration-100 transform hover:scale-105 hover:cursor-pointer'>
       <div className='shadow-md border bg-teesaWhite border-gray-400 rounded-md flex flex-col'>
@@ -205,16 +223,18 @@ export const Card = ({ nombre, categoria, imagenes, precio, marca, id }) => {
               alt='x'
             />
           </NavLink>
-          <div className='flex flex-col p-5'>
-            <p className='text-[15px] m-0 font-medium'>
-              {categoria} {marca}
-            </p>
-            <h2 className='h-[55px] text-[18px] mb-1 text-black font-light'>
-              {nombre}
-            </h2>
-            <h4 className='text-black text-[15px] font-bold'>
-              {`$${precio.toLocaleString('es-ES', options)} COP`}
-            </h4>
+          <div className='flex flex-col p-5 bg-white'>
+            <NavLink to={`/home/${id}`}>
+              <p className='text-[15px] m-0 font-medium'>
+                {tipo} | {categoria} {marca}
+              </p>
+              <h2 className='h-[55px] text-[18px] mb-1 text-black font-light'>
+                {nombreN}
+              </h2>
+              <h4 className='text-black text-[15px] font-bold'>
+                {`$${precio.toLocaleString('es-ES', options)} COP`}
+              </h4>
+            </NavLink>
             <form onSubmit={(e) => handleSubmit(e)}>
               <motion.div
                 className='flex items-center justify-start mt-2 gap-[5px]'

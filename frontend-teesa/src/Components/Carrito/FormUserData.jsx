@@ -1,5 +1,8 @@
-import { useNavigate, useParams } from 'react-router-dom';
-import { fetchUserById, putUser } from '../../features/reduxReducer/userSlice';
+//import { useNavigate, useParams } from 'react-router-dom';
+import {
+  //fetchUserById,
+  putUser,
+} from '../../features/reduxReducer/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
@@ -32,7 +35,7 @@ const FormUserData = () => {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
+    //reset,
     trigger,
     setValue,
     // getValues,

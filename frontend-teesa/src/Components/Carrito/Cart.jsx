@@ -148,6 +148,8 @@ export const Cart = () => {
     navigate(`/carrito/userform/${userId}`);
   };
 
+  console.log(info.items.cartProducts);
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -182,9 +184,13 @@ export const Cart = () => {
                             id={item.id}
                             cantidad={item.cantidad}
                             precioTotal={item.precioTotal}
+                            productId={item.ProductId}
                             nombre={item.Product?.nombre}
                             precio={item.Product?.precio}
                             imagen={item.Product?.imagenes}
+                            tipo={item.Product?.tipo}
+                            marca={item.Product?.marca}
+                            categoria={item.Product?.categoria}
                           />
                         ))}
                         <div>
@@ -266,10 +272,14 @@ export const Cart = () => {
                             key={item.id}
                             id={item.id}
                             cantidad={item.cantidad}
+                            productId={item.ProductId}
                             precioTotal={item.precioTotal}
                             nombre={item.Product?.nombre}
                             precio={item.Product?.precio}
                             imagen={item.Product?.imagenes}
+                            tipo={item.Product?.tipo}
+                            marca={item.Product?.marca}
+                            categoria={item.Product?.categoria}
                           />
                         ))}
                         <div>

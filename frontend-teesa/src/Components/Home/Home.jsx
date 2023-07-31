@@ -232,6 +232,7 @@ function Home() {
                       precio={product?.precio}
                       imagenes={product?.imagenes}
                       marca={product?.marca}
+                      tipo={product?.tipo}
                     />
                   </motion.div>
                 ))}
