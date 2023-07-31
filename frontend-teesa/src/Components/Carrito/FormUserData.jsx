@@ -1,5 +1,6 @@
 //import { useNavigate, useParams } from 'react-router-dom';
 import {
+  fetchUserById,
   //fetchUserById,
   putUser,
 } from '../../features/reduxReducer/userSlice';
@@ -7,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 const FormUserData = () => {
   //   const nav = useNavigate();
@@ -16,8 +18,8 @@ const FormUserData = () => {
 
   //   const { id } = useParams();
   const userData = useSelector((state) => state.userState);
-  const userData1 = useSelector((state) => state.userState.userData);
-  console.log(userData1);
+  console.log(userData);
+  const put = useSelector((state) => state.userState.putState);
 
   const {
     userData: {
@@ -28,6 +30,8 @@ const FormUserData = () => {
       userAddress,
       userPhone,
       userType,
+      userDetail,
+      userCity,
     },
   } = userData;
 
@@ -35,7 +39,7 @@ const FormUserData = () => {
     register,
     handleSubmit,
     formState: { errors },
-    //reset,
+    reset,
     trigger,
     setValue,
     // getValues,
@@ -48,14 +52,18 @@ const FormUserData = () => {
     setValue('userAddress', userAddress);
     setValue('userPhone', userPhone);
     setValue('userType', userType);
+    setValue('userCity', userCity);
+    setValue('userDetail', userDetail);
   }, [
+    setValue,
     userName,
     userEmail,
     userNit,
     userAddress,
     userPhone,
-    setValue,
     userType,
+    userCity,
+    userDetail,
   ]);
 
   const handleBlur = (fieldName) => {
@@ -69,40 +77,90 @@ const FormUserData = () => {
         userName: data.userName,
         userPhone: data.userPhone,
         userAddress: data.userAddress,
+        userCity: data.userCity,
+        userDetail: data.userDetail,
         userEmail,
         userType,
         userId,
       };
 
-      Swal.fire({
-        title: 'Confirmación',
-        html: `
-          ¿Estás seguro de cambiar los datos?<br/>
-          <strong>Nombre:</strong> ${data.userName}<br/>
-          <strong>NIT/Cédula:</strong> ${data.userNit}<br/>
-          <strong>Teléfono:</strong> ${data.userPhone}<br/>
-          <strong>Dirección:</strong> ${data.userAddress}
-        `,
-        icon: 'question',
-        showCancelButton: true,
-        confirmButtonColor: '#192C8C',
-        cancelButtonColor: '#FF0000',
-        confirmButtonText: 'Sí',
-        cancelButtonText: 'No',
-      }).then((result) => {
-        if (result.isConfirmed) {
-          dispatch(putUser(payload));
-          setEditing(true);
-        }
-      });
+      await dispatch(putUser(payload));
+      setEditing(true);
+      //navigate('/home');
+      // if (put === 'success') {
+      //   navigate('0');
+      // }
     } catch (error) {
       console.log(error.response.data.message);
     }
   };
 
+  useEffect(() => {
+    reset({
+      userName,
+      userEmail,
+      userNit,
+      userAddress,
+      userPhone,
+      userType,
+      userCity,
+      userDetail,
+    });
+  }, [
+    userData,
+    userName,
+    userEmail,
+    userNit,
+    userAddress,
+    userPhone,
+    userType,
+    userCity,
+    userDetail,
+    reset,
+  ]);
+
+  const userDataId = useSelector((state) => state.userState.userData.userId);
+
+  useEffect(() => {
+    if (userDataId) {
+      dispatch(fetchUserById(userDataId));
+    }
+  }, [dispatch, userData.userData, userDataId, reset]);
+
+  let navigate = useNavigate();
+
+  // console.log(put);
+
+  const handleConfirm = () => {
+    if (put === 'success') {
+      Swal.fire({
+        icon: 'success',
+        title: '¡Éxito!',
+        text: 'Tus datos fueron confirmados con éxito',
+        confirmButtonText: 'Aceptar',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate(`/carrito/summary/${userId}`);
+        }
+      });
+    }
+  };
+
+  const handleGoBack = () => {
+    navigate(-1);
+  };
+
   return (
-    <div className='h-screen w-full flex justify-center items-center'>
-      <div className='w-5/12 border-2 border-teesaBlueDark mt-20 p-5 rounded-2xl flex flex-col justify-between'>
+    <div className='h-screen w-full flex justify-center items-center flex-col'>
+      <div className='w-5/12 mb-4'>
+        <button
+          onClick={handleGoBack}
+          className='bg-blue-600 rounded-md text-white hover:bg-blue-700 p-2  mt-60 '
+        >
+          Volver
+        </button>
+      </div>
+      <div className='w-5/12 border-2 border-teesaBlueDark p-5 rounded-2xl flex flex-col justify-between'>
         <div>
           <h1 className='text-center font-bold text-3xl '>Datos Personales</h1>
           <h2 className='mt-2'>
@@ -169,6 +227,52 @@ const FormUserData = () => {
 
               <label className='flex flex-col justify-center align-center items-center w-full'>
                 <div className='w-full'>
+                  <p className='font-bold'>Celular:</p>
+                </div>
+                <input
+                  {...register('userPhone', {
+                    required: 'Este campo es obligatorio',
+                    pattern: {
+                      value: /^[0-9\s+]{0,14}$/,
+                      message: 'Usa números, espacios y "+"',
+                    },
+                  })}
+                  className='border-2 border-black p-1 rounded-lg w-full'
+                  onBlur={() => handleBlur('userPhone')}
+                  placeholder='Número de teléfono'
+                />
+
+                {errors.userPhone ? (
+                  <div className='w-full text-red-500 text-sm'>
+                    {errors.userPhone.message}
+                  </div>
+                ) : (
+                  <div className='h-[20px]'></div>
+                )}
+              </label>
+
+              <label className='flex flex-col justify-center align-center items-center w-full'>
+                <div className='w-full'>
+                  <p className='font-bold'>Ciudad:</p>
+                </div>
+                <input
+                  {...register('userCity', {
+                    required: 'Este campo es obligatorio',
+                  })}
+                  className='border-2 border-black p-1 rounded-lg w-full'
+                  onBlur={() => handleBlur('userCity')}
+                  placeholder='Ciudad'
+                />
+                {errors.userCity ? (
+                  <div className='w-full text-red-500 text-sm'>
+                    {errors.userCity.message}
+                  </div>
+                ) : (
+                  <div className='h-[20px]'></div>
+                )}
+              </label>
+              <label className='flex flex-col justify-center align-center items-center w-full'>
+                <div className='w-full'>
                   <p className='font-bold'>Dirección:</p>
                 </div>
                 <input
@@ -190,36 +294,30 @@ const FormUserData = () => {
 
               <label className='flex flex-col justify-center align-center items-center w-full'>
                 <div className='w-full'>
-                  <p className='font-bold'>Celular:</p>
+                  <p className='font-bold'>
+                    Detalles de Extra de Dirección (Opcional):
+                  </p>
                 </div>
                 <input
-                  {...register('userPhone', {
-                    pattern: {
-                      value: /^[0-9\s+]{0,14}$/,
-                      message:
-                        'Solo se aceptan números, espacios y el símbolo +',
-                    },
+                  {...register('userDetail', {
+                    required: 'Este campo es obligatorio',
                   })}
                   className='border-2 border-black p-1 rounded-lg w-full'
-                  onBlur={() => handleBlur('userPhone')}
-                  placeholder='Número de teléfono'
+                  onBlur={() => handleBlur('userDetail')}
+                  placeholder='Detalle'
                 />
 
-                {errors.userPhone ? (
-                  <div className='w-full text-red-500 text-sm'>
-                    {errors.userPhone.message}
-                  </div>
-                ) : (
-                  <div className='h-[20px]'></div>
-                )}
+                <div className='h-[20px]'></div>
               </label>
+
               <div className='flex flex-row justify-end items-center gap-[15%] text-lg text-black mb-5 w-full'>
                 <div className='w-full flex justify-end '>
                   <button
+                    onClick={handleConfirm}
                     type='submit'
                     className='text-center font-bold text-lg text-white py-2 px-4 rounded-xl bg-teesaBlueLight'
                   >
-                    Confirmar Flecha
+                    Confirmar Información
                   </button>
                 </div>
               </div>

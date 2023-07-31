@@ -10,12 +10,22 @@ const cookies = new Cookies();
 
 export const putUser = createAsyncThunk('user/putUser', async (payload) => {
   try {
-    const { userName, userNit, userAddress, userPhone, userId } = payload;
+    const {
+      userName,
+      userNit,
+      userAddress,
+      userPhone,
+      userId,
+      userCity,
+      userDetail,
+    } = payload;
     const nombre = userName;
     const nit = userNit;
     const direccion = userAddress;
     const telefono = userPhone;
-    console.log('Datos:' + nombre, nit, direccion, telefono);
+    const ciudad = userCity;
+    const detalles = userDetail;
+    console.log('Datos:' + nombre, nit, direccion, telefono, ciudad, detalles);
     const response = await axios.put(
       `https://teesa-backend.onrender.com/user/${userId}`,
       {
@@ -23,6 +33,8 @@ export const putUser = createAsyncThunk('user/putUser', async (payload) => {
         nit,
         direccion,
         telefono,
+        ciudad,
+        detalles,
       }
     );
     delete response.config.transformResponse;
@@ -30,13 +42,6 @@ export const putUser = createAsyncThunk('user/putUser', async (payload) => {
     delete response.config.transformRequest;
 
     console.log('Respuesta de la solicitud PUT:', response);
-    Swal.fire({
-      title: 'Cambios realizados',
-      text: 'Tus cambios se realizaron con éxito 😁',
-      icon: 'success',
-      confirmButtonText: 'Ok.',
-      confirmButtonColor: '#192C8C',
-    });
 
     return response;
   } catch (error) {
@@ -86,6 +91,7 @@ const initialState = {
   userGoogle: null,
   userOurs: null,
   userProducts: null,
+  putState: null,
   userData: {
     userId: null,
     userName: null,
@@ -94,6 +100,8 @@ const initialState = {
     userNit: null,
     userAddress: null,
     userPhone: null,
+    userDetail: null,
+    userCity: null,
   },
 };
 
@@ -182,19 +190,19 @@ const userSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(putUser.fulfilled, (state, action) => {
-      const responseData = action.payload.data.token; // Obtener la información actualizada del servidor
-      cookies.set('token', responseData, { path: '/' });
-      // Actualizar los estados con la información recibida
-      if (responseData) {
-        const userData = jwt_decode(responseData);
-        state.user = true;
-        state.userData.userName = userData.nombre;
-        state.userData.userNit = userData.nit;
-        state.userData.userAddress = userData.direccion;
-        state.userData.userPhone = userData.telefono;
-      }
-    });
+    // builder.addCase(putUser.fulfilled, (state, action) => {
+    //   const responseData = action.payload.data.token; // Obtener la información actualizada del servidor
+    //   cookies.set('token', responseData, { path: '/' });
+    //   // Actualizar los estados con la información recibida
+    //   if (responseData) {
+    //     const userData = jwt_decode(responseData);
+    //     state.user = true;
+    //     state.userData.userName = userData.nombre;
+    //     state.userData.userNit = userData.nit;
+    //     state.userData.userAddress = userData.direccion;
+    //     state.userData.userPhone = userData.telefono;
+    //   }
+    // });
     builder.addCase(getProducts.fulfilled, (state, action) => {
       const responseData = action.payload.data; // Obtener la información actualizada del servidor
       state.userProducts = responseData;
@@ -214,9 +222,23 @@ const userSlice = createSlice({
         state.userData.userNit = action.payload.nit;
         state.userData.userAddress = action.payload.direccion;
         state.userData.userPhone = action.payload.telefono;
+        state.userData.userDetail = action.payload.detalles;
+        state.userData.userCity = action.payload.ciudad;
       })
       .addCase(fetchUserById.rejected, (state, action) => {
         state.userDetailStatus = action.error.message;
+      });
+
+    builder
+      .addCase(putUser.pending, (state) => {
+        state.putState = 'pending';
+      })
+      .addCase(putUser.fulfilled, (state) => {
+        state.putState = 'success';
+      })
+      .addCase(putUser.rejected, (state, action) => {
+        state.putState = 'failed';
+        state.error = action.error.message;
       });
   },
 });

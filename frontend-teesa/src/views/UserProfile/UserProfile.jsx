@@ -17,12 +17,9 @@ const UserProfile = () => {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.userState);
   const userProducts = useSelector((state) => state.userState.userProducts);
+  const put = useSelector((state) => state.userState.putState);
 
-  // useEffect(() => {
-  //   if (userProducts) {
-  //     console.log('userProfile');
-  //   }
-  // });
+  const [editing, setEditing] = useState(false);
 
   const {
     user,
@@ -34,10 +31,12 @@ const UserProfile = () => {
       userAddress,
       userPhone,
       userType,
-    },
+      userDetail,
+      userCity,
+    } = {},
   } = userData;
 
-  const [editing, setEditing] = useState(false);
+  console.log(userData);
 
   const {
     register,
@@ -53,17 +52,23 @@ const UserProfile = () => {
 
   useEffect(() => {
     if (!user) {
-      nav('/login');
+      const redirectTimer = setTimeout(() => {
+        nav('/login');
+      }, 3000);
+
+      return () => clearTimeout(redirectTimer);
     }
-  }, [user]);
+  }, [user, nav]);
 
   //*Traer userData con el userDetail.
 
   const userDataId = useSelector((state) => state.userState.userData.userId);
 
   useEffect(() => {
-    dispatch(fetchUserById(userDataId));
-  }, [dispatch, userData.userData]);
+    if (userDataId) {
+      dispatch(fetchUserById(userDataId));
+    }
+  }, [dispatch, userData.userData, userDataId, reset]);
 
   const onClose = () => {
     Swal.fire({
@@ -89,14 +94,18 @@ const UserProfile = () => {
     setValue('userAddress', userAddress);
     setValue('userPhone', userPhone);
     setValue('userType', userType);
+    setValue('userCity', userCity);
+    setValue('userDetail', userDetail);
   }, [
+    setValue,
     userName,
     userEmail,
     userNit,
     userAddress,
     userPhone,
-    setValue,
     userType,
+    userCity,
+    userDetail,
   ]);
 
   const handleBlur = (fieldName) => {
@@ -110,11 +119,13 @@ const UserProfile = () => {
         userName: data.userName,
         userPhone: data.userPhone,
         userAddress: data.userAddress,
+        userCity: data.userCity,
+        userDetail: data.userDetail,
         userEmail,
         userType,
         userId,
       };
-
+      console.log(payload);
       Swal.fire({
         title: 'Confirmación',
         html: `
@@ -122,7 +133,9 @@ const UserProfile = () => {
           <strong>Nombre:</strong> ${data.userName}<br/>
           <strong>NIT/Cédula:</strong> ${data.userNit}<br/>
           <strong>Teléfono:</strong> ${data.userPhone}<br/>
-          <strong>Dirección:</strong> ${data.userAddress}
+          <strong>Ciudad:</strong> ${data.userCity}<br/>
+          <strong>Dirección:</strong> ${data.userAddress}<br/>
+          <strong>Detalle:</strong> ${data.userDetail}
         `,
         icon: 'question',
         showCancelButton: true,
@@ -149,8 +162,21 @@ const UserProfile = () => {
       userAddress,
       userPhone,
       userType,
+      userCity,
+      userDetail,
     });
-  }, [userName, userEmail, userNit, userAddress, userPhone, userType, reset]);
+  }, [
+    userData,
+    userName,
+    userEmail,
+    userNit,
+    userAddress,
+    userPhone,
+    userType,
+    userCity,
+    userDetail,
+    reset,
+  ]);
 
   useEffect(() => {
     if (userId) {
@@ -158,8 +184,13 @@ const UserProfile = () => {
     }
   }, [dispatch, userId]);
 
+  console.log(put);
+  if (put === 'success') {
+    nav(0);
+  }
+
   return (
-    <div className='allContainer bg-gray-100 flex xl:flex-row lg:flex-row md:flex-row sm-flex-col xs:flex-col justify-center items-start gap-5 w-full h-screen overflow-hidden pt-5'>
+    <div className='allContainer bg-gray-100 flex xl:flex-row lg:flex-row md:flex-row sm-flex-col xs:flex-col justify-center items-start gap-5 w-full min-h-screen  pt-5 pb-10'>
       {/* info section */}
       <motion.section
         initial={{ opacity: 0, x: -50 }}
@@ -227,6 +258,53 @@ const UserProfile = () => {
 
             <label className='flex flex-col justify-center align-center items-center w-full'>
               <div className='w-full'>
+                <p className='font-bold'>Celular:</p>
+              </div>
+              <input
+                {...register('userPhone', {
+                  required: 'Este campo es obligatorio',
+                  pattern: {
+                    value: /^[0-9\s+]{0,14}$/,
+                    message: 'Usa números, espacios y el "+"',
+                  },
+                })}
+                className='border-2 border-black p-1 rounded-lg w-full'
+                onBlur={() => handleBlur('userPhone')}
+                placeholder='Número de teléfono'
+              />
+
+              {errors.userPhone ? (
+                <div className='w-full text-red-500'>
+                  {errors.userPhone.message}
+                </div>
+              ) : (
+                <div className='h-[24px]'></div>
+              )}
+            </label>
+
+            <label className='flex flex-col justify-center align-center items-center w-full'>
+              <div className='w-full'>
+                <p className='font-bold'>Ciudad:</p>
+              </div>
+              <input
+                {...register('userCity', {
+                  required: 'Este campo es obligatorio',
+                })}
+                className='border-2 border-black p-1 rounded-lg w-full'
+                onBlur={() => handleBlur('userCity')}
+                placeholder='Ciudad'
+              />
+              {errors.userCity ? (
+                <div className='w-full text-red-500 text-sm'>
+                  {errors.userCity.message}
+                </div>
+              ) : (
+                <div className='h-[20px]'></div>
+              )}
+            </label>
+
+            <label className='flex flex-col justify-center align-center items-center w-full'>
+              <div className='w-full'>
                 <p className='font-bold'>Dirección:</p>
               </div>
               <input
@@ -248,28 +326,20 @@ const UserProfile = () => {
 
             <label className='flex flex-col justify-center align-center items-center w-full'>
               <div className='w-full'>
-                <p className='font-bold'>Celular:</p>
+                <p className='font-bold'>
+                  Detalles Extra de Dirección (Opcional):
+                </p>
               </div>
               <input
-                {...register('userPhone', {
-                  pattern: {
-                    value: /^[0-9\s+]{0,14}$/,
-                    message: 'Solo se aceptan números, espacios y el símbolo +',
-                  },
-                })}
+                {...register('userDetail', {})}
                 className='border-2 border-black p-1 rounded-lg w-full'
-                onBlur={() => handleBlur('userPhone')}
-                placeholder='Número de teléfono'
+                onBlur={() => handleBlur('userDetail')}
+                placeholder='Detalle'
               />
 
-              {errors.userPhone ? (
-                <div className='w-full text-red-500'>
-                  {errors.userPhone.message}
-                </div>
-              ) : (
-                <div className='h-[24px]'></div>
-              )}
+              <div className='h-[20px]'></div>
             </label>
+
             <div className='flex flex-row justify-center items-center gap-[15%] text-lg text-black mb-[3%]'>
               <button
                 type='submit'
@@ -286,7 +356,7 @@ const UserProfile = () => {
             </div>
           </form>
         ) : (
-          <div className='px-5 py-3 w-full '>
+          <div className='px-5 py-3 w-full h-auto'>
             <div className='flex justify-end items-center gap-2 '>
               <button onClick={() => setEditing(true)}>
                 <i
@@ -319,6 +389,24 @@ const UserProfile = () => {
                 {userNit == 0 ? 'N/A' : userNit}
               </h3>
               <h3>
+                <span className='font-bold'>Celular:</span>{' '}
+                {userAddress == undefined ||
+                userPhone == null ||
+                userPhone == '' ||
+                userPhone == ' '
+                  ? 'N/A'
+                  : userPhone}
+              </h3>
+              <h3>
+                <span className='font-bold'>Ciudad:</span>{' '}
+                {userCity == undefined ||
+                userCity == null ||
+                userCity == '' ||
+                userCity == ' '
+                  ? 'N/A'
+                  : userCity}
+              </h3>
+              <h3>
                 <span className='font-bold'>Dirección:</span>{' '}
                 {userAddress == undefined ||
                 userAddress == null ||
@@ -328,13 +416,13 @@ const UserProfile = () => {
                   : userAddress}
               </h3>
               <h3>
-                <span className='font-bold'>Celular:</span>{' '}
-                {userAddress == undefined ||
-                userPhone == null ||
-                userPhone == '' ||
-                userPhone == ' '
+                <span className='font-bold'>Detalles Extra:</span>{' '}
+                {userDetail == undefined ||
+                userDetail == null ||
+                userDetail == '' ||
+                userDetail == ' '
                   ? 'N/A'
-                  : userPhone}
+                  : userDetail}
               </h3>
             </div>
           </div>
