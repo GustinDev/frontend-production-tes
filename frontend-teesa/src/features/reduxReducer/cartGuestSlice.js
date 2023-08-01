@@ -97,7 +97,7 @@ const cartGuestSlice = createSlice({
         state.error = true;
         state.errorMessage = action.payload;
       })
-      .addCase(getCartGuestProducts.pending, (state, action) => {
+      .addCase(getCartGuestProducts.pending, (state) => {
         state.loading = true;
         state.error = null;
         state.cartGuestProducts = null;
@@ -112,7 +112,7 @@ const cartGuestSlice = createSlice({
         state.error = true;
         state.errorMessage = action.payload;
       })
-      .addCase(updateCartGuestProducts.pending, (state, action) => {
+      .addCase(updateCartGuestProducts.pending, (state) => {
         state.loading = true;
         state.error = null;
         state.errorMessage = null;
@@ -127,7 +127,7 @@ const cartGuestSlice = createSlice({
         state.error = true;
         state.errorMessage = action.payload;
       })
-      .addCase(deleteCartGuestProducts.pending, (state, action) => {
+      .addCase(deleteCartGuestProducts.pending, (state) => {
         state.loading = true;
         state.error = null;
         state.errorMessage = null;

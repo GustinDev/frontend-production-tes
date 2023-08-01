@@ -137,15 +137,7 @@ export const Carrito = ({
       dispatch(deleteCart(id)).then(() => {
         alertConfirm();
       });
-    } else
-      dispatch(deleteCartGuestProducts(id))
-        .then(() => {})
-        .catch((error) => {
-          console.error(
-            'Error al eliminar el producto del carrito de invitado:',
-            error
-          );
-        });
+    }
   };
 
   const [nombreN, setNombreN] = useState('');
@@ -198,12 +190,14 @@ export const Carrito = ({
           </div>
         </NavLink>
         <div className='ml-4'>
-          <button
-            onClick={handleDelete}
-            className='mt-4 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none'
-          >
-            Eliminar
-          </button>
+          {userData.userId ? (
+            <button
+              onClick={handleDelete}
+              className='mt-4 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none'
+            >
+              Eliminar
+            </button>
+          ) : null}
         </div>
       </div>
     </div>

@@ -131,6 +131,17 @@ const FormUserData = () => {
 
   // console.log(put);
 
+  //Button COnfirm:
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   const handleConfirm = () => {
     if (put === 'success') {
       Swal.fire({
@@ -138,10 +149,8 @@ const FormUserData = () => {
         title: 'Tus datos fueron confirmados con éxito',
         //text: 'Tus datos fueron confirmados con éxito',
         confirmButtonText: 'Aceptar',
-      }).then((result) => {
-        if (result.isConfirmed) {
-          navigate(`/carrito/summary/${userId}`);
-        }
+      }).then(() => {
+        navigate(`/carrito/summary/${userId}`);
       });
     }
   };
@@ -316,9 +325,13 @@ const FormUserData = () => {
                   <button
                     onClick={handleConfirm}
                     type='submit'
-                    className='text-center font-bold text-lg text-white py-2 px-4 rounded-xl bg-teesaBlueLight'
+                    className='text-center font-bold text-lg text-white py-2 px-4 rounded-xl bg-teesaBlueLight hover:bg-teesaBlueDark'
                   >
-                    Confirmar Información
+                    {isLoading
+                      ? 'Cargando...'
+                      : put === null
+                      ? 'Confirmar Información'
+                      : 'Confirmar Información'}
                   </button>
                 </div>
               </div>
