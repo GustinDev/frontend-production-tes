@@ -6,6 +6,7 @@ import { getCart, getUser } from '../../features/reduxReducer/carritoSlice';
 import CarritoSummary from './CarritoSummary';
 import loadingGif from '../../assets/icon/Loading.gif';
 import Swal from 'sweetalert2';
+import { postLinkMercado } from '../../features/reduxReducer/mercadoSlice';
 
 const Summary = () => {
   //Button Back
@@ -101,10 +102,6 @@ const Summary = () => {
     setTodosRepuestos(!encontramosEquipo);
   }, [info.items]);
 
-  const linkMercadoPago = useSelector(
-    (state) => state.mercadoState.linkMercado
-  );
-
   const handleConfirmUser = () => {
     Swal.fire({
       icon: 'success',
@@ -115,6 +112,23 @@ const Summary = () => {
       navigate(`/home`);
     });
   };
+
+  //*MercadoPago Button:
+
+  const userId = useSelector((state) => state.userState.userData.userId);
+
+  const linkMercadoPago = useSelector(
+    (state) => state.mercadoState.linkMercado
+  );
+  //const status = useSelector((state) => state.mercadoState.status);
+
+  useEffect(() => {
+    if (userId !== null) {
+      dispatch(postLinkMercado(userId));
+    }
+  }, [dispatch, userId]);
+
+  console.log(linkMercadoPago);
 
   return (
     <div className='h-screen w-full flex items-center flex-col justify-start '>
@@ -130,8 +144,8 @@ const Summary = () => {
         <h1 className='text-center font-bold text-3xl mb-5 '>
           Resumen de Compra
         </h1>
-        <div className='twoContainer w-full flex justify-between items-start flex-row'>
-          {info.items ? (
+        {info.items ? (
+          <div className='twoContainer w-full flex justify-between items-start flex-row'>
             <div className='product  w-8/12 h-full'>
               <div className='w-full h-full '>
                 {info?.items?.cartProducts?.map((item) => (
@@ -166,101 +180,110 @@ const Summary = () => {
                 </div>
               </div>
             </div>
-          ) : (
-            <div className='flex justify-center items-center w-[950px] h-[800px]'>
-              <img
-                className='w-1/3 mx-auto'
-                src={loadingGif}
-                alt='gif'
-              />
-            </div>
-          )}
-          <div className='divider h-full w-[3px] bg-gray-800   rounded-lg '></div>
-          <div className='user bg-gray-200 w-3/12 h-full px-6 rounded-lg -ml-10'>
-            <div className='flex flex-col justify-start items-start  text-black xl:text-xl lg:text-xl md:text-xl sm:text-lg xs:text-md pb-[5%] w-full pt-4 '>
-              <h3 className='text-[16px]'>
-                <span className='font-bold'>
-                  Nombre <br />
-                </span>{' '}
-                {userName == 0 ? 'N/A' : userName}
-              </h3>
-              <h3 className='text-[16px]'>
-                <span className='font-bold'>
-                  Email <br />
-                </span>{' '}
-                {userEmail == 0 ? 'N/A' : userEmail}
-              </h3>
-              <h3 className='text-[16px]'>
-                <span className='font-bold'>
-                  Cédula / Nit <br />
-                </span>{' '}
-                {userNit == 0 ? 'N/A' : userNit}
-              </h3>
-              <h3 className='text-[16px]'>
-                <span className='font-bold'>
-                  Celular <br />
-                </span>{' '}
-                {userAddress == undefined ||
-                userPhone == null ||
-                userPhone == '' ||
-                userPhone == ' '
-                  ? 'N/A'
-                  : userPhone}
-              </h3>
-              <h3 className='text-[16px]'>
-                <span className='font-bold'>
-                  Ciudad <br />
-                </span>{' '}
-                {userCity == undefined ||
-                userCity == null ||
-                userCity == '' ||
-                userCity == ' '
-                  ? 'N/A'
-                  : userCity}
-              </h3>
-              <h3 className='text-[16px]'>
-                <span className='font-bold'>
-                  Dirección <br />
-                </span>{' '}
-                {userAddress == undefined ||
-                userAddress == null ||
-                userAddress == '' ||
-                userAddress == ' '
-                  ? 'N/A'
-                  : userAddress}
-              </h3>
-              <h3 className='text-[16px]'>
-                <span className='font-bold'>
-                  Detalles de Extra de Dirección (Opcional):
-                  <br />
-                </span>{' '}
-                {userDetail == undefined ||
-                userDetail == null ||
-                userDetail == '' ||
-                userDetail == ' '
-                  ? 'N/A'
-                  : userDetail}
-              </h3>
+
+            <div className='divider h-full w-[3px] bg-gray-800   rounded-lg '></div>
+            <div className='user bg-gray-200 w-3/12 h-full px-6 rounded-lg -ml-10'>
+              <div className='flex flex-col justify-start items-start  text-black xl:text-xl lg:text-xl md:text-xl sm:text-lg xs:text-md pb-[5%] w-full pt-4 '>
+                <h3 className='text-[16px]'>
+                  <span className='font-bold'>
+                    Nombre <br />
+                  </span>{' '}
+                  {userName == 0 ? 'N/A' : userName}
+                </h3>
+                <h3 className='text-[16px]'>
+                  <span className='font-bold'>
+                    Email <br />
+                  </span>{' '}
+                  {userEmail == 0 ? 'N/A' : userEmail}
+                </h3>
+                <h3 className='text-[16px]'>
+                  <span className='font-bold'>
+                    Cédula / Nit <br />
+                  </span>{' '}
+                  {userNit == 0 ? 'N/A' : userNit}
+                </h3>
+                <h3 className='text-[16px]'>
+                  <span className='font-bold'>
+                    Celular <br />
+                  </span>{' '}
+                  {userAddress == undefined ||
+                  userPhone == null ||
+                  userPhone == '' ||
+                  userPhone == ' '
+                    ? 'N/A'
+                    : userPhone}
+                </h3>
+                <h3 className='text-[16px]'>
+                  <span className='font-bold'>
+                    Ciudad <br />
+                  </span>{' '}
+                  {userCity == undefined ||
+                  userCity == null ||
+                  userCity == '' ||
+                  userCity == ' '
+                    ? 'N/A'
+                    : userCity}
+                </h3>
+                <h3 className='text-[16px]'>
+                  <span className='font-bold'>
+                    Dirección <br />
+                  </span>{' '}
+                  {userAddress == undefined ||
+                  userAddress == null ||
+                  userAddress == '' ||
+                  userAddress == ' '
+                    ? 'N/A'
+                    : userAddress}
+                </h3>
+                <h3 className='text-[16px]'>
+                  <span className='font-bold'>
+                    Detalles de Extra de Dirección (Opcional):
+                    <br />
+                  </span>{' '}
+                  {userDetail == undefined ||
+                  userDetail == null ||
+                  userDetail == '' ||
+                  userDetail == ' '
+                    ? 'N/A'
+                    : userDetail}
+                </h3>
+              </div>
             </div>
           </div>
-        </div>
+        ) : (
+          <div className='flex justify-center items-center w-full '>
+            <img
+              className='w-1/3 mx-auto'
+              src={loadingGif}
+              alt='gif'
+            />
+          </div>
+        )}
         <div className='flex flex-row justify-end items-center gap-[15%] text-lg text-black my-5 w-full'>
           <div className='w-full flex justify-end '>
-            {todosRepuestos ? (
-              <a href={linkMercadoPago}>
-                <button className='7-80 px-4 py-3 border-4 bg-blue-500  rounded-lg text-white hover:bg-blue-600 transition duration-100 transform hover:scale-105 font-bold text-lg'>
-                  Comprar con MercadoPago
+            {info.items ? (
+              todosRepuestos ? (
+                linkMercadoPago ? (
+                  <a href={linkMercadoPago}>
+                    <button className='7-80 px-4 py-3 border-4 bg-blue-500  rounded-lg text-white hover:bg-blue-600 transition duration-100 transform hover:scale-105 font-bold text-lg'>
+                      Comprar con MercadoPago
+                    </button>
+                  </a>
+                ) : (
+                  <button className='7-80 px-4 py-3 border-4 bg-blue-500  rounded-lg text-white hover:bg-blue-600 transition duration-100 transform hover:scale-105 font-bold text-lg'>
+                    Cargando...
+                  </button>
+                )
+              ) : (
+                <button
+                  onClick={handleConfirmUser}
+                  type='submit'
+                  className='text-center font-bold text-2xl text-white py-2 px-4 rounded-xl bg-teesaBlueLight hover:bg-teesaBlueDark'
+                >
+                  Confirmar Compra
                 </button>
-              </a>
-            ) : (
-              <button
-                onClick={handleConfirmUser}
-                type='submit'
-                className='text-center font-bold text-2xl text-white py-2 px-4 rounded-xl bg-teesaBlueLight hover:bg-teesaBlueDark'
-              >
-                Confirmar Compra
-              </button>
-            )}
+              )
+            ) : null}
           </div>
         </div>
       </div>

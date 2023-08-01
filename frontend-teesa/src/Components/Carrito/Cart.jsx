@@ -299,7 +299,8 @@ export const Cart = () => {
                               onClick={handleBuyButton}
                               className='7-80 px-4 py-3 border-4 bg-blue-900 rounded-lg text-white hover:bg-blue-900 transition duration-100 transform hover:scale-105 mr-4 font-bold text-lg'
                             >
-                              Consulta con un asesor para adquirir el producto
+                              Comprar con un asesor
+                              {/* Consulta con un asesor para adquirir el producto */}
                             </button>
                           </div>
                         </div>

@@ -14,8 +14,6 @@ const FormUserData = () => {
   //   const nav = useNavigate();
   const dispatch = useDispatch();
 
-  const [, setEditing] = useState(true);
-
   //   const { id } = useParams();
   const userData = useSelector((state) => state.userState);
   console.log(userData);
@@ -85,11 +83,24 @@ const FormUserData = () => {
       };
 
       await dispatch(putUser(payload));
-      setEditing(true);
-      //navigate('/home');
-      // if (put === 'success') {
-      //   navigate('0');
-      // }
+      reset({
+        userName: '',
+        userEmail: '',
+        userNit: '',
+        userAddress: '',
+        userPhone: '',
+        userType: '',
+        userCity: '',
+        userDetail: '',
+      });
+      Swal.fire({
+        icon: 'success',
+        title: 'Tus datos fueron confirmados con éxito',
+        //text: 'Tus datos fueron confirmados con éxito',
+        confirmButtonText: 'Aceptar',
+      }).then(() => {
+        navigate(`/carrito/summary/${userId}`);
+      });
     } catch (error) {
       console.log(error.response.data.message);
     }
@@ -131,7 +142,7 @@ const FormUserData = () => {
 
   // console.log(put);
 
-  //Button COnfirm:
+  //Button Confirm:
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -142,18 +153,18 @@ const FormUserData = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  const handleConfirm = () => {
-    if (put === 'success') {
-      Swal.fire({
-        icon: 'success',
-        title: 'Tus datos fueron confirmados con éxito',
-        //text: 'Tus datos fueron confirmados con éxito',
-        confirmButtonText: 'Aceptar',
-      }).then(() => {
-        navigate(`/carrito/summary/${userId}`);
-      });
-    }
-  };
+  // const handleConfirm = () => {
+  //   if (put === 'success') {
+  //     Swal.fire({
+  //       icon: 'success',
+  //       title: 'Tus datos fueron confirmados con éxito',
+  //       text: 'Tus datos fueron confirmados con éxito',
+  //       confirmButtonText: 'Aceptar',
+  //     }).then(() => {
+  //       navigate(`/carrito/summary/${userId}`);
+  //     });
+  //   }
+  // };
 
   const handleGoBack = () => {
     navigate(-1);
@@ -323,7 +334,6 @@ const FormUserData = () => {
               <div className='flex flex-row justify-end items-center gap-[15%] text-lg text-black mb-5 w-full'>
                 <div className='w-full flex justify-end '>
                   <button
-                    onClick={handleConfirm}
                     type='submit'
                     className='text-center font-bold text-lg text-white py-2 px-4 rounded-xl bg-teesaBlueLight hover:bg-teesaBlueDark'
                   >
