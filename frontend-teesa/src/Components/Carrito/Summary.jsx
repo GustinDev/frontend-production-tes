@@ -106,7 +106,7 @@ const Summary = () => {
     Swal.fire({
       icon: 'success',
       title: '¡Gracias!',
-      text: 'Un asesor se comunicará contigo pronto, te brindará una oferta personalizada.',
+      text: 'Un asesor se comunicará contigo pronto, te brindará atención personalizada.',
       confirmButtonText: 'Aceptar',
     }).then(() => {
       navigate(`/home`);

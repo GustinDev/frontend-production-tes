@@ -125,10 +125,9 @@ export const Carrito = ({
       icon: 'success',
       confirmButtonText: 'Aceptar',
       confirmButtonColor: '#192C8C',
+    }).then(() => {
+      navigate(0);
     });
-    // .then(() => {
-    //   navigate(0);
-    // });
   };
 
   const handleDelete = (e) => {

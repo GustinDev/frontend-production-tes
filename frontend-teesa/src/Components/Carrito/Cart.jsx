@@ -13,6 +13,8 @@ import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import MessageIcon from '@mui/icons-material/Message';
 import SpeedIcon from '@mui/icons-material/Speed';
 import PaidIcon from '@mui/icons-material/Paid';
+import FaceIcon from '@mui/icons-material/Face';
+import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 
 export const Cart = () => {
   //*Validar User:
@@ -55,6 +57,8 @@ export const Cart = () => {
       // Validar los datos después de que se hayan obtenido
       if (user === false) {
         alertGoodbye();
+      } else {
+        fetchCartData();
       }
     }
   }, [user, waiting]);
@@ -82,17 +86,15 @@ export const Cart = () => {
     items: '',
   });
 
-  useEffect(() => {
+  const fetchCartData = () => {
     dispatch(getUser()).then((action) => {
       const response = action.payload;
-
       const cartId = response.find((user) => user.id === userData.userId)?.Cart
         .id;
 
       if (cartId) {
         dispatch(getCart(cartId)).then((action) => {
           const response = action.payload;
-
           setInfo((prevInfo) => ({
             ...prevInfo,
             items: response,
@@ -100,7 +102,7 @@ export const Cart = () => {
         });
       }
     });
-  }, [dispatch, userData, info]);
+  };
   //Cambio: [dispatch, userData, info]
   //console.log(info.items);
 
@@ -141,6 +143,7 @@ export const Cart = () => {
   };
 
   console.log(info.items.cartProducts);
+  //Aqui esta el bucle.
 
   return (
     <motion.div
@@ -264,23 +267,24 @@ export const Cart = () => {
                   ) : (
                     // EQUIPOS
                     <div className='econtainer flex flex-row w-full h-full'>
-                      <div className='w-8/12 h-full '>
-                        {info.items.cartProducts.map((item) => (
-                          <Carrito
-                            key={item.id}
-                            id={item.id}
-                            cantidad={item.cantidad}
-                            productId={item.ProductId}
-                            precioTotal={item.precioTotal}
-                            nombre={item.Product?.nombre}
-                            precio={item.Product?.precio}
-                            imagen={item.Product?.imagenes}
-                            tipo={item.Product?.tipo}
-                            marca={item.Product?.marca}
-                            categoria={item.Product?.categoria}
-                          />
-                        ))}
+                      <div className='w-8/12 h-11/12 flex flex-col justify-between'>
                         <div>
+                          {info.items.cartProducts.map((item) => (
+                            <Carrito
+                              key={item.id}
+                              id={item.id}
+                              cantidad={item.cantidad}
+                              productId={item.ProductId}
+                              precioTotal={item.precioTotal}
+                              nombre={item.Product?.nombre}
+                              precio={item.Product?.precio}
+                              imagen={item.Product?.imagenes}
+                              tipo={item.Product?.tipo}
+                              marca={item.Product?.marca}
+                              categoria={item.Product?.categoria}
+                            />
+                          ))}
+
                           <div className='mt-8'>
                             <h2 className='text-2xl font-bold text-gray-800'>
                               Total:{' '}
@@ -294,32 +298,32 @@ export const Cart = () => {
                               </span>
                             </h2>
                           </div>
-                          <div className='flex justify-center mt-8'>
-                            <button
-                              onClick={handleBuyButton}
-                              className='7-80 px-4 py-3 border-4 bg-blue-900 rounded-lg text-white hover:bg-blue-900 transition duration-100 transform hover:scale-105 mr-4 font-bold text-lg'
-                            >
-                              Comprar con un asesor
-                              {/* Consulta con un asesor para adquirir el producto */}
-                            </button>
-                          </div>
+                        </div>
+                        <div className='flex justify-center mt-8'>
+                          <button
+                            onClick={handleBuyButton}
+                            className='7-80 px-4 py-3 border-4 bg-blue-900 rounded-lg text-white hover:bg-blue-900 transition duration-100 transform hover:scale-105 mr-4 font-bold text-lg'
+                          >
+                            Comprar con un asesor
+                            {/* Consulta con un asesor para adquirir el producto */}
+                          </button>
                         </div>
                       </div>
                       <div className='divider h-11/12 w-[8px] bg-gray-600 ml-12 mr-8 rounded-lg'></div>
                       <div className=' w-4/12 h-11/12   rounded-lg p-5 flex flex-col gap-6 text-center'>
                         <div className='w-full'>
-                          <LocalShippingIcon
+                          <FaceIcon
                             style={{ fontSize: '60px' }}
                             className=' text-blue-800'
                           />
-                          <h1>Atención:</h1>
+
                           <h2 className='text-md'>
                             La compra de los equipos se realiza por medio un
                             asesor especializado.
                           </h2>
                         </div>
                         <div>
-                          <MessageIcon
+                          <LocalShippingIcon
                             style={{ fontSize: '60px' }}
                             className=' text-blue-800'
                           />
@@ -340,7 +344,7 @@ export const Cart = () => {
                           </h2>
                         </div>
                         <div>
-                          <SpeedIcon
+                          <ThumbUpAltIcon
                             style={{ fontSize: '60px' }}
                             className=' text-blue-800'
                           />
