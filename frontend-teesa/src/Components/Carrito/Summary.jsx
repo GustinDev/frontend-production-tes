@@ -3,7 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { fetchUserById } from '../../features/reduxReducer/userSlice';
 import { getCart, getUser } from '../../features/reduxReducer/carritoSlice';
-import Carrito from './Carrito';
+import CarritoSummary from './CarritoSummary';
+import loadingGif from '../../assets/icon/Loading.gif';
+import Swal from 'sweetalert2';
 
 const Summary = () => {
   //Button Back
@@ -41,7 +43,7 @@ const Summary = () => {
 
   function calculateTotal(cartProducts) {
     let total = 0;
-    for (let i = 0; i < cartProducts.length; i++) {
+    for (let i = 0; i < cartProducts?.length; i++) {
       total += cartProducts[i].precioTotal;
     }
     return total;
@@ -84,6 +86,34 @@ const Summary = () => {
 
   console.log(info?.items?.cartProducts);
 
+  //Respuestos - Equipo
+  const [todosRepuestos, setTodosRepuestos] = useState(null);
+
+  useEffect(() => {
+    let encontramosEquipo = false;
+
+    info?.items?.cartProducts?.forEach((element) => {
+      if (element.Product.tipo === 'Equipo') {
+        encontramosEquipo = true;
+      }
+    });
+
+    setTodosRepuestos(!encontramosEquipo);
+  }, [info.items]);
+
+  const linkMercadoPago = useSelector(
+    (state) => state.mercadoState.linkMercado
+  );
+
+  const handleConfirmUser = () => {
+    Swal.fire({
+      icon: 'success',
+      title: '¡Gracias!',
+      text: 'Un asesor se comunicará contigo pronto.',
+      confirmButtonText: 'Aceptar',
+    });
+  };
+
   return (
     <div className='h-screen w-full flex items-center flex-col justify-start '>
       <div className='w-10/12 mb-4'>
@@ -99,58 +129,75 @@ const Summary = () => {
           Resumen de Compra
         </h1>
         <div className='twoContainer w-full flex justify-between items-start flex-row'>
-          <div className='product bg-red-300 w-5/12 h-full'>
-            <h1>Products</h1>
-            <div className='w-full h-full '>
-              {info?.items?.cartProducts?.map((item) => (
-                <Carrito
-                  key={item.id}
-                  id={item.id}
-                  cantidad={item.cantidad}
-                  precioTotal={item.precioTotal}
-                  productId={item.ProductId}
-                  nombre={item.Product?.nombre}
-                  precio={item.Product?.precio}
-                  imagen={item.Product?.imagenes}
-                  tipo={item.Product?.tipo}
-                  marca={item.Product?.marca}
-                  categoria={item.Product?.categoria}
-                />
-              ))}
-              <div>
-                <div className='mt-8'>
-                  <h2 className='text-2xl font-bold text-gray-800'>
-                    Total:{' '}
-                    <span className='text-2xl font-bold text-black'>
-                      ${' '}
-                      {calculateTotal(
-                        info.items.cartProducts || info.items.cartGuestProducts
-                      ).toLocaleString('es-ES', options)}{' '}
-                      COP
-                    </span>
-                  </h2>
+          {info.items ? (
+            <div className='product  w-8/12 h-full'>
+              <div className='w-full h-full '>
+                {info?.items?.cartProducts?.map((item) => (
+                  <CarritoSummary
+                    key={item.id}
+                    id={item.id}
+                    cantidad={item.cantidad}
+                    precioTotal={item.precioTotal}
+                    productId={item.ProductId}
+                    nombre={item.Product?.nombre}
+                    precio={item.Product?.precio}
+                    imagen={item.Product?.imagenes}
+                    tipo={item.Product?.tipo}
+                    marca={item.Product?.marca}
+                    categoria={item.Product?.categoria}
+                  />
+                ))}
+                <div>
+                  <div className=''>
+                    <h2 className='text-2xl font-bold text-black border-t-2 border-t-gray-300 pt-4'>
+                      Total:{' '}
+                      <span className='text-2xl font-bold text-black'>
+                        ${' '}
+                        {calculateTotal(
+                          info.items.cartProducts ||
+                            info.items.cartGuestProducts
+                        ).toLocaleString('es-ES', options)}{' '}
+                        COP
+                      </span>
+                    </h2>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          ) : (
+            <div className='flex justify-center items-center w-[950px] h-[800px]'>
+              <img
+                className='w-1/3 mx-auto'
+                src={loadingGif}
+                alt='gif'
+              />
+            </div>
+          )}
           <div className='divider h-full w-[3px] bg-gray-800   rounded-lg '></div>
-          <div className='user bg-blue-300 w-5/12 h-full'>
-            <h1>Información de Usuario:</h1>
-            <div className='flex flex-col justify-start items-start gap-5 text-black xl:text-xl lg:text-xl md:text-xl sm:text-lg xs:text-md pb-[5%] w-full pt-4 '>
-              <h3>
-                <span className='font-bold'>Nombre:</span>{' '}
+          <div className='user bg-gray-200 w-3/12 h-full px-6 rounded-lg -ml-10'>
+            <div className='flex flex-col justify-start items-start  text-black xl:text-xl lg:text-xl md:text-xl sm:text-lg xs:text-md pb-[5%] w-full pt-4 '>
+              <h3 className='text-[16px]'>
+                <span className='font-bold'>
+                  Nombre <br />
+                </span>{' '}
                 {userName == 0 ? 'N/A' : userName}
               </h3>
-              <h3>
-                <span className='font-bold'>Email:</span>{' '}
+              <h3 className='text-[16px]'>
+                <span className='font-bold'>
+                  Email <br />
+                </span>{' '}
                 {userEmail == 0 ? 'N/A' : userEmail}
               </h3>
-              <h3>
-                <span className='font-bold'>Cédula / Nit:</span>{' '}
+              <h3 className='text-[16px]'>
+                <span className='font-bold'>
+                  Cédula / Nit <br />
+                </span>{' '}
                 {userNit == 0 ? 'N/A' : userNit}
               </h3>
-              <h3>
-                <span className='font-bold'>Celular:</span>{' '}
+              <h3 className='text-[16px]'>
+                <span className='font-bold'>
+                  Celular <br />
+                </span>{' '}
                 {userAddress == undefined ||
                 userPhone == null ||
                 userPhone == '' ||
@@ -158,8 +205,10 @@ const Summary = () => {
                   ? 'N/A'
                   : userPhone}
               </h3>
-              <h3>
-                <span className='font-bold'>Ciudad:</span>{' '}
+              <h3 className='text-[16px]'>
+                <span className='font-bold'>
+                  Ciudad <br />
+                </span>{' '}
                 {userCity == undefined ||
                 userCity == null ||
                 userCity == '' ||
@@ -167,8 +216,10 @@ const Summary = () => {
                   ? 'N/A'
                   : userCity}
               </h3>
-              <h3>
-                <span className='font-bold'>Dirección:</span>{' '}
+              <h3 className='text-[16px]'>
+                <span className='font-bold'>
+                  Dirección <br />
+                </span>{' '}
                 {userAddress == undefined ||
                 userAddress == null ||
                 userAddress == '' ||
@@ -176,8 +227,11 @@ const Summary = () => {
                   ? 'N/A'
                   : userAddress}
               </h3>
-              <h3>
-                <span className='font-bold'>Detalles Extra:</span>{' '}
+              <h3 className='text-[16px]'>
+                <span className='font-bold'>
+                  Detalles de Extra de Dirección (Opcional):
+                  <br />
+                </span>{' '}
                 {userDetail == undefined ||
                 userDetail == null ||
                 userDetail == '' ||
@@ -190,12 +244,21 @@ const Summary = () => {
         </div>
         <div className='flex flex-row justify-end items-center gap-[15%] text-lg text-black my-5 w-full'>
           <div className='w-full flex justify-end '>
-            <button
-              type='submit'
-              className='text-center font-bold text-lg text-white py-2 px-4 rounded-xl bg-teesaBlueLight'
-            >
-              Confirmar Compra
-            </button>
+            {todosRepuestos ? (
+              <a href={linkMercadoPago}>
+                <button className='7-80 px-4 py-3 border-4 bg-blue-500  rounded-lg text-white hover:bg-blue-600 transition duration-100 transform hover:scale-105 font-bold text-lg'>
+                  Comprar con MercadoPago
+                </button>
+              </a>
+            ) : (
+              <button
+                onClick={handleConfirmUser}
+                type='submit'
+                className='text-center font-bold text-2xl text-white py-2 px-4 rounded-xl bg-teesaBlueLight hover:bg-teesaBlueDark'
+              >
+                Confirmar Compra
+              </button>
+            )}
           </div>
         </div>
       </div>

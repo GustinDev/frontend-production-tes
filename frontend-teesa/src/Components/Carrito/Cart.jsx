@@ -78,14 +78,6 @@ export const Cart = () => {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.userState.userData);
 
-  // const carrito = useSelector((state) => state.cart);
-
-  // const userUUID = props.userId;
-  // console.log(userUUID);
-
-  // const [cart, setCart] = useState({
-  //   CartId: cartId,
-  // });
   const [info, setInfo] = useState({
     items: '',
   });
@@ -116,9 +108,9 @@ export const Cart = () => {
 
   const userId = useSelector((state) => state.userState.userData.userId);
 
-  const linkMercadoPago = useSelector(
-    (state) => state.mercadoState.linkMercado
-  );
+  // const linkMercadoPago = useSelector(
+  //   (state) => state.mercadoState.linkMercado
+  // );
   const status = useSelector((state) => state.mercadoState.status);
 
   useEffect(() => {
@@ -155,7 +147,7 @@ export const Cart = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
-      className='flex flex-col items-center justify-start mt-10 h-screen '
+      className='flex flex-col items-center justify-start mt-10  h-screen '
     >
       <h2 className='text-white font-bold   xl:text-5xl lg:text-5xl md:text-4xl sm:text-4xl  bg-teesaBlueDark py-5 px-10 rounded-xl'>
         Carrito de Productos
@@ -215,11 +207,17 @@ export const Cart = () => {
                               Ver más productos
                             </Link>
 
-                            <a href={linkMercadoPago}>
+                            {/* <a href={linkMercadoPago}>
                               <button className='7-80 px-4 py-3 border-4 bg-blue-500  rounded-lg text-white hover:bg-blue-600 transition duration-100 transform hover:scale-105 font-bold text-lg'>
                                 Comprar con MercadoPago
                               </button>
-                            </a>
+                            </a> */}
+                            <button
+                              onClick={handleBuyButton}
+                              className='7-80 px-4 py-3 border-4 bg-blue-500 rounded-lg text-white hover:bg-blue-700 transition duration-100 transform hover:scale-105 mr-4 font-bold text-lg'
+                            >
+                              Comprar Productos
+                            </button>
                           </div>
                         </div>
                       </div>

@@ -135,8 +135,8 @@ const FormUserData = () => {
     if (put === 'success') {
       Swal.fire({
         icon: 'success',
-        title: '¡Éxito!',
-        text: 'Tus datos fueron confirmados con éxito',
+        title: 'Tus datos fueron confirmados con éxito',
+        //text: 'Tus datos fueron confirmados con éxito',
         confirmButtonText: 'Aceptar',
       }).then((result) => {
         if (result.isConfirmed) {
@@ -150,8 +150,11 @@ const FormUserData = () => {
     navigate(-1);
   };
 
+  //Si el carrito tiene equipos, mostrar un alert que diga que un asesor se comunicará pronto.
+  //Si solo tiene repuestos, pasar a mercado pago.
+
   return (
-    <div className='h-screen w-full flex justify-center items-center flex-col'>
+    <div className='h-screen w-full flex justify-center items-center flex-col 2xl:-mt-40'>
       <div className='w-5/12 mb-4'>
         <button
           onClick={handleGoBack}
@@ -299,9 +302,7 @@ const FormUserData = () => {
                   </p>
                 </div>
                 <input
-                  {...register('userDetail', {
-                    required: 'Este campo es obligatorio',
-                  })}
+                  {...register('userDetail')}
                   className='border-2 border-black p-1 rounded-lg w-full'
                   onBlur={() => handleBlur('userDetail')}
                   placeholder='Detalle'
