@@ -196,7 +196,7 @@ const UserProfile = () => {
         initial={{ opacity: 0, x: -50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6 }}
-        className='bg-gray-100 border-2 border-teesaBlueLight rounded-lg flex flex-col justify-center items-center  xl:w-[30em] lg:w-[30em] md:w-[18em]  gap-3  mx-auto w-11/12'
+        className='bg-white border-2 border-teesaBlueLight rounded-lg flex flex-col justify-center items-center  xl:w-[30em] lg:w-[30em] md:w-[18em]  gap-3  mx-auto sm:mx-0 w-11/12 '
       >
         {editing ? (
           <form
@@ -434,7 +434,7 @@ const UserProfile = () => {
         initial={{ opacity: 0, x: 50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6 }}
-        className='flex flex-col items-center mb-[5%] bg-gray-100 border-2 border-teesaBlueLight overflow-y-scroll rounded-lg xl:w-[55%] h-[80%] mx-5'
+        className='flex flex-col items-center mb-[5%] bg-white border-2 border-teesaBlueLight overflow-y-scroll rounded-lg xl:w-[55%] h-[80%] mx-5'
       >
         <h1 className='font-bold text-black mt-[2%] text-4xl'>Compras</h1>
         <article className='w-[95%] '>
