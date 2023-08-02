@@ -440,46 +440,54 @@ const UserProfile = () => {
         <article className='w-[95%] '>
           {userProducts && userProducts.length > 0 ? (
             userProducts.map((product) => (
-              <section
-                className='bg-slate-300 w-[100%] my-[3%] h-[30] rounded-xl'
+              <Link
+                to={`/home/${product.ProductId}`}
                 key={product.id}
               >
-                <div className='flex flex-row items-center space-x-4'>
-                  <Link to={`/home/${product.ProductId}`}>
+                <section className='bg-gray-200 w-full mx-2 my-4 h-[30] rounded-xl p-5'>
+                  <div className='flex flex-row items-center space-x-4'>
                     <img
                       src={product.Product.imagenes[0]}
                       alt={product.Product.nombre}
                       className='w-16 hover:transform hover:scale-105 h-16 ml-[1%]'
                     />
-                  </Link>
-                  <div>
-                    <h3 className='text-2xl font-bold text-teesaBlueDark'>
-                      {product.Product.nombre}
-                    </h3>
-                    <section>
-                      <div className='grid grid-cols-2 gap-4'>
-                        <div className='col-span-1'>
-                          <p className='text-teesaGreen'>{product.estado}</p>
-                          <p>Cantidad: {product.cantidad}</p>
-                        </div>
-                        <div className='col-span-1 flex flex-col justify-between'>
-                          <div>
-                            <p>Precio: {product.precio}</p>
+
+                    <div>
+                      <h3 className='text-2xl font-bold text-teesaBlueDark'>
+                        {product.Product.nombre
+                          .split(' ')
+                          .map(
+                            (word) =>
+                              word.charAt(0).toUpperCase() +
+                              word.slice(1).toLowerCase()
+                          )
+                          .join(' ')}
+                      </h3>
+                      <section>
+                        <div className='grid grid-cols-1 md:grid-cols-2 md:gap-4'>
+                          <div className='col-span-1'>
+                            <p className='text-teesaGreen'>{product.estado}</p>
+                            <p>Cantidad: {product.cantidad}</p>
                           </div>
-                          <div>
-                            <p>
-                              Fecha de compra:{' '}
-                              {new Date(
-                                product.fechaDeCompra
-                              ).toLocaleDateString()}
-                            </p>
+                          <div className=' flex flex-col justify-between'>
+                            <div>
+                              <p>Precio: {product.precio}</p>
+                            </div>
+                            <div>
+                              <p>
+                                Fecha de compra:{' '}
+                                {new Date(
+                                  product.fechaDeCompra
+                                ).toLocaleDateString()}
+                              </p>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </section>
+                      </section>
+                    </div>
                   </div>
-                </div>
-              </section>
+                </section>
+              </Link>
             ))
           ) : (
             <div className='flex flex-col items-center justify-row mt-2'>
