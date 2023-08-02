@@ -152,15 +152,15 @@ export const Cart = () => {
       transition={{ duration: 1 }}
       className='flex flex-col items-center justify-start mt-10  h-screen '
     >
-      <h2 className='text-white font-bold   xl:text-5xl lg:text-5xl md:text-4xl sm:text-4xl  bg-teesaBlueDark py-5 px-10 rounded-xl'>
+      <h2 className='text-white font-bold text-2xl  xl:text-5xl lg:text-5xl md:text-4xl sm:text-4xl  bg-teesaBlueDark py-5 px-10 rounded-xl'>
         Carrito de Productos
       </h2>
-      <main>
-        <div className='max-w-5xl p-8 bg-white shadow-lg rounded-lg border-2 border-teesaBlueDark mt-5 mb-10'>
+      <main className='flex justify-center w-full h-full'>
+        <div className='w-10/12 mx-auto md:mx-0 md:max-w-3xl lg:max-w-5xl h-fit p-8 bg-white shadow-lg rounded-lg border-2 border-teesaBlueDark mt-5 mb-10 '>
           {status === 'pending' ? (
-            <div className='flex justify-center items-center w-[950px] h-[800px]'>
+            <div className='flex justify-center items-center h-full'>
               <img
-                className='w-1/3 mx-auto'
+                className=''
                 src={loadingGif}
                 alt='gif'
               />
@@ -170,9 +170,9 @@ export const Cart = () => {
               {info.items ? (
                 info.items.cartProducts?.length > 0 ? (
                   todosRepuestos ? (
-                    // REPUESTOS
-                    <div className='twoContainer flex flex-row w-full h-full'>
-                      <div className='w-8/12 h-11/12 flex flex-col justify-between'>
+                    //? REPUESTOS
+                    <div className='twoContainer flex flex-col md:flex-row w-full h-full'>
+                      <div className='md:w-6/12 lg:w-8/12 h-11/12 flex flex-col justify-between'>
                         <div className='upperContainer'>
                           {info.items.cartProducts.map((item) => (
                             <Carrito
@@ -192,9 +192,9 @@ export const Cart = () => {
                         </div>
                         <div className='bottomContainer'>
                           <div className='my-4'>
-                            <h2 className='text-2xl font-bold text-black'>
+                            <h2 className='text-xl lg:text-2xl font-bold text-black'>
                               Total:{' '}
-                              <span className='text-2xl font-bold text-black'>
+                              <span className='text-xl lg:text-2xl font-bold text-black'>
                                 ${' '}
                                 {calculateTotal(
                                   info.items.cartProducts ||
@@ -207,7 +207,7 @@ export const Cart = () => {
                           <div className='flex justify-center mt-8'>
                             <Link
                               to='/home'
-                              className='7-80 px-4 py-3 border-4 bg-blue-700 rounded-lg text-white hover:bg-blue-900 transition duration-100 transform hover:scale-105 mr-4 font-bold text-lg'
+                              className='7-80 px-4 py-3 border-4 bg-blue-700 rounded-lg text-white hover:bg-blue-900 transition duration-100 transform hover:scale-105 mr-4 font-bold text-lg text-center'
                             >
                               Ver más productos
                             </Link>
@@ -227,7 +227,7 @@ export const Cart = () => {
                         </div>
                       </div>
                       <div className='divider h-11/12 w-[4px] bg-gray-300 ml-12 mr-8 rounded-lg'></div>
-                      <div className=' w-4/12 h-11/12   rounded-lg p-5 flex flex-col gap-6 text-center'>
+                      <div className='md:w-3/12 lg:w-4/12 h-11/12   p-5 flex flex-col gap-6 text-center border-t-2 border-gray-300 mt-10 md:mt-0 md:b-t-0 md:border-0'>
                         <div>
                           <LocalShippingIcon
                             style={{ fontSize: '60px' }}
@@ -267,9 +267,9 @@ export const Cart = () => {
                       </div>
                     </div>
                   ) : (
-                    // EQUIPOS
-                    <div className='econtainer flex flex-row w-full h-full'>
-                      <div className='w-8/12 h-11/12 flex flex-col justify-between'>
+                    //? EQUIPOS
+                    <div className='econtainer flex flex-col md:flex-row w-full h-full'>
+                      <div className='w-full md:w-6/12 lg:w-8/12 h-11/12 flex flex-col justify-between'>
                         <div>
                           {info.items.cartProducts.map((item) => (
                             <Carrito
@@ -289,9 +289,9 @@ export const Cart = () => {
                         </div>
                         <div className='flex justify-center mt-8 flex-col  '>
                           <div className='my-4'>
-                            <h2 className='text-2xl font-bold text-black'>
+                            <h2 className='text-xl lg:text-2xl md:text-2xl font-bold text-black'>
                               Total:{' '}
-                              <span className='text-2xl font-bold text-black'>
+                              <span className='text-xl lg:text-2xl font-bold text-black'>
                                 ${' '}
                                 {calculateTotal(
                                   info.items.cartProducts ||
@@ -301,10 +301,10 @@ export const Cart = () => {
                               </span>
                             </h2>
                           </div>
-                          <div>
+                          <div className='flex flex-col lg:flex-row'>
                             <Link
                               to='/home'
-                              className='7-80 px-4 py-3 border-4 bg-blue-700 rounded-lg text-white hover:bg-blue-900 transition duration-100 transform hover:scale-105 mr-4 font-bold text-lg'
+                              className='7-80 px-4 py-3 border-4 bg-blue-700 rounded-lg text-white hover:bg-blue-900 transition duration-100 transform hover:scale-105 mr-4 font-bold text-lg text-center'
                             >
                               Ver más productos
                             </Link>
@@ -319,7 +319,7 @@ export const Cart = () => {
                         </div>
                       </div>
                       <div className='divider h-11/12 w-[4px] bg-gray-800 ml-12 mr-8 rounded-lg'></div>
-                      <div className=' w-4/12 h-11/12   rounded-lg p-5 flex flex-col gap-6 text-center'>
+                      <div className=' w-full md:w-4/12 h-11/12   rounded-lg p-5 flex flex-col gap-6 text-center border-t-2 border-gray-300 mt-10 md:mt-0 md:b-t-0 md:border-0'>
                         <div className='w-full'>
                           <FaceIcon
                             style={{ fontSize: '60px' }}
@@ -372,16 +372,16 @@ export const Cart = () => {
                     </p>
                     <Link
                       to='/home'
-                      className='7-80 px-4 py-3 border-4 bg-blue-800 rounded-lg text-white hover:bg-blue-900 transition duration-100 transform hover:scale-105'
+                      className='7-80 px-4 py-3 border-4 bg-blue-800 rounded-lg text-white hover:bg-blue-900 transition duration-100 transform hover:scale-105 text-center'
                     >
                       Ver más productos
                     </Link>
                   </div>
                 )
               ) : (
-                <div className='flex justify-center items-center w-[950px] h-[800px]'>
+                <div className='flex justify-center items-center h-full'>
                   <img
-                    className='w-1/3 mx-auto'
+                    className=''
                     src={loadingGif}
                     alt='gif'
                   />

@@ -160,14 +160,16 @@ export const Carrito = ({
       </NavLink>
       <div>
         <NavLink to={`/home/${productId}`}>
-          <div className='ml-4'>
-            <p>
+          <div className='ml-4  '>
+            <p className='text-sm md:text-md lg:text-lg'>
               {tipo} <span className=' font-bold'>|</span> {categoria} {marca}
             </p>
-            <h2 className=' font-medium text-black mb-1 text-2xl'>{nombreN}</h2>
+            <h2 className=' font-medium text-black mb-1 text-md md:text-lg lg:text-2xl'>
+              {nombreN}
+            </h2>
             <label
               htmlFor='quantity'
-              className='mr-2 text-lg'
+              className='mr-2 text-sm md:text-md lg:text-lg'
             >
               Cantidad:
               <span
@@ -177,7 +179,7 @@ export const Carrito = ({
                 {userData.userId ? cart.cantidad : cartGuest.cantidad}
               </span>
             </label>
-            <h4 className='text-black font-bold mt-2 text-lg'>
+            <h4 className='text-black font-bold mt-2 text-sm md:text-md lg:text-lg'>
               ${' '}
               {cart.precioTotal
                 ? cart.precioTotal.toLocaleString('en-US', options)
@@ -192,7 +194,7 @@ export const Carrito = ({
           {userData.userId ? (
             <button
               onClick={handleDelete}
-              className='mt-4 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none'
+              className='mt-4 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none text-sm md:text-md lg:text-lg'
             >
               Eliminar
             </button>
