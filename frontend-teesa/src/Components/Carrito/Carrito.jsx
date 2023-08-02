@@ -150,7 +150,7 @@ export const Carrito = ({
   }, [nombre]);
 
   return (
-    <div className='flex items-center border-b-2 pb-4 my-2 bg-gray-50 p-2'>
+    <div className='flex items-center border-b-4 border-gray-200 pb-4 my-2 bg-gray-50 p-2'>
       <NavLink to={`/home/${productId}`}>
         <img
           className='w-40 h-36 object-contain rounded-lg '
@@ -172,7 +172,7 @@ export const Carrito = ({
               Cantidad:
               <span
                 id='quantity'
-                className='px-2 text-gray-700 font-bold'
+                className='px-2 text-black '
               >
                 {userData.userId ? cart.cantidad : cartGuest.cantidad}
               </span>

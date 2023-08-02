@@ -97,6 +97,7 @@ const FormUserData = () => {
         icon: 'success',
         title: 'Tus datos fueron confirmados con éxito',
         //text: 'Tus datos fueron confirmados con éxito',
+        confirmButtonColor: '#192C8C',
         confirmButtonText: 'Aceptar',
       }).then(() => {
         navigate(`/carrito/summary/${userId}`);
@@ -174,16 +175,16 @@ const FormUserData = () => {
   //Si solo tiene repuestos, pasar a mercado pago.
 
   return (
-    <div className='h-screen w-full flex justify-center items-center flex-col 2xl:-mt-40'>
+    <div className='min-h-screen w-full flex justify-center items-center flex-col xl:-mt-40 pb-40'>
       <div className='w-5/12 mb-4'>
         <button
           onClick={handleGoBack}
-          className='bg-blue-600 rounded-md text-white hover:bg-blue-700 p-2  mt-60 '
+          className='rounded-md text-white bg-blue-700 hover:bg-blue-900 p-2  mt-60 '
         >
           Volver
         </button>
       </div>
-      <div className='w-5/12 border-2 border-teesaBlueDark p-5 rounded-2xl flex flex-col justify-between'>
+      <div className='w-5/12 border-2 border-teesaBlueDark p-5 rounded-2xl flex flex-col justify-between bg-white'>
         <div>
           <h1 className='text-center font-bold text-3xl '>Datos Personales</h1>
           <h2 className='mt-2'>
@@ -335,7 +336,7 @@ const FormUserData = () => {
                 <div className='w-full flex justify-end '>
                   <button
                     type='submit'
-                    className='text-center font-bold text-lg text-white py-2 px-4 rounded-xl bg-teesaBlueLight hover:bg-teesaBlueDark'
+                    className='text-center font-bold text-lg text-white py-2 px-4 rounded-xl bg-blue-700 hover:bg-blue-900'
                   >
                     {isLoading
                       ? 'Cargando...'

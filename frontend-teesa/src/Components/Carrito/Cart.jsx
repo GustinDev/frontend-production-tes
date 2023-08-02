@@ -172,25 +172,27 @@ export const Cart = () => {
                   todosRepuestos ? (
                     // REPUESTOS
                     <div className='twoContainer flex flex-row w-full h-full'>
-                      <div className='w-8/12 h-full '>
-                        {info.items.cartProducts.map((item) => (
-                          <Carrito
-                            key={item.id}
-                            id={item.id}
-                            cantidad={item.cantidad}
-                            precioTotal={item.precioTotal}
-                            productId={item.ProductId}
-                            nombre={item.Product?.nombre}
-                            precio={item.Product?.precio}
-                            imagen={item.Product?.imagenes}
-                            tipo={item.Product?.tipo}
-                            marca={item.Product?.marca}
-                            categoria={item.Product?.categoria}
-                          />
-                        ))}
-                        <div>
-                          <div className='mt-8'>
-                            <h2 className='text-2xl font-bold text-gray-800'>
+                      <div className='w-8/12 h-11/12 flex flex-col justify-between'>
+                        <div className='upperContainer'>
+                          {info.items.cartProducts.map((item) => (
+                            <Carrito
+                              key={item.id}
+                              id={item.id}
+                              cantidad={item.cantidad}
+                              precioTotal={item.precioTotal}
+                              productId={item.ProductId}
+                              nombre={item.Product?.nombre}
+                              precio={item.Product?.precio}
+                              imagen={item.Product?.imagenes}
+                              tipo={item.Product?.tipo}
+                              marca={item.Product?.marca}
+                              categoria={item.Product?.categoria}
+                            />
+                          ))}
+                        </div>
+                        <div className='bottomContainer'>
+                          <div className='my-4'>
+                            <h2 className='text-2xl font-bold text-black'>
                               Total:{' '}
                               <span className='text-2xl font-bold text-black'>
                                 ${' '}
@@ -205,7 +207,7 @@ export const Cart = () => {
                           <div className='flex justify-center mt-8'>
                             <Link
                               to='/home'
-                              className='7-80 px-4 py-3 border-4 bg-blue-900 rounded-lg text-white hover:bg-blue-900 transition duration-100 transform hover:scale-105 mr-4 font-bold text-lg'
+                              className='7-80 px-4 py-3 border-4 bg-blue-700 rounded-lg text-white hover:bg-blue-900 transition duration-100 transform hover:scale-105 mr-4 font-bold text-lg'
                             >
                               Ver más productos
                             </Link>
@@ -217,14 +219,14 @@ export const Cart = () => {
                             </a> */}
                             <button
                               onClick={handleBuyButton}
-                              className='7-80 px-4 py-3 border-4 bg-blue-500 rounded-lg text-white hover:bg-blue-700 transition duration-100 transform hover:scale-105 mr-4 font-bold text-lg'
+                              className='7-80 px-4 py-3 border-4 bg-blue-600 rounded-lg text-white hover:bg-blue-700 transition duration-100 transform hover:scale-105 mr-4 font-bold text-lg'
                             >
                               Comprar Productos
                             </button>
                           </div>
                         </div>
                       </div>
-                      <div className='divider h-11/12 w-[8px] bg-gray-600 ml-12 mr-8 rounded-lg'></div>
+                      <div className='divider h-11/12 w-[4px] bg-gray-300 ml-12 mr-8 rounded-lg'></div>
                       <div className=' w-4/12 h-11/12   rounded-lg p-5 flex flex-col gap-6 text-center'>
                         <div>
                           <LocalShippingIcon
@@ -284,9 +286,10 @@ export const Cart = () => {
                               categoria={item.Product?.categoria}
                             />
                           ))}
-
-                          <div className='mt-8'>
-                            <h2 className='text-2xl font-bold text-gray-800'>
+                        </div>
+                        <div className='flex justify-center mt-8 flex-col  '>
+                          <div className='my-4'>
+                            <h2 className='text-2xl font-bold text-black'>
                               Total:{' '}
                               <span className='text-2xl font-bold text-black'>
                                 ${' '}
@@ -298,18 +301,24 @@ export const Cart = () => {
                               </span>
                             </h2>
                           </div>
-                        </div>
-                        <div className='flex justify-center mt-8'>
-                          <button
-                            onClick={handleBuyButton}
-                            className='7-80 px-4 py-3 border-4 bg-blue-900 rounded-lg text-white hover:bg-blue-900 transition duration-100 transform hover:scale-105 mr-4 font-bold text-lg'
-                          >
-                            Comprar con un asesor
-                            {/* Consulta con un asesor para adquirir el producto */}
-                          </button>
+                          <div>
+                            <Link
+                              to='/home'
+                              className='7-80 px-4 py-3 border-4 bg-blue-700 rounded-lg text-white hover:bg-blue-900 transition duration-100 transform hover:scale-105 mr-4 font-bold text-lg'
+                            >
+                              Ver más productos
+                            </Link>
+                            <button
+                              onClick={handleBuyButton}
+                              className='7-80 px-4 py-3 border-4 bg-blue-500 rounded-lg text-white hover:bg-blue-700 transition duration-100 transform hover:scale-105 mr-4 font-bold text-lg'
+                            >
+                              Comprar con un asesor
+                              {/* Consulta con un asesor para adquirir el producto */}
+                            </button>
+                          </div>
                         </div>
                       </div>
-                      <div className='divider h-11/12 w-[8px] bg-gray-600 ml-12 mr-8 rounded-lg'></div>
+                      <div className='divider h-11/12 w-[4px] bg-gray-800 ml-12 mr-8 rounded-lg'></div>
                       <div className=' w-4/12 h-11/12   rounded-lg p-5 flex flex-col gap-6 text-center'>
                         <div className='w-full'>
                           <FaceIcon
@@ -365,7 +374,7 @@ export const Cart = () => {
                       to='/home'
                       className='7-80 px-4 py-3 border-4 bg-blue-800 rounded-lg text-white hover:bg-blue-900 transition duration-100 transform hover:scale-105'
                     >
-                      Seguir comprando
+                      Ver más productos
                     </Link>
                   </div>
                 )

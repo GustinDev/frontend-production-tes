@@ -108,6 +108,7 @@ const Summary = () => {
       title: '¡Gracias!',
       text: 'Un asesor se comunicará contigo pronto, te brindará atención personalizada.',
       confirmButtonText: 'Aceptar',
+      confirmButtonColor: '#192C8C',
     }).then(() => {
       navigate(`/home`);
     });
@@ -131,8 +132,8 @@ const Summary = () => {
   console.log(linkMercadoPago);
 
   return (
-    <div className='h-screen w-full flex items-center flex-col justify-start '>
-      <div className='w-10/12 mb-4'>
+    <div className='h-screen w-full flex items-center flex-col justify-start mb-10'>
+      <div className='w-10/12 2xl:w-8/12 mb-4'>
         <button
           onClick={handleGoBack}
           className='bg-blue-600 rounded-md text-white hover:bg-blue-700 p-2  mt-10 '
@@ -140,7 +141,7 @@ const Summary = () => {
           Volver
         </button>
       </div>
-      <div className='w-10/12 border-2 border-teesaBlueDark  p-5 rounded-2xl flex flex-col justify-between '>
+      <div className='w-10/12 2xl:w-8/12 border-2 border-teesaBlueDark  p-5 rounded-2xl flex flex-col justify-between bg-white'>
         <h1 className='text-center font-bold text-3xl mb-5 '>
           Resumen de Compra
         </h1>
@@ -181,8 +182,8 @@ const Summary = () => {
               </div>
             </div>
 
-            <div className='divider h-full w-[3px] bg-gray-800   rounded-lg '></div>
-            <div className='user bg-gray-200 w-3/12 h-full px-6 rounded-lg -ml-10'>
+            <div className='divider h-full w-[3px] bg-gray-300  rounded-lg '></div>
+            <div className='user bg-gray-100 w-3/12 h-full px-6 rounded-lg -ml-10 shadow-lg'>
               <div className='flex flex-col justify-start items-start  text-black xl:text-xl lg:text-xl md:text-xl sm:text-lg xs:text-md pb-[5%] w-full pt-4 '>
                 <h3 className='text-[16px]'>
                   <span className='font-bold'>
@@ -286,6 +287,9 @@ const Summary = () => {
             ) : null}
           </div>
         </div>
+      </div>
+      <div className='w-10/12 2xl:w-8/12 h-[30px]'>
+        <div className='h-[80px]'></div>
       </div>
     </div>
   );
