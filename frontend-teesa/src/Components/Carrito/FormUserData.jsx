@@ -175,8 +175,8 @@ const FormUserData = () => {
   //Si solo tiene repuestos, pasar a mercado pago.
 
   return (
-    <div className='min-h-screen w-full flex justify-center items-center flex-col xl:-mt-40 pb-40'>
-      <div className='w-5/12 mb-4'>
+    <div className='min-h-screen w-full flex justify-center items-center flex-col -mt-40 xl:-mt-40 pb-40'>
+      <div className='w-10/12  lg:w-5/12 mb-4'>
         <button
           onClick={handleGoBack}
           className='rounded-md text-white bg-blue-700 hover:bg-blue-900 p-2  mt-60 '
@@ -184,7 +184,7 @@ const FormUserData = () => {
           Volver
         </button>
       </div>
-      <div className='w-5/12 border-2 border-teesaBlueDark p-5 rounded-2xl flex flex-col justify-between bg-white'>
+      <div className='w-10/12  lg:w-5/12 border-2 border-teesaBlueDark p-5 rounded-2xl flex flex-col justify-between bg-white'>
         <div>
           <h1 className='text-center font-bold text-3xl '>Datos Personales</h1>
           <h2 className='mt-2'>

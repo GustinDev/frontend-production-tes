@@ -105,8 +105,8 @@ const Summary = () => {
   const handleConfirmUser = () => {
     Swal.fire({
       icon: 'success',
-      title: '¡Gracias!',
-      text: 'Un asesor se comunicará contigo pronto, te brindará atención personalizada.',
+      title: 'Asesoria Programada',
+      text: 'Un asesor se comunicará contigo pronto, te brindará atención personalizada para realizar tu compra.',
       confirmButtonText: 'Aceptar',
       confirmButtonColor: '#192C8C',
     }).then(() => {
@@ -133,7 +133,7 @@ const Summary = () => {
 
   return (
     <div className='h-screen w-full flex items-center flex-col justify-start mb-10'>
-      <div className='w-10/12 2xl:w-8/12 mb-4'>
+      <div className='w-11/12  lg:w-10/12 2xl:w-8/12 mb-4'>
         <button
           onClick={handleGoBack}
           className='bg-blue-600 rounded-md text-white hover:bg-blue-700 p-2  mt-10 '
@@ -141,14 +141,17 @@ const Summary = () => {
           Volver
         </button>
       </div>
-      <div className='w-10/12 2xl:w-8/12 border-2 border-teesaBlueDark  p-5 rounded-2xl flex flex-col justify-between bg-white'>
+      <div className='w-11/12 lg:w-10/12 2xl:w-8/12 border-2 border-teesaBlueDark  p-5 rounded-2xl flex flex-col justify-between bg-white'>
         <h1 className='text-center font-bold text-3xl mb-5 '>
           Resumen de Compra
         </h1>
         {info.items ? (
-          <div className='twoContainer w-full flex justify-between items-start flex-row'>
-            <div className='product  w-8/12 h-full'>
+          <div className='twoContainer w-full flex justify-between items-start flex-col-reverse md:flex-row'>
+            <div className='product w-full md:w-6/12 lg:w-8/12 h-full'>
               <div className='w-full h-full '>
+                <h1 className='block md:hidden my-2 font-bold text-lg'>
+                  Productos
+                </h1>
                 {info?.items?.cartProducts?.map((item) => (
                   <CarritoSummary
                     key={item.id}
@@ -182,8 +185,8 @@ const Summary = () => {
               </div>
             </div>
 
-            <div className='divider h-full w-[3px] bg-gray-300  rounded-lg '></div>
-            <div className='user bg-gray-100 w-3/12 h-full px-6 rounded-lg -ml-10 shadow-lg'>
+            <div className='divider h-full w-[3px] bg-gray-300  rounded-lg hidden lg:flex'></div>
+            <div className='user w-full bg-gray-100 md:w-5/12 lg:w-3/12 h-full px-6 rounded-lg md:-ml-10 md:shadow-lg'>
               <div className='flex flex-col justify-start items-start  text-black xl:text-xl lg:text-xl md:text-xl sm:text-lg xs:text-md pb-[5%] w-full pt-4 '>
                 <h3 className='text-[16px]'>
                   <span className='font-bold'>

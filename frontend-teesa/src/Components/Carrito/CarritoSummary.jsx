@@ -172,24 +172,23 @@ export const CarritoSummary = ({
             <p className='text-[14px]'>
               {tipo} <span className=' font-bold '>|</span> {categoria} {marca}
             </p>
-            <h2 className=' font-medium text-black mb-1 text-lg'>{nombreN}</h2>
+            <h2 className=' font-medium text-black  text-lg'>{nombreN}</h2>
 
             <span
               id='quantity'
               className=' text-black  flex text-md'
             >
-              Cantidad {userData.userId ? cart.cantidad : cartGuest.cantidad}{' '}
-              |&nbsp;
-              <h4 className='text-black text-md'>
-                ${' '}
-                {cart.precioTotal
-                  ? cart.precioTotal.toLocaleString('en-US', options)
-                  : cartGuest.precioTotal
-                  ? cartGuest.precioTotal.toLocaleString('en-US', options)
-                  : '0'}{' '}
-                COP
-              </h4>
+              Cantidad: {userData.userId ? cart.cantidad : cartGuest.cantidad}{' '}
             </span>
+            <h4 className='text-black text-md'>
+              ${' '}
+              {cart.precioTotal
+                ? cart.precioTotal.toLocaleString('en-US', options)
+                : cartGuest.precioTotal
+                ? cartGuest.precioTotal.toLocaleString('en-US', options)
+                : '0'}{' '}
+              COP
+            </h4>
           </div>
         </NavLink>
       </div>
