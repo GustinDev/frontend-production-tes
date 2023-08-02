@@ -39,10 +39,10 @@ function App() {
   }, [dispatch]);
 
   // Lista de rutas donde se mostrará el Footer
-  const visibleFooterRoutes = ['/', '/home', '/about', '/services'];
+  const visibleFooterRoutes = ['/home', '/about', '/services'];
 
   const hideNavbar = pathname === '/' || pathname === '/error404';
-  const hideFooter = !visibleFooterRoutes.includes(pathname); // Verificar si la ruta actual no está en la lista de rutas visibles para el Footer
+  const hideFooter = !visibleFooterRoutes.includes(pathname);
 
   return (
     <div>

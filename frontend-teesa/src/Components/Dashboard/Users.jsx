@@ -3,6 +3,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useTable } from 'react-table';
+import Modal from '@mui/material/Modal';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import { UserCard } from './UserCard';
 import {
   getUser,
   enableUser,
@@ -30,39 +34,7 @@ const columns = [
   {
     Header: 'Historial de Compras',
     accessor: 'historialCompras',
-    Cell: ({ value }) => (
-      <>
-        {value.length ? (
-          <ul>
-            {value.map((compra, index) => (
-              <li key={index}>
-                <div className='flex items-center'>
-                  <img
-                    src={compra.Product.imagenes[0]}
-                    alt='Producto'
-                    className='w-8 h-8 mr-2'
-                  />
-                  <div>
-                    <p className='text-sm font-semibold'>
-                      {compra.Product.nombre}
-                    </p>
-                    <p className='text-xs text-gray-500'>
-                      Fecha: {compra.fechaDeCompra}
-                    </p>
-                  </div>
-                </div>
-                <div className='text-xs'>
-                  Precio: {compra.precio}, Cantidad: {compra.cantidad}, Estado:{' '}
-                  {compra.estado}
-                </div>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>Este usuario no realizó ninguna compra.</p>
-        )}
-      </>
-    ),
+    Cell: ({ row }) => <UserCard usuario={row.original} />,
   },
   {
     Header: 'Inhabilitar Usuario',
@@ -102,7 +74,29 @@ const columns = [
 ];
 
 const Users = () => {
+  //HISTORIAL
   const dispatch = useDispatch();
+
+  const [showHistorialModal, setShowHistorialModal] = useState(false);
+  const [historialCompras] = useState([]);
+  // const [selectedUserId, setSelectedUserId] = useState(null);
+
+  // const fetchHistorialCompras = async (userId) => {
+  //   const shopId = await dispatch(getShopId(userId));
+  //   setHistorialCompras(shopId.payload);
+  // };
+
+  // const handleMostrarHistorial = (userId) => {
+  //   setSelectedUserId(userId);
+  //   toggleHistorialModal();
+  //   fetchHistorialCompras(userId);
+  // };
+
+  const toggleHistorialModal = () => {
+    setShowHistorialModal(!showHistorialModal);
+  };
+
+  //ETC
 
   useEffect(() => {
     dispatch(getUser());
@@ -117,7 +111,7 @@ const Users = () => {
     direccion: usuario.direccion || 'N/A',
     telefono: usuario.telefono || 'N/A',
     historialCompras: [],
-    enable: usuario.enable, // Estado para controlar si el usuario está habilitado o no.
+    enable: usuario.enable,
   }));
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
@@ -186,7 +180,9 @@ const Users = () => {
                       className='px-3 py-2 border-r border-black'
                       key={cell.column.id}
                     >
-                      {cell.render('Cell')}
+                      {cell.column.id === 'historialCompras'
+                        ? cell.render('Cell')
+                        : cell.render('Cell')}
                     </td>
                   ))}
                 </tr>
@@ -196,6 +192,57 @@ const Users = () => {
         </table>
       </div>
       <div className='w-full h-10'></div>
+
+      {/* Modal del historial de compras */}
+      <Modal
+        open={showHistorialModal}
+        onClose={toggleHistorialModal}
+        aria-labelledby='modal-modal-title'
+        aria-describedby='modal-modal-description'
+      >
+        <Box>
+          <Typography
+            id='modal-modal-title'
+            variant='h6'
+            component='h2'
+            style={{ color: '#000' }}
+          >
+            Historial de Compras
+          </Typography>
+          {historialCompras.length ? (
+            <ul className='mt-4'>
+              {historialCompras.map((compra) => (
+                <li
+                  key={compra.id}
+                  className='mb-2'
+                >
+                  <div className='flex items-center'>
+                    <img
+                      src={compra.Product.imagenes[0]}
+                      alt='Producto'
+                      className='w-8 h-8 mr-2'
+                    />
+                    <div>
+                      <p className='text-sm font-semibold'>
+                        {compra.Product.nombre}
+                      </p>
+                      <p className='text-xs text-gray-500'>
+                        Fecha: {compra.fechaDeCompra}
+                      </p>
+                    </div>
+                  </div>
+                  <div className='text-xs'>
+                    Precio: {compra.precio}, Cantidad: {compra.cantidad},
+                    Estado: {compra.estado}
+                  </div>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <h1>Este usuario no realizó ninguna compra</h1>
+          )}
+        </Box>
+      </Modal>
     </motion.div>
   );
 };
