@@ -144,7 +144,10 @@ const Users = () => {
           </h1>
         </div>
       </div>
-      <div className='h-full gap-1 mx-auto w-3/4 mb-[10px] border-black border-2'>
+      <h1 className='block lg:hidden w-full text-center'>
+        Para ver la tabla de usuarios y sus acciones, entra desde un computador.{' '}
+      </h1>
+      <div className='h-full gap-1 mx-auto w-3/4 mb-[10px] border-black border-2 hidden lg:block'>
         <table
           {...getTableProps()}
           className='w-full border-collapse'

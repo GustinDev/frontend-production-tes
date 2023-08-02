@@ -165,7 +165,7 @@ const CreateProducts = () => {
       </h1>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className='w-full md:w-2/5 lg:w-2/5 xl:w-2/5 sm:w-4/5 xs:w-4/5   bg-grey-100 rounded-lg border-teesaBlueDark border-2 flex flex-col p-10 h-auto mb-10 shadow-xl'
+        className='w-full md:w-3/5 lg:w-2/5 xl:w-2/5 sm:w-4/5 xs:w-4/5   bg-grey-100 rounded-lg border-teesaBlueDark border-2 flex flex-col p-10 h-auto mb-10 shadow-xl'
       >
         {/* nombre */}
         <label className='flex flex-col justify-center align-center items-center '>

@@ -1,6 +1,6 @@
-import React from 'react';
+/* eslint-disable react/prop-types */
 import { Doughnut } from 'react-chartjs-2';
-import { Chart, ArcElement, Tooltip, Legend } from "chart.js";
+import { Chart, ArcElement, Tooltip, Legend } from 'chart.js';
 
 Chart.register(Tooltip, Legend, ArcElement);
 const SalesChart = ({ salesData }) => {
@@ -32,8 +32,11 @@ const SalesChart = ({ salesData }) => {
   };
 
   return (
-    <div>
-      <Doughnut data={data} options={options} />
+    <div className='w-full h-full flex justify-center items-center'>
+      <Doughnut
+        data={data}
+        options={options}
+      />
     </div>
   );
 };

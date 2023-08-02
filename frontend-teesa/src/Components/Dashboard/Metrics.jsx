@@ -36,21 +36,23 @@ const Metrics = () => {
       <h1 className='text-white text-5xl font-bold my-5 bg-teesaBlueDark rounded-2xl p-2'>
         Métricas
       </h1>
-      <section className='flex flex-row gap-[3em] items-center justify-center bg-teesaGrey rounded-xl py-5 px-10'>
-        <article className='flex flex-row items-start font-bold text-lg text-black'>
-          <div>
-            Producto mas vendido:
-            {ProductChart && <h1>{ProductChart.mostSoldProduct}</h1>}
-            {ProductChart && <h2>{ProductChart.mostSoldCount}</h2>}
+      <section className='flex flex-col lg:flex-row gap-[3em] items-center justify-center bg-teesaGrey rounded-xl py-5 px-10 w-11/12'>
+        <article className='w-full flex flex-col items-start font-bold text-lg text-black'>
+          <div className='w-full'>
+            <h1>Producto mas vendido:</h1>
+            <div className='flex flex-row gap-2'>
+              {ProductChart && <h1>{ProductChart.mostSoldProduct}:</h1>}
+              {ProductChart && <h2>{ProductChart.mostSoldCount}.</h2>}
+            </div>
           </div>
-          <div>
+          <div className='w-full  h-[300px]'>
             {ProductChart && (
               <SalesChart salesData={ProductChart.productSales} />
             )}
           </div>
         </article>
-        <article className=' bg-white'>
-          <div>
+        <article className=' bg-white hidden md:block'>
+          <div className='w-full '>
             {ProductChart && (
               <MonthSalesChart salesByMonth={ProductChart.salesByMonth} />
             )}
