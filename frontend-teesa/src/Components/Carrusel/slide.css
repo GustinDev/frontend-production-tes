@@ -1,3 +1,26 @@
 .carousel .slider-wrapper {
   width: 100%;
 }
+
+/* Cambiar el color de las flechas del Carousel a negro */
+.carousel .control-arrow::before,
+.carousel .slider-wrapper .control-arrow::before,
+.carousel .thumbs-wrapper .control-arrow::before {
+  color: black;
+}
+
+.carousel {
+  display: flex;
+  justify-content: center;
+}
+
+.carousel .control-prev.control-arrow:before {
+  border-right: 8px solid #000;
+}
+.carousel .control-next.control-arrow:before {
+  border-left: 8px solid #000;
+}
+
+.ul.thumbs .animated {
+  display: flex;
+}

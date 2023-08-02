@@ -9,13 +9,13 @@ const ImageCarousel = () => {
   );
 
   return (
-    <div className='w-2/3 h-full mx-auto'>
+    <div className='w-10/12 h-fit mx-auto bg-gray-300 '>
       {' '}
-      <Carousel className='main-slide'>
+      <Carousel className='main-slide flex flex-col items-center w-full'>
         {imagenes?.map((image, index) => (
           <div
             key={index}
-            className='h-[300px] w-[300px]'
+            className='w-[150px] h-[230px] md:h-[380px] md:w-[300px] mx-auto'
           >
             <img
               className='h-full object-contain'

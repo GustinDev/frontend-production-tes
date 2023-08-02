@@ -287,10 +287,22 @@ const CardDetail = ({
     navigate(`/dashboard/editproduct/${id}`);
   };
 
+  //Nombre:
+
+  const [nombreN, setNombreN] = useState('');
+
+  function capitalizeFirstLetters(str) {
+    return str?.replace(/\b\w/g, (char) => char?.toUpperCase());
+  }
+  useEffect(() => {
+    const nombreEnMayusculas = capitalizeFirstLetters(nombre);
+    setNombreN(nombreEnMayusculas);
+  }, [nombre]);
+
   return (
-    <div className='w-full h-full mt-12 flex flex-col justify-center items-center '>
-      <div className='detailContainer flex flex-col lg:flex-row w-full lg:w-3/4 rounded   '>
-        <div className='flex justify-start items-start w-5 -mt-10'>
+    <div className='w-full h-full mt-12 flex flex-col justify-center items-center bg-white p-5 lg:p-0'>
+      <div className='detailContainer flex flex-col lg:flex-row w-full lg:w-3/4  rounded-xl border-2 border-gray-300  mt-6'>
+        <div className='flex justify-start items-start w-5 -mt-16 '>
           <NavLink className=' justify-self-start mb-1  transition duration-300 ease-in-out transform m-2'>
             <button
               onClick={handleGoBack}
@@ -300,7 +312,7 @@ const CardDetail = ({
             </button>
           </NavLink>
         </div>
-        <div className='w-full lg:w-1/2 m-4 flex items-center justify-center'>
+        <div className='w-11/12 lg:w-1/2 m-4 flex items-start justify-center bg-gray-300 md:p-5 rounded-lg mt-8'>
           <Carrusel />
         </div>
         <div className='w-full lg:w-1/2  px-8 py-6'>
@@ -308,7 +320,7 @@ const CardDetail = ({
             {categoria} {marca}
           </div>
           <h2 className='text-teesaBlueDark text-3xl font-light mb-4'>
-            {nombre}
+            {nombreN}
           </h2>
 
           <div className='flex items-center '>
@@ -422,7 +434,7 @@ const CardDetail = ({
         </div>
       </div>
       {/* Reviews */}
-      <div className='reviewsContainer w-full m-8 lg:m-4 lg:w-3/4   border-t-2 border-blue-950'>
+      <div className='reviewsContainer w-full m-0 lg:m-4 lg:w-3/4  mt-4 border-t-2 border-blue-950'>
         {/* Review Form */}
         {userReviewEnabled && (
           <ReviewForm
