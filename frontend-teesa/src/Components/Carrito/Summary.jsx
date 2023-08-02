@@ -7,6 +7,7 @@ import CarritoSummary from './CarritoSummary';
 import loadingGif from '../../assets/icon/Loading.gif';
 import Swal from 'sweetalert2';
 import { postLinkMercado } from '../../features/reduxReducer/mercadoSlice';
+import { motion } from 'framer-motion';
 
 const Summary = () => {
   //Button Back
@@ -59,8 +60,6 @@ const Summary = () => {
     useGrouping: true,
     minimumFractionDigits: 0,
   };
-
-  //! VER BUCLE INFINITO DE CART - IMPORTANTE
 
   console.log(info);
 
@@ -132,7 +131,12 @@ const Summary = () => {
   console.log(linkMercadoPago);
 
   return (
-    <div className='h-screen w-full flex items-center flex-col justify-start mb-10'>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}
+      className='h-screen w-full flex items-center flex-col justify-start mb-10'
+    >
       <div className='w-11/12  lg:w-10/12 2xl:w-8/12 mb-4'>
         <button
           onClick={handleGoBack}
@@ -294,7 +298,7 @@ const Summary = () => {
       <div className='w-10/12 2xl:w-8/12 h-[30px]'>
         <div className='h-[80px]'></div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

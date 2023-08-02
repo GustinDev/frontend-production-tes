@@ -9,6 +9,7 @@ import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 const FormUserData = () => {
   //   const nav = useNavigate();
@@ -175,7 +176,12 @@ const FormUserData = () => {
   //Si solo tiene repuestos, pasar a mercado pago.
 
   return (
-    <div className='min-h-screen w-full flex justify-center items-center flex-col -mt-40 xl:-mt-40 pb-40'>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}
+      className='min-h-screen w-full flex justify-center items-center flex-col -mt-40 xl:-mt-40 pb-40'
+    >
       <div className='w-10/12  lg:w-5/12 mb-4'>
         <button
           onClick={handleGoBack}
@@ -350,7 +356,7 @@ const FormUserData = () => {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
