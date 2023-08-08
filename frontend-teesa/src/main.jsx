@@ -40,7 +40,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
           <link
             rel='icon'
-            href='./img/SVGs/TeesaAll.svg'
+            href='/img/SVGs/TeesaAll.svg'
             type='image/svg+xml'
           />
           {/* <meta
