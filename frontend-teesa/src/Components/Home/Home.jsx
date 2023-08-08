@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 //Redux:
 import {
   addFilter,
+  changePage,
   fetchProducts,
 } from '../../features/reduxReducer/filterSlice';
 import {
@@ -115,6 +116,10 @@ function Home() {
 
   const [tipo, setTipo] = useState('');
 
+  const handleChange = () => {
+    dispatch(changePage(1));
+  };
+
   return (
     <div className='flex flex-wrap overflow-y-auto min-h-screen w-full mx-auto justify-center items'>
       {/* Second Navbar */}
@@ -185,7 +190,10 @@ function Home() {
                     className={`w-full h-full rounded-l-xl font-bold text-lg ${
                       tipo === '' ? 'bg-teesaGreen text-text-black' : 'bg-white'
                     } px-4 py-2  border border-gray-200`}
-                    onClick={() => setTipo('')}
+                    onClick={() => {
+                      setTipo('');
+                      handleChange();
+                    }}
                   >
                     Todos
                   </button>
@@ -197,7 +205,10 @@ function Home() {
                         ? 'bg-teesaGreen text-bleck'
                         : 'bg-white'
                     } px-4 py-2  border border-gray-200`}
-                    onClick={() => setTipo('equipo')}
+                    onClick={() => {
+                      setTipo('equipo');
+                      handleChange();
+                    }}
                   >
                     Equipos
                   </button>
@@ -209,7 +220,10 @@ function Home() {
                         ? 'bg-teesaGreen text-black'
                         : 'bg-white'
                     } px-4 py-2  border border-gray-200`}
-                    onClick={() => setTipo('repuesto')}
+                    onClick={() => {
+                      setTipo('repuesto');
+                      handleChange();
+                    }}
                   >
                     Repuestos
                   </button>

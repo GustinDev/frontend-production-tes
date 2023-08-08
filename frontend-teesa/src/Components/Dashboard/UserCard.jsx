@@ -27,7 +27,7 @@ const UserCard = ({ usuario }) => {
   };
 
   return (
-    <div className='w-full '>
+    <div className='w-full'>
       <button
         onClick={handleMostrarHistorial}
         className='bg-blue-600 rounded-md text-white hover:bg-blue-700 p-2 mt-2'
