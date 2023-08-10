@@ -31,7 +31,7 @@ export const createProduct = createAsyncThunk(
     console.log(payload);
     try {
       const response = await axios.post(
-        'https://teesa-backend.onrender.com/products',
+        'http://localhost:3001/products',
         payload
       );
       console.log(response);
@@ -51,7 +51,7 @@ export const editProduct = createAsyncThunk(
       const { imagenes, precio, stock } = payload.data;
       const { ProductID } = payload;
       const response = await axios.put(
-        `https://teesa-backend.onrender.com/detail/${ProductID}`,
+        `http://localhost:3001/detail/${ProductID}`,
         { imagenes, precio, stock }
       );
 
@@ -75,7 +75,7 @@ export const deleteProduct = createAsyncThunk(
   async (ProductID) => {
     try {
       const response = await axios.delete(
-        `https://teesa-backend.onrender.com/products/${ProductID}`
+        `http://localhost:3001/products/${ProductID}`
       );
       console.log('Respuesta de la solicitud DELETE:', response.data);
       return response.data;
@@ -95,9 +95,7 @@ export const getProductsChart = createAsyncThunk(
   'admin/getProductsChart',
   async () => {
     try {
-      const response = await axios.get(
-        `https://teesa-backend.onrender.com/purchase`
-      );
+      const response = await axios.get(`http://localhost:3001/purchase`);
       return response;
     } catch (error) {
       console.log('ERROR', error.response.data.message);

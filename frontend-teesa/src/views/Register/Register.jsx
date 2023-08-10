@@ -11,7 +11,6 @@ import { loginUser } from '../../features/reduxReducer/loginSlice';
 import Cookies from 'universal-cookie';
 import { Link } from 'react-router-dom';
 //EmailJS - Mailer
-import emailjs from '@emailjs/browser';
 import waves from '../../assets/icon/layered-waves.svg';
 import { motion } from 'framer-motion';
 
@@ -96,21 +95,21 @@ function Register() {
       }
     }
     //EmailJS - Mailer
-    const user_email = data.correo;
-    const user_name = data.nombre;
-    emailjs
-      .send(
-        'service_2rp9duo',
-        'template_ogrchsj',
-        { user_email, user_name },
-        'W5KJUGxF4wBdmUA3v'
-      )
-      .then((result) => {
-        console.log(result.text);
-      })
-      .catch((error) => {
-        console.log(error.text);
-      });
+    // const user_email = data.correo;
+    // const user_name = data.nombre;
+    // emailjs
+    //   .send(
+    //     'service_2rp9duo',
+    //     'template_ogrchsj',
+    //     { user_email, user_name },
+    //     'W5KJUGxF4wBdmUA3v'
+    //   )
+    //   .then((result) => {
+    //     console.log(result.text);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error.text);
+    //   });
     reset();
   };
 
@@ -271,7 +270,7 @@ function Register() {
           </form>
           <div className='flex justify-center items-center align-center text-center mt-2 w-full'>
             <a
-              href='https://teesa-backend.onrender.com/google/signup'
+              href='http://localhost:3001/google/signup'
               className='w-full'
             >
               <button

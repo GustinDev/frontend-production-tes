@@ -29,22 +29,24 @@ export default function NavBar(props) {
     items: '',
   });
   const userUUID = props.userId;
+
+  console.log(info);
+
+  //!Bucle - Fix:
   useEffect(() => {
     dispatch(getUser()).then((action) => {
       const response = action.payload;
-      // console.log(response);
       const cartId = response.find((user) => user.id === userId)?.Cart.id;
-      // console.log(cartId);
+
       if (cartId) {
         dispatch(getCart(cartId)).then((action) => {
           const response = action.payload;
-          // console.log(response);
           setInfo((prevInfo) => ({
             ...prevInfo,
             items: response,
           }));
         });
-      } else
+      } else {
         dispatch(getCartGuestProducts(userUUID)).then((action) => {
           const response = action.payload;
           setInfo((prevInfo) => ({
@@ -52,8 +54,9 @@ export default function NavBar(props) {
             items: response,
           }));
         });
+      }
     });
-  }, [dispatch, userData, info]);
+  }, [dispatch]);
 
   //Google
   const [nombreGoogle, setNombreGoogle] = useState(null);

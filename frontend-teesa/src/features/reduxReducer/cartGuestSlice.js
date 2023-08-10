@@ -14,7 +14,7 @@ export const postCartGuestProducts = createAsyncThunk(
   async ({ ProductId, cantidad }, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        'https://teesa-backend.onrender.com/cartGuestProducts',
+        'http://localhost:3001/cartGuestProducts',
         {
           ProductId,
           cantidad,
@@ -35,7 +35,7 @@ export const getCartGuestProducts = createAsyncThunk(
   async (userId) => {
     try {
       const response = await axios.get(
-        `https://teesa-backend.onrender.com/cartGuestProducts?userId=${userId}`
+        `http://localhost:3001/cartGuestProducts?userId=${userId}`
       );
       return response.data;
     } catch (error) {
@@ -50,7 +50,7 @@ export const updateCartGuestProducts = createAsyncThunk(
   async ({ CartGuestProductId, cantidad }) => {
     try {
       const response = await axios.put(
-        `https://teesa-backend.onrender.com/cartGuestProducts/${CartGuestProductId}`,
+        `http://localhost:3001/cartGuestProducts/${CartGuestProductId}`,
         { cantidad }
       );
       return response.data;
@@ -66,7 +66,7 @@ export const deleteCartGuestProducts = createAsyncThunk(
   async (CartGuestProductId) => {
     try {
       const response = await axios.delete(
-        `https://teesa-backend.onrender.com/cartGuestProducts/${CartGuestProductId}`
+        `http://localhost:3001/cartGuestProducts/${CartGuestProductId}`
       );
       return response.data;
     } catch (error) {

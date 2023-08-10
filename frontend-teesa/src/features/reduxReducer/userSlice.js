@@ -26,17 +26,14 @@ export const putUser = createAsyncThunk('user/putUser', async (payload) => {
     const ciudad = userCity;
     const detalles = userDetail;
     console.log('Datos:' + nombre, nit, direccion, telefono, ciudad, detalles);
-    const response = await axios.put(
-      `https://teesa-backend.onrender.com/user/${userId}`,
-      {
-        nombre,
-        nit,
-        direccion,
-        telefono,
-        ciudad,
-        detalles,
-      }
-    );
+    const response = await axios.put(`http://localhost:3001/user/${userId}`, {
+      nombre,
+      nit,
+      direccion,
+      telefono,
+      ciudad,
+      detalles,
+    });
     delete response.config.transformResponse;
     delete response.headers;
     delete response.config.transformRequest;
@@ -60,7 +57,7 @@ export const getProducts = createAsyncThunk(
   async (userId) => {
     try {
       const response = await axios.get(
-        `https://teesa-backend.onrender.com/purchase/${userId}`
+        `http://localhost:3001/purchase/${userId}`
       );
       return response;
     } catch (error) {
@@ -75,9 +72,7 @@ export const getProducts = createAsyncThunk(
 export const fetchUserById = createAsyncThunk(
   'user/fetchUserById',
   async (id) => {
-    const response = await axios.get(
-      `https://teesa-backend.onrender.com/users/${id}`
-    );
+    const response = await axios.get(`http://localhost:3001/users/${id}`);
     // console.log(response.data);
     return response.data;
   }
