@@ -8,7 +8,7 @@ const initialState = {
   errorMessage: '',
   success: false,
   token: '',
-  googleAuthLink: 'http://localhost:3001/google/signup',
+  googleAuthLink: 'https://teesa-backend.onrender.com/google/signup',
 };
 
 // Comunicación con BACK.
@@ -19,12 +19,15 @@ export const registerUser = createAsyncThunk(
     { rejectWithValue }
   ) => {
     try {
-      const response = await axios.post('http://localhost:3001/signup', {
-        nombre,
-        correo,
-        contrasena,
-        confirmarContrasena,
-      });
+      const response = await axios.post(
+        'https://teesa-backend.onrender.com/signup',
+        {
+          nombre,
+          correo,
+          contrasena,
+          confirmarContrasena,
+        }
+      );
       console.log(response.data.token);
       return response.data.token;
     } catch (error) {

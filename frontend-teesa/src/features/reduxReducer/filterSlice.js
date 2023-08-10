@@ -9,7 +9,7 @@ export const fetchProducts = createAsyncThunk(
       // const { precioQuery } = filters;
       const queryParams = new URLSearchParams(filters).toString();
       const response = await axios.get(
-        `http://localhost:3001/products?${queryParams}`
+        `https://teesa-backend.onrender.com/products?${queryParams}`
       );
       return response.data;
     } catch (error) {
@@ -22,7 +22,7 @@ export const fetchProducts = createAsyncThunk(
 //   async (number) => {
 //     try {
 //       const response = await axios.get(
-//         `http://localhost:3001/products?page=${number}`
+//         `https://teesa-backend.onrender.com/products?page=${number}`
 //       );
 //       return response.data;
 //     } catch (error) {

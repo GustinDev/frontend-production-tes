@@ -232,18 +232,33 @@ const Login = () => {
             </p>
           </form>
           <div className='w-full border-t-2 border-teesaBlueLight mb-4'></div>
-          <div className='flex justify-center items-center mt-2 w-full'>
+          <div className='flex flex-col justify-center items-center mt-2 w-full gap-2'>
             <button
-              className='flex mb-[5px]  w-full rounded bg-teesaWhite  py-2.5 text-sm 2xl:text-lg  font-medium uppercase leading-normal text-black shadow-lg  cursor-pointer border-2 border-teesaBlueLight hover:bg-gray-300 justify-center'
+              className='flex flex-row mb-[5px]  w-full rounded bg-teesaWhite  py-2.5 text-sm 2xl:text-lg  font-medium uppercase leading-normal text-black shadow-lg  cursor-pointer border-2 border-teesaBlueLight hover:bg-gray-300 justify-center'
               type='submit'
               onClick={handleGoogleLogin}
             >
               <img
                 src={googleIcon}
-                className='w-5 h-5 mx-3 my-auto'
+                className='w-5 h-5 mx-2 my-auto'
               />{' '}
               Ingresa con Google
             </button>
+            <a
+              href='https://teesa-backend.onrender.com/google/signup'
+              className='w-full'
+            >
+              <button
+                className='flex flex-crow mb-[5px]  w-full rounded bg-teesaWhite  py-2.5 text-sm 2xl:text-lg  font-medium uppercase leading-normal text-black shadow-lg  cursor-pointer border-2 border-teesaBlueLight hover:bg-gray-300 justify-center'
+                type='submit'
+              >
+                <img
+                  src={googleIcon}
+                  className='w-5 h-5 mx-2 my-auto'
+                />{' '}
+                Registrate con Google
+              </button>
+            </a>
           </div>
         </div>
 

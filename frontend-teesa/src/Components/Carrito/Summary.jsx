@@ -120,7 +120,7 @@ const Summary = () => {
   const mailerRequest = () => {
     console.log(userEmail);
     axios
-      .post('http://localhost:3001/userContact', {
+      .post('https://teesa-backend.onrender.com/userContact', {
         user: userSumData,
         cart: cartSumData,
       })

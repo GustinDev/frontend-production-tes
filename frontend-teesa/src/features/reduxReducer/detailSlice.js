@@ -11,7 +11,9 @@ export const getProductById = createAsyncThunk(
   'products/getProductById',
   async (id) => {
     try {
-      const response = await axios.get(`http://localhost:3001/detail/${id}`);
+      const response = await axios.get(
+        `https://teesa-backend.onrender.com/detail/${id}`
+      );
       return response.data;
     } catch (error) {
       console.error('Error fetching product:', error);

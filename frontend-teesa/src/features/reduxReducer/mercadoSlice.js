@@ -12,7 +12,7 @@ export const postLinkMercado = createAsyncThunk(
   async (id) => {
     try {
       const response = await axios.post(
-        `http://localhost:3001/mercadopago/create_order/${id}`
+        `https://teesa-backend.onrender.com/mercadopago/create_order/${id}`
       );
       const link = response.data;
       return link;

@@ -18,7 +18,9 @@ const initialState = {
 //Traer los productos
 export const getApiData = createAsyncThunk('products/getApiData', async () => {
   try {
-    const response = await axios.get('http://localhost:3001/products');
+    const response = await axios.get(
+      'https://teesa-backend.onrender.com/products'
+    );
     return response.data.products;
   } catch (error) {
     console.error('Error fetching products:', error);
@@ -32,7 +34,7 @@ export const getPaginationData = createAsyncThunk(
   async (number) => {
     try {
       const response = await axios.get(
-        `http://localhost:3001/products?page=${number}`
+        `https://teesa-backend.onrender.com/products?page=${number}`
       );
 
       return response.data;
@@ -47,7 +49,9 @@ export const getPaginationData = createAsyncThunk(
 
 export const getBrands = createAsyncThunk('products/getBrands', async () => {
   try {
-    const response = await axios.get('http://localhost:3001/brands');
+    const response = await axios.get(
+      'https://teesa-backend.onrender.com/brands'
+    );
     return response.data; // Actualiza aquí para acceder a response.data
   } catch (error) {
     console.error('Error fetching brands:', error);

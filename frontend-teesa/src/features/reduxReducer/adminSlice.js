@@ -12,7 +12,9 @@ const initialState = {
 
 export const getUser = createAsyncThunk('users/getUsers', async () => {
   try {
-    const response = await axios.get(`http://localhost:3001/users`);
+    const response = await axios.get(
+      `https://teesa-backend.onrender.com/users`
+    );
     console.log(response.data);
     return response.data;
   } catch (error) {
@@ -24,7 +26,7 @@ export const getUser = createAsyncThunk('users/getUsers', async () => {
 export const getShopId = createAsyncThunk('users/getShopId', async (userId) => {
   try {
     const response = await axios.get(
-      `http://localhost:3001/purchase/${userId}`
+      `https://teesa-backend.onrender.com/purchase/${userId}`
     );
     console.log(response.data);
     return response.data;
@@ -39,7 +41,7 @@ export const enableUserfalse = createAsyncThunk(
   async (userId, { rejectWithValue }) => {
     try {
       const response = await axios.put(
-        `http://localhost:3001/enable/${userId}`,
+        `https://teesa-backend.onrender.com/enable/${userId}`,
         null,
         {
           params: {
@@ -60,7 +62,7 @@ export const enableUser = createAsyncThunk(
   async (userId, { rejectWithValue }) => {
     try {
       const response = await axios.put(
-        `http://localhost:3001/enable/${userId}`,
+        `https://teesa-backend.onrender.com/enable/${userId}`,
         null,
         {
           params: {

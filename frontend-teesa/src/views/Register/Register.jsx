@@ -10,7 +10,6 @@ import jwt_decode from 'jwt-decode';
 import { loginUser } from '../../features/reduxReducer/loginSlice';
 import Cookies from 'universal-cookie';
 import { Link } from 'react-router-dom';
-//EmailJS - Mailer
 import waves from '../../assets/icon/layered-waves.svg';
 import { motion } from 'framer-motion';
 
@@ -270,7 +269,7 @@ function Register() {
           </form>
           <div className='flex justify-center items-center align-center text-center mt-2 w-full'>
             <a
-              href='http://localhost:3001/google/signup'
+              href='https://teesa-backend.onrender.com/google/signup'
               className='w-full'
             >
               <button
