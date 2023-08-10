@@ -40,7 +40,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
           <link
             rel='icon'
-            href='https://www.teesa.online/assets/TeesaAll-bcd00dc8.svg'
+            href='https://www.teesa.online/assets/TeesaLogo-911954d6.svg'
             type='image/svg+xml'
           />
           <meta
