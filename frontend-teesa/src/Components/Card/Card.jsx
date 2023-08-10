@@ -213,7 +213,7 @@ export const Card = ({
   }, [nombre]);
 
   return (
-    <div className='flex w-[260px] h-[460px] my-2 mx-6 transition duration-100 transform hover:scale-105 hover:cursor-pointer'>
+    <div className='flex w-[260px] h-[480px] my-2 mx-6 transition duration-100 transform hover:scale-105 hover:cursor-pointer'>
       <div className='shadow-md border bg-teesaWhite border-gray-400 rounded-md flex flex-col'>
         <div>
           <NavLink to={`/home/${id}`}>
