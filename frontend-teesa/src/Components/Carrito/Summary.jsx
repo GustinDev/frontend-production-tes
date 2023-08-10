@@ -1,13 +1,14 @@
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { fetchUserById } from '../../features/reduxReducer/userSlice';
 import { getCart, getUser } from '../../features/reduxReducer/carritoSlice';
-import CarritoSummary from './CarritoSummary';
-import loadingGif from '../../assets/icon/Loading.gif';
-import Swal from 'sweetalert2';
 import { postLinkMercado } from '../../features/reduxReducer/mercadoSlice';
+import { fetchUserById } from '../../features/reduxReducer/userSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import loadingGif from '../../assets/icon/Loading.gif';
+import { useNavigate } from 'react-router-dom';
+import CarritoSummary from './CarritoSummary';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import Swal from 'sweetalert2';
+import axios from 'axios';
 
 const Summary = () => {
   //Button Back
@@ -101,11 +102,26 @@ const Summary = () => {
     setTodosRepuestos(!encontramosEquipo);
   }, [info.items]);
 
+  //*Mailer - Equipos:
+
+  const mailerRequest = () => {
+    console.log(userEmail);
+    axios
+      .post('/api/send-email', { email: userEmail })
+      .then((response) => {
+        console.log('Correo enviado:', response.data);
+      })
+      .catch((error) => {
+        console.error('Error al enviar el correo:', error);
+      });
+  };
+
   const handleConfirmUser = () => {
+    mailerRequest();
     Swal.fire({
       icon: 'success',
       title: 'Asesoria Programada',
-      text: 'Un asesor se comunicará contigo pronto, te brindará atención personalizada para realizar tu compra.',
+      text: 'Envíamos tu compra a un asesor, el se comunicará contigo pronto y te brindará atención personalizada para realizar tu compra.',
       confirmButtonText: 'Aceptar',
       confirmButtonColor: '#192C8C',
     }).then(() => {
@@ -282,13 +298,20 @@ const Summary = () => {
                     Cargando...
                   </button>
                 )
-              ) : (
+              ) : userEmail ? (
                 <button
                   onClick={handleConfirmUser}
                   type='submit'
                   className='text-center font-bold text-2xl text-white py-2 px-4 rounded-xl bg-teesaBlueLight hover:bg-teesaBlueDark'
                 >
                   Confirmar Compra
+                </button>
+              ) : (
+                <button
+                  type='submit'
+                  className='text-center font-bold text-2xl text-white py-2 px-4 rounded-xl bg-teesaBlueLight hover:bg-teesaBlueDark'
+                >
+                  Cargando...
                 </button>
               )
             ) : null}

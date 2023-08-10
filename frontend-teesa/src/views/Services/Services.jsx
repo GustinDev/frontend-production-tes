@@ -3,6 +3,7 @@ import correctivo from '../../img/imgs/correctivo.png';
 import tech from '../../img/imgs/tech.jpg';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import Logo from '../../img/SVGs/TeesaLogo.svg';
 
 //Responsive:
 
@@ -58,8 +59,13 @@ function Services() {
             ¿Quieres agendar una visita técnica?
           </h1>
           <Link to='/contact'>
-            <button className='inline-block  rounded bg-teesaBlueLight  px-6 pt-2.5 pb-2 text-lg uppercase leading-normal text-white shadow-lg hover:bg-blue-600 cursor-pointer xl:text-2xl  font-extrabold '>
-              contáctanos
+            <button className=' rounded bg-teesaBlueLight  px-6 pt-2.5 pb-2 text-lg uppercase leading-normal text-white shadow-lg hover:bg-blue-600 cursor-pointer xl:text-2xl  font-extrabold flex justify-center items-center'>
+              contáctanos{' '}
+              <img
+                src={Logo}
+                alt='logo'
+                className='w-5 h-5 pl-1'
+              />
             </button>
           </Link>
           {/* MITAD */}

@@ -40,13 +40,25 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
           <link
             rel='icon'
-            href='/img/SVGs/TeesaAll.svg'
+            href='https://www.teesa.online/assets/TeesaAll-bcd00dc8.svg'
             type='image/svg+xml'
           />
-          {/* <meta
+          <meta
             property='og:url'
             content='https://www.teesa.online/'
-          /> */}
+          />
+          <meta
+            property='og:url'
+            content='https://www.linkedin.com/in/teesa-tecnologia-en-equipos-alimenticios-sas-076696230/?originalSubdomain=co'
+          />
+          <meta
+            property='og:url'
+            content='https://www.facebook.com/profile.php?id=100068661421832&mibextid=ZbWKwL'
+          />
+          <meta
+            property='og:url'
+            content='https://www.instagram.com/teesa.tec/?igshid=YmMyMTA2M2Y%3D'
+          />
         </Helmet>
         {/* Final Metada  */}
         <App />
