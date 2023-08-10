@@ -104,10 +104,26 @@ const Summary = () => {
 
   //*Mailer - Equipos:
 
+  let userSumData = {
+    nombre: userName,
+    email: userEmail,
+    direccion: userAddress,
+    nit: userNit,
+    ciudad: userCity,
+    detalle: userDetail,
+    celular: userPhone,
+  };
+  let cartSumData = info?.items?.cartProducts;
+
+  console.log({ user: userSumData, cart: cartSumData });
+
   const mailerRequest = () => {
     console.log(userEmail);
     axios
-      .post('/api/send-email', { email: userEmail })
+      .post('https://teesa-backend.onrender.com/userContact', {
+        user: userSumData,
+        cart: cartSumData,
+      })
       .then((response) => {
         console.log('Correo enviado:', response.data);
       })

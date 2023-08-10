@@ -19,7 +19,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
           <meta
             name='description'
-            content='Teesa S.A.S, tu tienda de venta de repuestos y servicios de equipos alimenticios en Colombia.'
+            content='Teesa S.A.S, tu tienda de venta de repuestos y servicios de equipos alimenticios en Colombia. Ubicados en Cali, Colombia.'
           />
           <meta
             name='keywords'
