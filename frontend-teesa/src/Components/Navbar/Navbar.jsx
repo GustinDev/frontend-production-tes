@@ -245,7 +245,7 @@ export default function NavBar() {
                     />
                   </span>
                 ) : cartNumberS > 0 ? (
-                  <span className='w-4 h-4 absolute -top-1 -right-3 bg-teesaGreen text-black rounded-full text-xs px-1.5 py-.05 font-bold'>
+                  <span className=' absolute -top-1 -right-3 bg-teesaGreen text-black rounded-full text-xs px-1.5 py-.05 font-bold'>
                     <h1 className='-ml-[1.5px] mt-[1px]'>{cartNumberS}</h1>
                   </span>
                 ) : null}
