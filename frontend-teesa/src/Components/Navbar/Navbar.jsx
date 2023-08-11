@@ -2,7 +2,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { getUser, getCart } from '../../features/reduxReducer/carritoSlice';
+import { getUserCartNumber } from '../../features/reduxReducer/carritoSlice';
 import { NavLink } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 import 'boxicons/css/boxicons.min.css';
@@ -11,54 +11,61 @@ import {
   resetUserState,
   updateUserDataFromCookie,
 } from '../../features/reduxReducer/userSlice';
-import { getCartGuestProducts } from '../../features/reduxReducer/cartGuestSlice';
+// import { getCartGuestProducts } from '../../features/reduxReducer/cartGuestSlice';
 
-export default function NavBar(props) {
+export default function NavBar() {
   //Traer Data del User - Nuestro Login y Register
   const userData = useSelector((state) => state.userState);
+
   const dispatch = useDispatch();
   const {
     user,
     userData: { userName },
-    userData: { userId },
+    // userData: { userId },
   } = userData;
 
   const userAdmin = useSelector((state) => state.userState.userData.userType);
 
-  const [info, setInfo] = useState({
-    items: '',
-  });
-  const userUUID = props.userId;
+  //! Bucle - Fix (Number Cart):
+  // eslint-disable-next-line no-unused-vars
+  const [info, setInfo] = useState({});
+  const [numberCart, setNumberCart] = useState(0);
+  const userDataP = useSelector((state) => state.userState.userData);
 
-  console.log(info);
-
-  //!Bucle - Fix:
   useEffect(() => {
-    dispatch(getUser()).then((action) => {
-      const response = action.payload;
-      const cartId = response.find((user) => user.id === userId)?.Cart.id;
+    if (userDataP.userId) {
+      const fetchUserCart = async () => {
+        try {
+          const userId = userDataP.userId;
+          const cart = await dispatch(
+            getUserCartNumber({ userId, dispatch })
+          ).unwrap();
 
-      if (cartId) {
-        dispatch(getCart(cartId)).then((action) => {
-          const response = action.payload;
-          setInfo((prevInfo) => ({
-            ...prevInfo,
-            items: response,
-          }));
-        });
-      } else {
-        dispatch(getCartGuestProducts(userUUID)).then((action) => {
-          const response = action.payload;
-          setInfo((prevInfo) => ({
-            ...prevInfo,
-            items: response,
-          }));
-        });
-      }
-    });
-  }, [dispatch]);
+          setNumberCart(cart);
+          return cart;
+        } catch (error) {
+          console.error('Error al obtener el carrito:', error);
+        }
+      };
+      fetchUserCart();
+    }
+  }, [dispatch, userDataP.userId]);
 
-  //Google
+  //!Show Cart Number
+
+  const cartNumberState = useSelector((state) => state.app.productNumber);
+  const [cartNumberS, setCartNumberS] = useState(cartNumberState);
+  useEffect(() => {
+    if (cartNumberState) {
+      setCartNumberS(cartNumberState);
+    }
+  }, [cartNumberState]);
+
+  console.log(cartNumberS);
+  console.log('Numero de objetos:', numberCart);
+
+  //*Google
+
   const [nombreGoogle, setNombreGoogle] = useState(null);
   const cookies = new Cookies();
   //Sesión Continúa: Data del User - Google Auth
@@ -198,12 +205,20 @@ export default function NavBar(props) {
             )}
           </div>
         ) : (
-          <NavLink
-            to='/login'
-            className={` sm:flex px-6 py-4 transition duration-300 ease-in-out transform hover:text-teesaGreen focus:text-teesaGreen text-md`}
-          >
-            Ingresar
-          </NavLink>
+          <>
+            <NavLink
+              to='/login'
+              className={` sm:flex px-2 py-4 transition duration-300 ease-in-out transform hover:text-teesaGreen focus:text-teesaGreen text-md`}
+            >
+              Ingresar
+            </NavLink>
+            <NavLink
+              to='/signup'
+              className={` sm:flex px-2 py-4 transition duration-300 ease-in-out transform hover:text-teesaGreen focus:text-teesaGreen text-md`}
+            >
+              Regístrarse
+            </NavLink>
+          </>
         )}
 
         {/* Tooltip End*/}
@@ -217,19 +232,9 @@ export default function NavBar(props) {
                 className='flex items-center my-auto'
               >
                 <i className='fa-solid fa-cart-shopping text-xl rounded-md hover:text-teesaGreen p-1'></i>
-                {info.items?.cartProducts?.length > 0 ? (
+                {cartNumberS > 0 ? (
                   <span className='absolute -top-1 -right-3 bg-teesaGreen text-black rounded-full text-xs px-1.5 py-.05 font-bold'>
-                    {info.items.cartProducts.reduce(
-                      (total, item) => total + item.cantidad,
-                      0
-                    )}
-                  </span>
-                ) : info.items?.cartGuestProducts?.length > 0 ? (
-                  <span className='absolute -top-1 -right-3 bg-teesaGreen text-black rounded-full text-xs px-1.5 py-.05'>
-                    {info.items.cartGuestProducts.reduce(
-                      (total, item) => total + item.cantidad,
-                      0
-                    )}
+                    {cartNumberS}
                   </span>
                 ) : null}
               </NavLink>

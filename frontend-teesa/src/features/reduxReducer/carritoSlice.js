@@ -9,6 +9,10 @@ const initialState = {
   errorMessage: '',
   users: [],
   cart: [],
+  //Cart Number
+  productNumber: 0,
+  productNumberLoading: false,
+  productNumberError: null,
 };
 
 export const getUser = createAsyncThunk('users/getUsers', async () => {
@@ -60,6 +64,36 @@ export const getCart = createAsyncThunk('cart/getCart', async (CartId) => {
   }
 });
 
+//*Fix Loop - byJuan - GetUserCartNumber
+export const getUserCartNumber = createAsyncThunk(
+  'users/getUserCartNumber',
+  async ({ userId }, { dispatch }) => {
+    try {
+      const response = await axios.get(
+        `https://teesa-backend.onrender.com/users`
+      );
+      const allUsers = response.data;
+      //Encontramos al usuario
+      const user = allUsers.find((user) => user.id === userId);
+      if (user) {
+        const userCartId = user.Cart.id;
+        const cart = await dispatch(getCart(userCartId)).unwrap();
+        // return cart.cartProducts;
+        const totalQuantity = cart.cartProducts.reduce(
+          (accumulator, product) => accumulator + product.cantidad,
+          0
+        );
+        return totalQuantity;
+      } else {
+        throw new Error('User not found');
+      }
+    } catch (error) {
+      console.error('Error al obtener usuarios:', error);
+      throw error;
+    }
+  }
+);
+
 export const updateCart = createAsyncThunk(
   'cart/updateCart',
   async ({ CartProductId, cantidad }) => {
@@ -96,7 +130,11 @@ export const deleteCart = createAsyncThunk(
 const cartSlice = createSlice({
   name: 'app',
   initialState,
-  reducers: {},
+  reducers: {
+    setProductNumber: (state, action) => {
+      state.productNumber = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getUser.pending, (state) => {
@@ -172,10 +210,25 @@ const cartSlice = createSlice({
         state.loading = false;
         state.error = true;
         state.errorMessage = action.payload;
+      })
+      //*Cart Number:
+      .addCase(getUserCartNumber.pending, (state) => {
+        state.productNumberLoading = true; // Actualiza el estado de carga
+        state.productNumberError = null; // Limpia el error
+      })
+      .addCase(getUserCartNumber.fulfilled, (state, action) => {
+        state.productNumberLoading = false; // Cambia el estado de carga de nuevo
+        state.success = true;
+        state.productNumber = action.payload; // Actualiza el número de productos
+      })
+      .addCase(getUserCartNumber.rejected, (state, action) => {
+        state.productNumberLoading = false; // Cambia el estado de carga de nuevo
+        state.productNumberError = action.payload; // Actualiza el error
       });
   },
 });
 
+export const { setProductNumber } = cartSlice.actions;
 export default cartSlice.reducer;
 
 //me renderiza producto en la NavBar

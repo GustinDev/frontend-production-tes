@@ -11,7 +11,12 @@ import ReviewForm from './ReviewForm';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
-import { getUser, postCart } from '../../features/reduxReducer/carritoSlice';
+import {
+  getUser,
+  getUserCartNumber,
+  postCart,
+  setProductNumber,
+} from '../../features/reduxReducer/carritoSlice';
 import {
   fetchReviews,
   verifyUserReview,
@@ -150,61 +155,83 @@ const CardDetail = ({
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (cart.CartId && cart.cantidad > 0) {
-      dispatch(postCart(cart));
-      setCart({
-        ProductId: id,
-        CartId: cartId,
-        cantidad: 0,
-      });
-      Swal.fire({
-        icon: 'success',
-        title: 'Producto agregado al carrito.',
-        showConfirmButton: false,
-        timer: 2000,
-        timerProgressBar: true,
-        toast: true,
-        position: 'top-end',
-        didOpen: (toast) => {
-          toast.addEventListener('mouseenter', Swal.stopTimer);
-          toast.addEventListener('mouseleave', Swal.resumeTimer);
-          toast.style.marginTop = '80px';
-        },
-      });
-    } else if (!user) {
-      Swal.fire({
-        icon: 'warning',
-        title: '¡Error!',
-        text: 'Ingresa a tu cuenta para agregar productos.',
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        toast: true,
-        position: 'top-end',
-        didOpen: (toast) => {
-          toast.addEventListener('mouseenter', Swal.stopTimer);
-          toast.addEventListener('mouseleave', Swal.resumeTimer);
-          toast.style.marginTop = '80px';
-        },
-      });
-    } else if (cartGuest.cantidad > 0) {
-      Swal.fire({
-        icon: 'warning',
-        title: 'Error',
-        text: 'Lo sentimos, inténtalo de nuevo.',
-        showConfirmButton: false,
-        timer: 2000,
-        timerProgressBar: true,
-        toast: true,
-        position: 'top-end',
-        didOpen: (toast) => {
-          toast.addEventListener('mouseenter', Swal.stopTimer);
-          toast.addEventListener('mouseleave', Swal.resumeTimer);
-          toast.style.marginTop = '80px';
-        },
-      });
+    try {
+      if (cart.CartId && cart.cantidad > 0) {
+        //Resetear Estados
+        setCart({
+          ProductId: id,
+          CartId: cartId,
+          cantidad: 0,
+        });
+        //Mostrar Alerta
+        Swal.fire({
+          icon: 'success',
+          title: 'Producto agregado al carrito.',
+          showConfirmButton: false,
+          timer: 2000,
+          timerProgressBar: true,
+          toast: true,
+          position: 'top-end',
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer);
+            toast.addEventListener('mouseleave', Swal.resumeTimer);
+            toast.style.marginTop = '80px';
+          },
+        });
+
+        // Submit
+        const postCartAction = await dispatch(postCart(cart)).unwrap();
+
+        //*  Update Cart Number
+        if (postCartAction) {
+          const getUserCartNumberAction = await dispatch(
+            getUserCartNumber({ userId, dispatch })
+          );
+
+          if (
+            getUserCartNumberAction.type === getUserCartNumber.fulfilled.type
+          ) {
+            const updatedCartNumber = getUserCartNumberAction.payload;
+            dispatch(setProductNumber(updatedCartNumber));
+          }
+        }
+      } else if (!user) {
+        Swal.fire({
+          icon: 'warning',
+          title: '¡Error!',
+          text: 'Ingresa a tu cuenta para agregar productos.',
+          showConfirmButton: false,
+          timer: 4000,
+          timerProgressBar: true,
+          toast: true,
+          position: 'top-end',
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer);
+            toast.addEventListener('mouseleave', Swal.resumeTimer);
+            toast.style.marginTop = '80px';
+          },
+        });
+      } else if (cartGuest.cantidad > 0) {
+        Swal.fire({
+          icon: 'warning',
+          title: 'Error',
+          text: 'Lo sentimos, inténtalo de nuevo.',
+          showConfirmButton: false,
+          timer: 2000,
+          timerProgressBar: true,
+          toast: true,
+          position: 'top-end',
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer);
+            toast.addEventListener('mouseleave', Swal.resumeTimer);
+            toast.style.marginTop = '80px';
+          },
+        });
+      }
+    } catch (error) {
+      console.error('Error en handleSubmit:', error);
     }
   };
 
@@ -421,7 +448,7 @@ const CardDetail = ({
               </motion.button>
               <motion.button
                 type='submit'
-                className={`text-white px-[10px] py-1 border-blue-800 rounded-md border-2 text-2xl font-bold bg-blue-700`}
+                className={`text-white px-[10px] py-1 border-blue-800 rounded-md border-2 text-2xl font-bold bg-blue-700 hover:bg-blue-800`}
               >
                 Agregar
                 <i className='fa-solid fa-cart-shopping  ml-1'></i>

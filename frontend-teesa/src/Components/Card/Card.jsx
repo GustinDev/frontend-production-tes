@@ -2,7 +2,12 @@
 // eslint-disable-next-line no-unused-vars
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { postCart, getUser } from '../../features/reduxReducer/carritoSlice';
+import {
+  postCart,
+  getUser,
+  getUserCartNumber,
+  setProductNumber,
+} from '../../features/reduxReducer/carritoSlice';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -36,7 +41,7 @@ export const Card = ({
     cantidad: 0,
   });
 
-  //Cart - Fix
+  //*Cart - Fix
 
   const user = useSelector((state) => state.userState.user);
   const [loadingUser, setLoadingUser] = useState(null);
@@ -58,12 +63,12 @@ export const Card = ({
           }));
         })
         .finally(() => {
-          setLoadingUser(false); // Se establece loadingUser en false al finalizar la carga
+          setLoadingUser(false);
         });
     }
-  }, [dispatch, userData]);
+  }, [dispatch, userData, user]);
 
-  const handleIncrement = () => {
+  const handleIncrement = async () => {
     if (user) {
       if (cart.CartId) {
         setCart((prevCart) => ({
@@ -75,6 +80,7 @@ export const Card = ({
           ...prevCartGuest,
           cantidad: Number(prevCartGuest.cantidad) + 1,
         }));
+      //GetNumber
     } else {
       Swal.fire({
         icon: 'warning',
@@ -127,61 +133,86 @@ export const Card = ({
     }
   };
 
-  const handleSubmit = (e) => {
+  const userId = useSelector((state) => state.userState.userData.userId);
+  console.log(userId);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (cart.CartId && cart.cantidad > 0) {
-      dispatch(postCart(cart));
-      setCart({
-        ProductId: id,
-        CartId: cartId,
-        cantidad: 0,
-      });
-      Swal.fire({
-        icon: 'success',
-        title: 'Producto agregado al carrito.',
-        showConfirmButton: false,
-        timer: 2000,
-        timerProgressBar: true,
-        toast: true,
-        position: 'top-end',
-        didOpen: (toast) => {
-          toast.addEventListener('mouseenter', Swal.stopTimer);
-          toast.addEventListener('mouseleave', Swal.resumeTimer);
-          toast.style.marginTop = '80px';
-        },
-      });
-    } else if (!user) {
-      Swal.fire({
-        icon: 'warning',
-        title: '¡Error!',
-        text: 'Ingresa a tu cuenta para agregar productos.',
-        showConfirmButton: false,
-        timer: 4000,
-        timerProgressBar: true,
-        toast: true,
-        position: 'top-end',
-        didOpen: (toast) => {
-          toast.addEventListener('mouseenter', Swal.stopTimer);
-          toast.addEventListener('mouseleave', Swal.resumeTimer);
-          toast.style.marginTop = '80px';
-        },
-      });
-    } else if (cartGuest.cantidad > 0) {
-      Swal.fire({
-        icon: 'warning',
-        title: 'Error',
-        text: 'Lo sentimos, inténtalo de nuevo.',
-        showConfirmButton: false,
-        timer: 2000,
-        timerProgressBar: true,
-        toast: true,
-        position: 'top-end',
-        didOpen: (toast) => {
-          toast.addEventListener('mouseenter', Swal.stopTimer);
-          toast.addEventListener('mouseleave', Swal.resumeTimer);
-          toast.style.marginTop = '80px';
-        },
-      });
+    try {
+      if (cart.CartId && cart.cantidad > 0) {
+        //Resetear Estados
+        setCart({
+          ProductId: id,
+          CartId: cartId,
+          cantidad: 0,
+        });
+        //Mostrar Alerta
+        Swal.fire({
+          icon: 'success',
+          title: 'Producto agregado al carrito.',
+          showConfirmButton: false,
+          timer: 2000,
+          timerProgressBar: true,
+          toast: true,
+          position: 'top-end',
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer);
+            toast.addEventListener('mouseleave', Swal.resumeTimer);
+            toast.style.marginTop = '80px';
+          },
+        });
+
+        // Submit
+        const postCartAction = await dispatch(postCart(cart)).unwrap();
+
+        //*  Update Cart Number
+        if (postCartAction) {
+          const getUserCartNumberAction = await dispatch(
+            getUserCartNumber({ userId, dispatch })
+          );
+
+          if (
+            getUserCartNumberAction.type === getUserCartNumber.fulfilled.type
+          ) {
+            const updatedCartNumber = getUserCartNumberAction.payload;
+            dispatch(setProductNumber(updatedCartNumber));
+          }
+        }
+      } else if (!user) {
+        Swal.fire({
+          icon: 'warning',
+          title: '¡Error!',
+          text: 'Ingresa a tu cuenta para agregar productos.',
+          showConfirmButton: false,
+          timer: 4000,
+          timerProgressBar: true,
+          toast: true,
+          position: 'top-end',
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer);
+            toast.addEventListener('mouseleave', Swal.resumeTimer);
+            toast.style.marginTop = '80px';
+          },
+        });
+      } else if (cartGuest.cantidad > 0) {
+        Swal.fire({
+          icon: 'warning',
+          title: 'Error',
+          text: 'Lo sentimos, inténtalo de nuevo.',
+          showConfirmButton: false,
+          timer: 2000,
+          timerProgressBar: true,
+          toast: true,
+          position: 'top-end',
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer);
+            toast.addEventListener('mouseleave', Swal.resumeTimer);
+            toast.style.marginTop = '80px';
+          },
+        });
+      }
+    } catch (error) {
+      console.error('Error en handleSubmit:', error);
     }
   };
 
@@ -282,7 +313,7 @@ export const Card = ({
                 </motion.button>
                 <motion.button
                   type='submit'
-                  className={`px-[10px] py-1 border rounded-md border-gray-600 text md font-bold bg-green-400`}
+                  className={`px-[10px] py-1 border rounded-md border-gray-600 text md font-bold bg-green-400 hover:bg-green-500`}
                 >
                   Agregar
                   <i className='fa-solid fa-cart-shopping  ml-1'></i>

@@ -151,7 +151,7 @@ const Login = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className='formContainer flex justify-center items-center flex-col-reverse sm:flex-col-reverse  lg:flex-row w-3/4 p-5 -mt-36'
+        className='formContainer flex justify-center items-center flex-col-reverse sm:flex-col-reverse  lg:flex-row w-5/6 p-5 -mt-36'
       >
         <div className='hidden w-2/3 h-full lg:flex -mr-5'>
           <img
@@ -165,7 +165,7 @@ const Login = () => {
             onSubmit={handleSubmit(onSubmit)}
             className='w-full h-fit bg-teesaWhite '
           >
-            <h1 className='font-bold text-sm lg:text-2xl 2xl:text-4xl  -mt-4 mb-2 text-teesaBlueDark'>
+            <h1 className='font-bold text-lg lg:text-2xl 2xl:text-4xl  -mt-4 mb-2 text-teesaBlueDark'>
               Ingresa
             </h1>
             <div className='flex flex-col'>
@@ -256,7 +256,7 @@ const Login = () => {
                   src={googleIcon}
                   className='w-5 h-5 mx-2 my-auto'
                 />{' '}
-                Registrate con Google
+                Regístrate con Google
               </button>
             </a>
           </div>
