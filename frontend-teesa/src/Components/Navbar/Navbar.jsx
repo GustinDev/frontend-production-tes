@@ -216,7 +216,7 @@ export default function NavBar() {
               to='/signup'
               className={` sm:flex px-2 py-4 transition duration-300 ease-in-out transform hover:text-teesaGreen focus:text-teesaGreen text-md`}
             >
-              Regístrarse
+              Registrarse
             </NavLink>
           </>
         )}
