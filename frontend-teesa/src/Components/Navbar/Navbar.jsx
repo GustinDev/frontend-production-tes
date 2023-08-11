@@ -7,6 +7,7 @@ import { NavLink } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 import 'boxicons/css/boxicons.min.css';
 import title from '../../title.png';
+import loadingGif from '../../assets/icon/Loading2.gif';
 import {
   resetUserState,
   updateUserDataFromCookie,
@@ -54,6 +55,9 @@ export default function NavBar() {
   //!Show Cart Number
 
   const cartNumberState = useSelector((state) => state.app.productNumber);
+  const loadingNumberState = useSelector(
+    (state) => state.app.productNumberLoading
+  );
   const [cartNumberS, setCartNumberS] = useState(cartNumberState);
   useEffect(() => {
     if (cartNumberState) {
@@ -232,9 +236,17 @@ export default function NavBar() {
                 className='flex items-center my-auto'
               >
                 <i className='fa-solid fa-cart-shopping text-xl rounded-md hover:text-teesaGreen p-1'></i>
-                {cartNumberS > 0 ? (
-                  <span className='absolute -top-1 -right-3 bg-teesaGreen text-black rounded-full text-xs px-1.5 py-.05 font-bold'>
-                    {cartNumberS}
+                {loadingNumberState ? (
+                  <span className='absolute -top-1 -right-3 bg-teesaGreen text-black rounded-full font-bold'>
+                    <img
+                      className='w-4 h-4'
+                      src={loadingGif}
+                      alt='loading'
+                    />
+                  </span>
+                ) : cartNumberS > 0 ? (
+                  <span className='w-4 h-4 absolute -top-1 -right-3 bg-teesaGreen text-black rounded-full text-xs px-1.5 py-.05 font-bold'>
+                    <h1 className='-ml-[1.5px] mt-[1px]'>{cartNumberS}</h1>
                   </span>
                 ) : null}
               </NavLink>
