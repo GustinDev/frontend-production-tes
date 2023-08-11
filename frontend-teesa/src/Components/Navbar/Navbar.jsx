@@ -241,7 +241,7 @@ export default function NavBar() {
                     <img
                       className='w-4 h-4'
                       src={loadingGif}
-                      alt='loading'
+                      alt='loading number'
                     />
                   </span>
                 ) : cartNumberS > 0 ? (
