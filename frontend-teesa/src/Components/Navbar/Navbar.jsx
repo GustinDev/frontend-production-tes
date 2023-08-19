@@ -30,7 +30,7 @@ export default function NavBar() {
   //! Bucle - Fix (Number Cart):
   // eslint-disable-next-line no-unused-vars
   const [info, setInfo] = useState({});
-  const [numberCart, setNumberCart] = useState(0);
+  const [, setNumberCart] = useState(0);
   const userDataP = useSelector((state) => state.userState.userData);
 
   useEffect(() => {
@@ -65,8 +65,8 @@ export default function NavBar() {
     }
   }, [cartNumberState]);
 
-  console.log(cartNumberS);
-  console.log('Numero de objetos:', numberCart);
+  // console.log(cartNumberS);
+  // console.log('Numero de objetos:', numberCart);
 
   //*Google
 

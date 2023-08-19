@@ -22,6 +22,7 @@ export const Card = ({
   marca,
   id,
   tipo,
+  refe,
 }) => {
   const options = {
     style: 'decimal',
@@ -134,7 +135,7 @@ export const Card = ({
   };
 
   const userId = useSelector((state) => state.userState.userData.userId);
-  console.log(userId);
+  //console.log(userId);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -245,8 +246,8 @@ export const Card = ({
 
   return (
     <div className='flex w-[260px] h-[480px] my-2 mx-6 transition duration-100 transform hover:scale-105 hover:cursor-pointer'>
-      <div className='shadow-md border bg-teesaWhite border-gray-400 rounded-md flex flex-col'>
-        <div>
+      <div className='shadow-md border bg-teesaWhite border-gray-400 rounded-md flex flex-col h-full'>
+        <div className='h-full'>
           <NavLink to={`/home/${id}`}>
             <img
               className='w-[290px] h-[260px] object-fill rounded-lg'
@@ -254,14 +255,23 @@ export const Card = ({
               alt='x'
             />
           </NavLink>
-          <div className='flex flex-col p-5 bg-white'>
+          <div className='flex flex-col h-fit p-5 bg-white'>
             <NavLink to={`/home/${id}`}>
               <p className='text-[15px] m-0 font-medium'>
                 {tipo} | {categoria} {marca}
               </p>
-              <h2 className='h-[55px] text-[18px] mb-1 text-black font-light'>
-                {nombreN}
+              <h2 className='h-[85px] text-[18px] mb-1 text-black font-light'>
+                {nombreN} <br />{' '}
+                <span>
+                  <p
+                    className='text-[14px] m-0 font-medium uppercase
+                  '
+                  >
+                    ref: {refe}
+                  </p>
+                </span>
               </h2>
+
               <h4 className='text-black text-[15px] font-bold'>
                 {`$${precio.toLocaleString('es-ES', options)} COP`}
               </h4>

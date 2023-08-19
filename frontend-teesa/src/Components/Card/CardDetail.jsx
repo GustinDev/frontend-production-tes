@@ -38,6 +38,7 @@ const CardDetail = ({
   marca,
   estado,
   productRef,
+  tipo,
 }) => {
   const navigate = useNavigate();
 
@@ -49,7 +50,7 @@ const CardDetail = ({
   const userData = useSelector((state) => state.userState.userData);
 
   const userAdmin = useSelector((state) => state.userState.userData.userType);
-  console.log(userAdmin);
+  //console.log(userAdmin);
 
   const [cartId, setCartId] = useState('');
   const [cart, setCart] = useState({
@@ -252,7 +253,7 @@ const CardDetail = ({
     },
   };
 
-  console.log(cartGuest);
+  //console.log(cartGuest);
 
   //* Datos Descripción:
 
@@ -326,6 +327,9 @@ const CardDetail = ({
     setNombreN(nombreEnMayusculas);
   }, [nombre]);
 
+  // console.log(tipo);
+  //Equipo - Repuesto
+
   return (
     <div className='w-full h-full mt-12 flex flex-col justify-center items-center bg-white p-5 lg:p-0'>
       <div className='detailContainer flex flex-col lg:flex-row w-full lg:w-3/4  rounded-xl border-2 border-gray-300  mt-6'>
@@ -383,7 +387,9 @@ const CardDetail = ({
             <h2 className='text-teesaBlueDark text-2xl font-bold'>{`$${
               precio ? precio.toLocaleString('es-ES', options) : ''
             } COP`}</h2>
-
+            <h2 className='text-xl text-teesaBlueDark'>
+              {tipo === 'Repuesto' ? 'Precio con IVA.' : 'Precio sin IVA.'}
+            </h2>
             <h2 className='text-xl text-teesaBlueDark'>
               Stock: {stock === 0 ? 'Bajo Pedido.' : stock}
             </h2>

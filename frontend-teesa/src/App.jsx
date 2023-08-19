@@ -40,7 +40,7 @@ function App() {
   // Lista de rutas donde se mostrará el Footer
   const visibleFooterRoutes = ['/home', '/about', '/services'];
 
-  const hideNavbar = pathname === '/' || pathname === '/error404';
+  const hideNavbar = pathname === '/error404';
   const hideFooter = !visibleFooterRoutes.includes(pathname);
 
   return (
@@ -49,12 +49,12 @@ function App() {
       {!hideNavbar && <Navbar />}
       <Routes>
         <Route
-          path='/'
-          element={<Landing />}
-        />
-        <Route
           path='/home'
           element={<Home />}
+        />
+        <Route
+          path='/'
+          element={<Navigate to='/home' />}
         />
         <Route
           path='/home/:id'

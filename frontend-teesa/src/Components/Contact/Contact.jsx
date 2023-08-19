@@ -266,7 +266,7 @@ const Contact = () => {
                       <p className='mb-2 font-bold text-3xl'>Redes Sociales</p>
                       <div className='flex justify-center items-center '>
                         <a
-                          href='https://wa.link/76pmz1'
+                          href='https://wa.link/xc6lc6'
                           target='_blank'
                           rel='noreferrer'
                         >

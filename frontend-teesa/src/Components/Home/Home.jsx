@@ -237,7 +237,7 @@ function Home() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 1 }}
-                    className='mx-auto' // Puedes ajustar la duración de la animación aquí
+                    className='mx-auto'
                   >
                     <Card
                       id={product?.id}
@@ -247,6 +247,7 @@ function Home() {
                       imagenes={product?.imagenes}
                       marca={product?.marca}
                       tipo={product?.tipo}
+                      refe={product?.ref}
                     />
                   </motion.div>
                 ))}
