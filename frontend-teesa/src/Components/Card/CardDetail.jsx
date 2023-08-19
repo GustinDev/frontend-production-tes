@@ -388,7 +388,9 @@ const CardDetail = ({
               precio ? precio.toLocaleString('es-ES', options) : ''
             } COP`}</h2>
             <h2 className='text-xl text-teesaBlueDark'>
-              {tipo === 'Repuesto' ? 'IVA incluido.' : 'Precio sin IVA.'}
+              {tipo === 'Repuesto'
+                ? 'Precion con IVA incluido.'
+                : 'Precio sin IVA.'}
             </h2>
             <h2 className='text-xl text-teesaBlueDark'>
               Stock: {stock === 0 ? 'Bajo Pedido.' : stock}
