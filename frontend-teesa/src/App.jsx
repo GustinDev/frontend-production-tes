@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { getUserDataFromCookie } from './features/reduxReducer/userSlice';
 import Home from './Components/Home/Home';
 import Navbar from './Components/Navbar/Navbar';
-import Landing from './views/Landing/Landing';
+// import Landing from './views/Landing/Landing';
 import Detail from './Components/Detail/Detail';
 import Login from './Components/Login/Login';
 import Services from './views/Services/Services';
