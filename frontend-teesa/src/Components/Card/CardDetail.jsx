@@ -389,7 +389,7 @@ const CardDetail = ({
             } COP`}</h2>
             <h2 className='text-xl text-teesaBlueDark'>
               {tipo === 'Repuesto'
-                ? 'Precion con IVA incluido.'
+                ? 'Precio con IVA incluido.'
                 : 'Precio sin IVA.'}
             </h2>
             <h2 className='text-xl text-teesaBlueDark'>
