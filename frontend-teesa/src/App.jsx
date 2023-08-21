@@ -139,7 +139,7 @@ function App() {
           element={<CreateProducts />}
         />
         <Route
-          path='/admin/stockproduct'
+          path='/admin/stocks'
           element={<StockProduct />}
         />
         <Route

@@ -10,6 +10,7 @@ import userReducer from '../features/reduxReducer/userSlice';
 import adminReducer from '../features/reduxReducer/admproductSlice';
 import admiReducer from '../features/reduxReducer/adminSlice';
 import guestReducer from '../features/reduxReducer/cartGuestSlice';
+import stockReducer from '../features/reduxReducer/stockSlice';
 
 import { configureStore } from '@reduxjs/toolkit';
 
@@ -23,9 +24,10 @@ export const store = configureStore({
     loginState: loginReducer,
     filters: filtersReducer,
     userState: userReducer,
+    stockState: stockReducer,
     app: carritoReducer,
-    adminProductState: adminReducer,
     admin: admiReducer,
     guest: guestReducer,
+    adminProductState: adminReducer,
   },
 });

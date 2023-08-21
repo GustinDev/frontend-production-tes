@@ -80,6 +80,11 @@ function Dashboard() {
               Métricas y Gráficas
             </button>
           </NavLink>
+          <NavLink to='/admin/stocks'>
+            <button className='bg-teesaBlueLight  text-white flex flex-row hover:bg-teesaBlueDark p-3 rounded-xl text-xl font-bold'>
+              Editar Stocks
+            </button>
+          </NavLink>
         </div>
         <div className='md:w-1/2 flex mt-5'>
           <img
