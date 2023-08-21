@@ -27,6 +27,7 @@ import Metrics from './Components/Dashboard/Metrics';
 import Users from './Components/Dashboard/Users';
 import FormUserData from './Components/Carrito/FormUserData';
 import Summary from './Components/Carrito/Summary';
+import StockProduct from './Components/Dashboard/StockProduct';
 
 function App() {
   const location = useLocation();
@@ -138,12 +139,16 @@ function App() {
           element={<CreateProducts />}
         />
         <Route
-          path='/admin/users'
-          element={<Users />}
+          path='/admin/stockproduct'
+          element={<StockProduct />}
         />
         <Route
           path='/admin/metrics'
           element={<Metrics />}
+        />
+        <Route
+          path='/admin/users'
+          element={<Users />}
         />
       </Routes>
       {!hideFooter && <Footer />}
