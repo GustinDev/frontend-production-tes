@@ -59,7 +59,7 @@ export const editProduct = createAsyncThunk(
 
       return response.data;
     } catch (error) {
-      console.log('error', error.response.data.message);
+      console.log('Error:', error.response.data.message);
       Swal.fire({
         title: 'Error',
         text: 'Hubo un error al actualizar su información, inténtelo de nuevo.',
@@ -69,6 +69,7 @@ export const editProduct = createAsyncThunk(
     }
   }
 );
+
 
 export const deleteProduct = createAsyncThunk(
   'admin/deleteProduct',
