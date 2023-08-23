@@ -25,7 +25,7 @@ const StockProduct = () => {
     <div className='w-full min-h-screen flex justify-center items-center'>
       <div className='stocksContainter bg-blue-200 w-11/12 h-fit rounded-xl border-2 border-black p-2'>
         <h1>Productos</h1>
-        {/*TODO HACER CARD INDIVIDUAL CON BOTON Y INPUT PARA CAMBIAR STOCK */}
+        {/*TODO HACER CARD INDIVIDUAL CON BOTON Y INPUT PARA CAMBIAR STOCK  */}
         <div className='stock-container'>
           {products.map((product) => (
             <StockCard
