@@ -1,8 +1,8 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 
 export const fetchProducts = createAsyncThunk(
-  'filters/fetchProducts',
+  "filters/fetchProducts",
   async (filters, { rejectWithValue }) => {
     try {
       // const { marcaQuery } = filters;
@@ -33,12 +33,12 @@ export const fetchProducts = createAsyncThunk(
 // );
 
 const filtersSlice = createSlice({
-  name: 'filters',
+  name: "filters",
   initialState: {
     filters: {},
     products: [],
     page: 1,
-    status: 'idle',
+    status: "idle",
     error: null,
   },
   reducers: {
@@ -53,9 +53,9 @@ const filtersSlice = createSlice({
 
     sortByName: (state, action) => {
       state.products.products.sort((a, b) => {
-        if (action.payload === 'ascendente') {
+        if (action.payload === "ascendente") {
           return a.nombre.toLowerCase().localeCompare(b.nombre.toLowerCase());
-        } else if (action.payload === 'descendente') {
+        } else if (action.payload === "descendente") {
           return b.nombre.toLowerCase().localeCompare(a.nombre.toLowerCase());
         }
         return 0;
@@ -63,9 +63,9 @@ const filtersSlice = createSlice({
     },
     sortByPrice: (state, action) => {
       state.products.products.sort((a, b) => {
-        if (action.payload === 'precio_min') {
+        if (action.payload === "precio_min") {
           return a.precio - b.precio;
-        } else if (action.payload === 'precio_max') {
+        } else if (action.payload === "precio_max") {
           return b.precio - a.precio;
         }
         return 0;
@@ -75,15 +75,15 @@ const filtersSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchProducts.pending, (state) => {
-        state.status = 'loading';
+        state.status = "loading";
         state.error = null;
       })
       .addCase(fetchProducts.fulfilled, (state, action) => {
-        state.status = 'succeeded';
+        state.status = "succeeded";
         state.products = action.payload;
       })
       .addCase(fetchProducts.rejected, (state, action) => {
-        state.status = 'failed';
+        state.status = "failed";
         state.error = action.payload;
       });
     // builder.addCase(getPaginationData.fulfilled, (state, action) => {

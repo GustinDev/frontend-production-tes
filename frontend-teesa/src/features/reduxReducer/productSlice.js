@@ -1,36 +1,31 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 
 const initialState = {
-  loading: false,
   allProducts: [],
-  brands: [], // Nuevo estado para almacenar las marcas
+  loading: false,
+  error: "",
+  brands: [],
   filteredProducts: [],
-  error: '',
-  // pagination:{
-  //   currentPage: 1,
-  //   itemsPage: 6,
-  //   totalPage: 1,
-  // }
   general: [],
 };
 
 //Traer los productos
-export const getApiData = createAsyncThunk('products/getApiData', async () => {
+export const getApiData = createAsyncThunk("products/getApiData", async () => {
   try {
     const response = await axios.get(
-      'https://teesa-backend.onrender.com/products'
+      "https://teesa-backend.onrender.com/products"
     );
     return response.data.products;
   } catch (error) {
-    console.error('Error fetching products:', error);
+    console.error("Error fetching products:", error);
     throw error;
   }
 });
 
 //Traer la Data en General
 export const getPaginationData = createAsyncThunk(
-  'products/getPaginationData',
+  "products/getPaginationData",
   async (number) => {
     try {
       const response = await axios.get(
@@ -39,7 +34,7 @@ export const getPaginationData = createAsyncThunk(
 
       return response.data;
     } catch (error) {
-      console.error('Error fetching products:', error);
+      console.error("Error fetching products:", error);
       throw error;
     }
   }
@@ -47,20 +42,20 @@ export const getPaginationData = createAsyncThunk(
 
 //Filtro Marcas Sol
 
-export const getBrands = createAsyncThunk('products/getBrands', async () => {
+export const getBrands = createAsyncThunk("products/getBrands", async () => {
   try {
     const response = await axios.get(
-      'https://teesa-backend.onrender.com/brands'
+      "https://teesa-backend.onrender.com/brands"
     );
     return response.data; // Actualiza aquí para acceder a response.data
   } catch (error) {
-    console.error('Error fetching brands:', error);
+    console.error("Error fetching brands:", error);
     throw error;
   }
 });
 
 export const productSlice = createSlice({
-  name: 'productState',
+  name: "productState",
   initialState,
   reducers: {},
   //*GetData
@@ -72,7 +67,7 @@ export const productSlice = createSlice({
     builder.addCase(getApiData.fulfilled, (state, action) => {
       state.loading = false;
       state.allProducts = action.payload;
-      state.error = '';
+      state.error = "";
     });
     builder.addCase(getApiData.rejected, (state, action) => {
       state.loading = false;
@@ -100,7 +95,7 @@ export const productSlice = createSlice({
       state.loading = false;
       const newBrands = action.payload;
       state.brands = [...new Set([...state.brands, ...newBrands])]; // Filtrar duplicados
-      state.error = '';
+      state.error = "";
     });
     builder.addCase(getBrands.rejected, (state, action) => {
       state.loading = false;

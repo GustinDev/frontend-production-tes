@@ -1,7 +1,8 @@
 /* eslint-disable react/prop-types */
-import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { getShopId } from '../../features/reduxReducer/adminSlice';
+import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { getShopId } from "../../features/reduxReducer/adminSlice";
+import cancel from "../../assets/cancel.png";
 
 const UserCard = ({ usuario }) => {
   const dispatch = useDispatch();
@@ -27,43 +28,46 @@ const UserCard = ({ usuario }) => {
   };
 
   return (
-    <div className='w-full'>
+    <div className="w-full">
       <button
         onClick={handleMostrarHistorial}
-        className='bg-blue-600 rounded-md text-white hover:bg-blue-700 p-2 mt-2'
-        style={{ marginLeft: '10px' }}
+        className="bg-blue-600 rounded-md text-white hover:bg-blue-700 p-2 mt-2"
+        style={{ marginLeft: "10px" }}
       >
         {mostrarHistorial
-          ? 'Ocultar historial de compras'
-          : 'Mostrar historial de compras'}
+          ? "Ocultar historial de compras"
+          : "Mostrar historial de compras"}
       </button>
 
       {/* HISTORIAL DE COMPRAS */}
       {mostrarHistorial && (
         <>
           {historialCompras.length ? (
-            <ul className='mt-4'>
+            <ul className="mt-4">
               {historialCompras.map((compra) => (
-                <li
-                  key={compra.id}
-                  className='mb-2'
-                >
-                  <div className='flex items-center'>
+                <li key={compra.id} className="mb-2">
+                  <div className="flex items-center">
                     <img
-                      src={compra.Product.imagenes[0]}
-                      alt='Producto'
-                      className='w-8 h-8 mr-2'
+                      src={
+                        compra.Product?.imagenes[0]
+                          ? compra.Product.imagenes[0]
+                          : cancel
+                      }
+                      alt="Producto"
+                      className="w-8 h-8 mr-2 object-cover"
                     />
                     <div>
-                      <p className='text-sm font-semibold'>
-                        {compra.Product.nombre}
+                      <p className="text-sm font-semibold">
+                        {compra.Product?.nombre
+                          ? compra.Product.nombre
+                          : "Producto Eliminado"}
                       </p>
-                      <p className='text-xs text-gray-500'>
-                        Fecha: {compra.fechaDeCompra}
+                      <p className="text-xs text-gray-500">
+                        Fecha: {compra?.fechaDeCompra}
                       </p>
                     </div>
                   </div>
-                  <div className='text-xs'>
+                  <div className="text-xs">
                     Precio: {compra.precio}, Cantidad: {compra.cantidad},
                     Estado: {compra.estado}
                   </div>
